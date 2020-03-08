@@ -19,7 +19,6 @@ public:
     void setCoordinates(XY xy);
     void setAxisVelocity(XY xy);
     void setAxisAcceleration(XY xy);
-    void setAxisAngle(XY xy);
 
     void setVelocity(double var);
     void setAcceleration(double var);
@@ -29,7 +28,6 @@ public:
     XY getCoordinates();
     XY getAxisVelocity();
     XY getAxisAcceleration();
-    XY getAxisAngle();
 
     double getVelocity();
     double getAcceleration();
@@ -49,7 +47,6 @@ private:
     XY coordinates_;
     XY axis_velocity_;
     XY axis_acceleration_;
-    XY axis_angle_;
 
     double velocity_;
     double acceleration_;

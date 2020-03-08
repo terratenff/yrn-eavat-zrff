@@ -26,7 +26,6 @@ SubjectCore::SubjectCore():
     coordinates_(XY(0,0)),
     axis_velocity_(XY(0,0)),
     axis_acceleration_(XY(0,0)),
-    axis_angle_(XY(0,0)),
     velocity_(0),
     acceleration_(0),
     angle_(0),
@@ -78,11 +77,6 @@ void SubjectCore::setAxisAcceleration(XY xy)
     axis_acceleration_ = xy;
 }
 
-void SubjectCore::setAxisAngle(XY xy)
-{
-    axis_angle_ = xy;
-}
-
 void SubjectCore::setVelocity(double var)
 {
     velocity_ = var;
@@ -118,11 +112,6 @@ XY SubjectCore::getAxisAcceleration()
     return axis_acceleration_;
 }
 
-XY SubjectCore::getAxisAngle()
-{
-    return axis_angle_;
-}
-
 double SubjectCore::getVelocity()
 {
     return velocity_;
@@ -148,7 +137,10 @@ void SubjectCore::updateMovement()
     angle_ += angular_velocity_;
     angle_ = std::remainder(angle_, 360);
     velocity_ += acceleration_;
-    axis_velocity_ = calculate_components(angle_, abs(velocity_));
+    XY velocity_components = calculate_components(angle_, abs(velocity_));
+    coordinates_ = coordinates_ + velocity_components;
+
+    axis_velocity_ = axis_velocity_ + axis_acceleration_;
     coordinates_ = coordinates_ + axis_velocity_;
 }
 
