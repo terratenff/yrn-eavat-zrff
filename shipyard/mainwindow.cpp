@@ -8,8 +8,42 @@ MainWindow::MainWindow(QWidget *parent) :
     rand_()
 {
     ui->setupUi(this);
+    sw = nullptr;
 
-    settings_ = new Settings();
+    QObject::connect(ui->actionNew,
+                     SIGNAL(triggered()),
+                     this,
+                     SLOT(fileNewScenario()));
+    QObject::connect(ui->actionLoad,
+                     SIGNAL(triggered()),
+                     this,
+                     SLOT(fileLoadScenario()));
+    QObject::connect(ui->actionExit,
+                     SIGNAL(triggered()),
+                     this,
+                     SLOT(fileExit()));
+    QObject::connect(ui->actionSubjectParams,
+                     SIGNAL(triggered()),
+                     this,
+                     SLOT(editSubjectParameters()));
+    QObject::connect(ui->actionNetworkParams,
+                     SIGNAL(triggered()),
+                     this,
+                     SLOT(editNetworkParameters()));
+    QObject::connect(ui->actionGeneral,
+                     SIGNAL(triggered()),
+                     this,
+                     SLOT(helpGeneral()));
+    QObject::connect(ui->actionInstructions,
+                     SIGNAL(triggered()),
+                     this,
+                     SLOT(helpInstructions()));
+    QObject::connect(ui->actionAbout,
+                     SIGNAL(triggered()),
+                     this,
+                     SLOT(helpAbout()));
+
+    settings_ = Settings::get_settings();
     scene_ = new QGraphicsScene();
     manager_ = new Manager(settings_, scene_, rand_);
 
@@ -190,9 +224,12 @@ void MainWindow::mousePressEvent(QMouseEvent *event)
     remapped.setY(remapped.y() - 22); // Removes MenuBar height.
     if (ui->graphicsView->rect().contains(remapped)) {
         QPointF source = ui->graphicsView->mapToScene(remapped);
-        mousePoint_->setCoordinates(XY(source.x(),source.y()));
-        mousePoint_->setAngle(0);
-        mousePoint_->update();
+
+        if (event->button() == Qt::MouseButton::RightButton) {
+            mousePoint_->setCoordinates(XY(source.x(),source.y()));
+            mousePoint_->setAngle(0);
+            mousePoint_->update();
+        }
 
         if (event->button() == Qt::MouseButton::LeftButton) {
             target_->setCourse(XY(source.x(), source.y()));
@@ -413,4 +450,50 @@ void MainWindow::fitnessChanged(int change)
         settings_->set_fitness_type(NO_FITNESS);
         break;
     }
+}
+
+void MainWindow::fileNewScenario()
+{
+    //
+}
+
+void MainWindow::fileLoadScenario()
+{
+    //
+}
+
+void MainWindow::fileSaveScenario()
+{
+    //
+}
+
+void MainWindow::fileExit()
+{
+    //
+}
+
+void MainWindow::editSubjectParameters()
+{
+    sw = new SubjectWindow();
+    sw->show();
+}
+
+void MainWindow::editNetworkParameters()
+{
+    //
+}
+
+void MainWindow::helpGeneral()
+{
+    //
+}
+
+void MainWindow::helpInstructions()
+{
+    //
+}
+
+void MainWindow::helpAbout()
+{
+    //
 }

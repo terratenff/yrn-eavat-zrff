@@ -7,6 +7,7 @@
 #include <QKeyEvent>
 #include <QMouseEvent>
 #include <QTimer>
+#include "subjectwindow.hh"
 #include "settings.hh"
 #include "manager.hh"
 #include "target.hh"
@@ -33,6 +34,8 @@ protected:
 
 private:
     Ui::MainWindow *ui;
+    SubjectWindow *sw;
+
     Settings *settings_;
     QGraphicsScene *scene_;
     QTimer *timer_;
@@ -59,6 +62,18 @@ private slots:
     void inputChanged(int change);
     void outputChanged(int change);
     void fitnessChanged(int change);
+
+    void fileNewScenario();
+    void fileLoadScenario();
+    void fileSaveScenario();
+    void fileExit();
+
+    void editSubjectParameters();
+    void editNetworkParameters();
+
+    void helpGeneral();
+    void helpInstructions();
+    void helpAbout();
 };
 
 #endif // MAINWINDOW_HH

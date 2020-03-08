@@ -611,7 +611,15 @@
     <addaction name="actionInstructions"/>
     <addaction name="actionAbout"/>
    </widget>
+   <widget class="QMenu" name="menuEdit">
+    <property name="title">
+     <string>Edit</string>
+    </property>
+    <addaction name="actionSubjectParams"/>
+    <addaction name="actionNetworkParams"/>
+   </widget>
    <addaction name="menuLearning_Mess"/>
+   <addaction name="menuEdit"/>
    <addaction name="menuHelp"/>
   </widget>
   <action name="actionGeneral">
@@ -647,6 +655,16 @@
   <action name="actionExit">
    <property name="text">
     <string>Exit</string>
+   </property>
+  </action>
+  <action name="actionSubjectParams">
+   <property name="text">
+    <string>Subject parameters...</string>
+   </property>
+  </action>
+  <action name="actionNetworkParams">
+   <property name="text">
+    <string>Network parameters...</string>
    </property>
   </action>
  </widget>
