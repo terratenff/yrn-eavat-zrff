@@ -27,12 +27,12 @@ enum fitness_type {
     AVOID_EYE_CONTACT
 };
 enum spawn_point {
-    CENTER = 0,
-    USER = 1,
-    MOUSE = 2,
-    RANDOM_POINT = 3,
-    SCATTERED = 4,
-    NO_SPAWN_POINT = -1
+    CENTER,
+    USER,
+    MOUSE,
+    RANDOM_POINT,
+    SCATTERED,
+    NO_SPAWN_POINT
 };
 
 class Settings
