@@ -1,5 +1,7 @@
 #include "settings.hh"
 
+Settings *Settings::instance_ = nullptr;
+
 Settings::Settings():
     input_type_(ANGULAR_DIFFERENCE),
     output_type_(ANGULAR_VELOCITY),
@@ -9,8 +11,31 @@ Settings::Settings():
     iteration_count_(1000),
     instance_count_(50),
     offspring_count_(25),
-    time_delta_(10)
+    time_delta_(10),
+    velocity_initial_(20),
+    velocity_max_change_(0),
+    acceleration_initial_(0),
+    acceleration_max_change_(0),
+    angular_velocity_initial_(0),
+    angular_velocity_max_change_(0),
+    axis_velocity_x_initial_(0),
+    axis_velocity_y_initial_(0),
+    axis_velocity_x_max_change_(0),
+    axis_velocity_y_max_change_(0),
+    axis_acceleration_x_initial_(0),
+    axis_acceleration_y_initial_(0),
+    axis_acceleration_x_max_change_(0),
+    axis_acceleration_y_max_change_(0),
+    spawn_location_(CENTER)
 {
+}
+
+Settings *Settings::get_settings()
+{
+    if (instance_ == nullptr) {
+        instance_ = new Settings();
+    }
+    return instance_;
 }
 
 void Settings::use_default_settings()
@@ -115,4 +140,154 @@ unsigned int Settings::get_offspring_count()
 unsigned int Settings::get_time_delta()
 {
     return time_delta_;
+}
+
+void Settings::set_velocity_initial(int var)
+{
+    velocity_initial_ = var;
+}
+
+void Settings::set_velocity_max_change(int var)
+{
+    velocity_max_change_ = var;
+}
+
+void Settings::set_acceleration_initial(int var)
+{
+    acceleration_initial_ = var;
+}
+
+void Settings::set_acceleration_max_change(int var)
+{
+    acceleration_max_change_ = var;
+}
+
+void Settings::set_angular_velocity_initial(int var)
+{
+    angular_velocity_initial_ = var;
+}
+
+void Settings::set_angular_velocity_max_change(int var)
+{
+    angular_velocity_max_change_ = var;
+}
+
+void Settings::set_axis_velocity_x_initial(int var)
+{
+    axis_velocity_x_initial_ = var;
+}
+
+void Settings::set_axis_velocity_y_initial(int var)
+{
+    axis_velocity_y_initial_ = var;
+}
+
+void Settings::set_axis_velocity_x_max_change(int var)
+{
+    axis_velocity_x_max_change_ = var;
+}
+
+void Settings::set_axis_velocity_y_max_change(int var)
+{
+    axis_velocity_y_max_change_ = var;
+}
+
+void Settings::set_axis_acceleration_x_initial(int var)
+{
+    axis_acceleration_x_initial_ = var;
+}
+
+void Settings::set_axis_acceleration_y_initial(int var)
+{
+    axis_acceleration_y_initial_ = var;
+}
+
+void Settings::set_axis_acceleration_x_max_change(int var)
+{
+    axis_acceleration_x_max_change_ = var;
+}
+
+void Settings::set_axis_acceleration_y_max_change(int var)
+{
+    axis_acceleration_y_max_change_ = var;
+}
+
+void Settings::set_spawn_location(spawn_point location)
+{
+    spawn_location_ = location;
+}
+
+int Settings::get_velocity_initial()
+{
+    return velocity_initial_;
+}
+
+int Settings::get_velocity_max_change()
+{
+    return velocity_max_change_;
+}
+
+int Settings::get_acceleration_initial()
+{
+    return acceleration_initial_;
+}
+
+int Settings::get_acceleration_max_change()
+{
+    return acceleration_max_change_;
+}
+
+int Settings::get_angular_velocity_initial()
+{
+    return angular_velocity_initial_;
+}
+
+int Settings::get_angular_velocity_max_change()
+{
+    return angular_velocity_max_change_;
+}
+
+int Settings::get_axis_velocity_x_initial()
+{
+    return axis_velocity_x_initial_;
+}
+
+int Settings::get_axis_velocity_y_initial()
+{
+    return axis_velocity_y_initial_;
+}
+
+int Settings::get_axis_velocity_x_max_change()
+{
+    return axis_velocity_x_max_change_;
+}
+
+int Settings::get_axis_velocity_y_max_change()
+{
+    return axis_velocity_y_max_change_;
+}
+
+int Settings::get_axis_acceleration_x_initial()
+{
+    return axis_acceleration_x_initial_;
+}
+
+int Settings::get_axis_acceleration_y_initial()
+{
+    return axis_acceleration_y_initial_;
+}
+
+int Settings::get_axis_acceleration_x_max_change()
+{
+    return axis_acceleration_x_max_change_;
+}
+
+int Settings::get_axis_acceleration_y_max_change()
+{
+    return axis_acceleration_y_max_change_;
+}
+
+spawn_point Settings::get_spawn_location()
+{
+    return spawn_location_;
 }
