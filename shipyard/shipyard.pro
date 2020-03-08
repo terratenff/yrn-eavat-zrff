@@ -26,6 +26,7 @@ SOURCES += \
     settings.cpp \
     subject.cpp \
     subjectcore.cpp \
+    subjectwindow.cpp \
     target.cpp
 
 HEADERS += \
@@ -38,10 +39,12 @@ HEADERS += \
     settings.hh \
     subject.hh \
     subjectcore.hh \
+    subjectwindow.hh \
     target.hh
 
 FORMS += \
-    mainwindow.ui
+    mainwindow.ui \
+    subjectwindow.ui
 
 # Default rules for deployment.
 qnx: target.path = /tmp/$${TARGET}/bin
