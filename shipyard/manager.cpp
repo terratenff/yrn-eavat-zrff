@@ -5,7 +5,8 @@ Manager::Manager(Settings *settings,
                  Random &rand):
     settings_(settings),
     scene_(scene),
-    rand_(rand)
+    rand_(rand),
+    random_point_(0,0)
 {
     primaryTarget_ = nullptr;
     secondaryTarget_ = nullptr;
@@ -21,6 +22,8 @@ void Manager::initialize(SubjectCore *p,
                          SubjectCore *a)
 {
     clear_subjects();
+
+    random_point_ = rand_.random_coordinates();
 
     primaryTarget_ = p;
     secondaryTarget_ = s;
@@ -46,11 +49,7 @@ void Manager::initialize(SubjectCore *p,
     for (unsigned int i = 0; i < instances; i++) {
         Subject *subject = new Subject(scene_);
         subject->setNeuralNetwork(networks_[i]);
-        //subject->setCoordinates(rand_.random_coordinates());
-        subject->setCoordinates(XY(960,540));
-        //subject->setCoordinates(mousePoint_->getCoordinates());
-        subject->setAngle(rand_.random_int(0,360));
-        subject->setVelocity(5); // TODO
+        set_subject_parameters(subject);
         subject->update();
         subjects_.push_back(subject);
     }
@@ -64,6 +63,8 @@ void Manager::update()
     for (Subject *subject : subjects_) {
         subject->update();
     }
+
+    random_point_ = rand_.random_coordinates();
 
     ++iteration_count_;
     if (iteration_count_ >= iteration_max_) {
@@ -89,12 +90,7 @@ void Manager::update()
         for (unsigned int i = 0; i < population; i++) {
             Subject *subject = subjects_[i];
             subject->setNeuralNetwork(networks_[i]);
-            subject->getNeuralNetwork()->setFitness(0);
-            //subject->setCoordinates(rand_.random_coordinates());
-            subject->setCoordinates(XY(960,540));
-            //subject->setCoordinates(mousePoint_->getCoordinates());
-            subject->setAngle(rand_.random_int(0,360));
-            subject->setVelocity(5); // TODO
+            set_subject_parameters(subject);
             subject->update();
         }
     }
@@ -128,4 +124,45 @@ void Manager::clear_subjects()
 void Manager::sort_networks()
 {
     std::sort(networks_.begin(), networks_.end(), NeuralNetwork::compare);
+}
+
+void Manager::set_subject_parameters(Subject *subject)
+{
+    subject->getNeuralNetwork()->setFitness(0);
+
+    switch (settings_->get_spawn_location()) {
+    case CENTER:
+        subject->setCoordinates(XY(960,540));
+        break;
+    case USER:
+        subject->setCoordinates(primaryTarget_->getCoordinates());
+        break;
+    case MOUSE:
+        subject->setCoordinates(mousePoint_->getCoordinates());
+        break;
+    case RANDOM_POINT:
+        subject->setCoordinates(random_point_);
+        break;
+    case SCATTERED:
+        subject->setCoordinates(rand_.random_coordinates());
+        break;
+    case NO_SPAWN_POINT:
+        subject->setCoordinates(XY(960,540));
+        break;
+    }
+
+
+    subject->setAngle(rand_.random_int(0,360));
+    subject->setVelocity(settings_->get_velocity_initial());
+    subject->setAcceleration(settings_->get_acceleration_initial());
+    subject->setAngularVelocity(settings_->get_angular_velocity_initial());
+
+    subject->setAxisVelocity(
+                XY(settings_->get_axis_velocity_x_initial(),
+                   settings_->get_axis_velocity_y_initial())
+                );
+    subject->setAxisAcceleration(
+                XY(settings_->get_axis_acceleration_x_initial(),
+                   settings_->get_axis_acceleration_y_initial())
+                );
 }

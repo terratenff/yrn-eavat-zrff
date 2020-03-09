@@ -25,6 +25,7 @@ public:
 private:
     void clear_subjects();
     void sort_networks();
+    void set_subject_parameters(Subject *subject);
 
     SubjectCore *primaryTarget_;
     SubjectCore *secondaryTarget_;
@@ -40,6 +41,8 @@ private:
     unsigned int generation_count_;
     unsigned int iteration_count_;
     unsigned int iteration_max_;
+
+    XY random_point_;
 };
 
 #endif // MANAGER_HH
