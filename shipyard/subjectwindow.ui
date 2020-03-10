@@ -13,12 +13,12 @@
   <property name="windowTitle">
    <string>Form</string>
   </property>
-  <widget class="QWidget" name="">
+  <widget class="QWidget" name="layoutWidget">
    <property name="geometry">
     <rect>
      <x>11</x>
      <y>11</y>
-     <width>343</width>
+     <width>367</width>
      <height>201</height>
     </rect>
    </property>
@@ -183,10 +183,10 @@
          </size>
         </property>
         <property name="minimum">
-         <number>-9999</number>
+         <number>-99999</number>
         </property>
         <property name="maximum">
-         <number>9999</number>
+         <number>99999</number>
         </property>
        </widget>
       </item>
@@ -205,10 +205,10 @@
          </size>
         </property>
         <property name="minimum">
-         <number>-9999</number>
+         <number>-99999</number>
         </property>
         <property name="maximum">
-         <number>9999</number>
+         <number>99999</number>
         </property>
        </widget>
       </item>
@@ -227,10 +227,10 @@
          </size>
         </property>
         <property name="minimum">
-         <number>-9999</number>
+         <number>-99999</number>
         </property>
         <property name="maximum">
-         <number>9999</number>
+         <number>99999</number>
         </property>
        </widget>
       </item>
@@ -251,10 +251,10 @@
            </size>
           </property>
           <property name="minimum">
-           <number>-9999</number>
+           <number>-99999</number>
           </property>
           <property name="maximum">
-           <number>9999</number>
+           <number>99999</number>
           </property>
          </widget>
         </item>
@@ -273,10 +273,10 @@
            </size>
           </property>
           <property name="minimum">
-           <number>-9999</number>
+           <number>-99999</number>
           </property>
           <property name="maximum">
-           <number>9999</number>
+           <number>99999</number>
           </property>
          </widget>
         </item>
@@ -299,10 +299,10 @@
            </size>
           </property>
           <property name="minimum">
-           <number>-9999</number>
+           <number>-99999</number>
           </property>
           <property name="maximum">
-           <number>9999</number>
+           <number>99999</number>
           </property>
          </widget>
         </item>
@@ -321,10 +321,10 @@
            </size>
           </property>
           <property name="minimum">
-           <number>-9999</number>
+           <number>-99999</number>
           </property>
           <property name="maximum">
-           <number>9999</number>
+           <number>99999</number>
           </property>
          </widget>
         </item>
@@ -371,10 +371,10 @@
          </size>
         </property>
         <property name="minimum">
-         <number>-9999</number>
+         <number>-99999</number>
         </property>
         <property name="maximum">
-         <number>9999</number>
+         <number>99999</number>
         </property>
        </widget>
       </item>
@@ -393,10 +393,10 @@
          </size>
         </property>
         <property name="minimum">
-         <number>-9999</number>
+         <number>-99999</number>
         </property>
         <property name="maximum">
-         <number>9999</number>
+         <number>99999</number>
         </property>
        </widget>
       </item>
@@ -415,10 +415,10 @@
          </size>
         </property>
         <property name="minimum">
-         <number>-9999</number>
+         <number>-99999</number>
         </property>
         <property name="maximum">
-         <number>9999</number>
+         <number>99999</number>
         </property>
        </widget>
       </item>
@@ -442,10 +442,10 @@
            <bool>true</bool>
           </property>
           <property name="minimum">
-           <number>-9999</number>
+           <number>-99999</number>
           </property>
           <property name="maximum">
-           <number>9999</number>
+           <number>99999</number>
           </property>
          </widget>
         </item>
@@ -464,10 +464,10 @@
            </size>
           </property>
           <property name="minimum">
-           <number>-9999</number>
+           <number>-99999</number>
           </property>
           <property name="maximum">
-           <number>9999</number>
+           <number>99999</number>
           </property>
          </widget>
         </item>
@@ -490,10 +490,10 @@
            </size>
           </property>
           <property name="minimum">
-           <number>-9999</number>
+           <number>-99999</number>
           </property>
           <property name="maximum">
-           <number>9999</number>
+           <number>99999</number>
           </property>
          </widget>
         </item>
@@ -512,10 +512,10 @@
            </size>
           </property>
           <property name="minimum">
-           <number>-9999</number>
+           <number>-99999</number>
           </property>
           <property name="maximum">
-           <number>9999</number>
+           <number>99999</number>
           </property>
          </widget>
         </item>
@@ -525,10 +525,10 @@
     </item>
    </layout>
   </widget>
-  <widget class="QWidget" name="">
+  <widget class="QWidget" name="layoutWidget">
    <property name="geometry">
     <rect>
-     <x>370</x>
+     <x>380</x>
      <y>10</y>
      <width>141</width>
      <height>201</height>
@@ -591,7 +591,7 @@
     </item>
    </layout>
   </widget>
-  <widget class="QWidget" name="">
+  <widget class="QWidget" name="layoutWidget">
    <property name="geometry">
     <rect>
      <x>10</x>

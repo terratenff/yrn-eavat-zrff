@@ -22,20 +22,34 @@ SubjectWindow::SubjectWindow(QWidget *parent) :
 
     settings_ = Settings::get_settings();
 
-    ui->spinVelocityInitial->setValue(settings_->get_velocity_initial());
-    ui->spinVelocityChange->setValue(settings_->get_velocity_max_change());
-    ui->spinAccelerationInitial->setValue(settings_->get_acceleration_initial());
-    ui->spinAccelerationChange->setValue(settings_->get_acceleration_max_change());
-    ui->spinAngularInitial->setValue(settings_->get_angular_velocity_initial());
-    ui->spinAngularChange->setValue(settings_->get_angular_velocity_max_change());
-    ui->spinAxisVelocityInitialX->setValue(settings_->get_axis_velocity_x_initial());
-    ui->spinAxisVelocityInitialY->setValue(settings_->get_axis_velocity_y_initial());
-    ui->spinAxisVelocityChangeX->setValue(settings_->get_axis_velocity_x_max_change());
-    ui->spinAxisVelocityChangeY->setValue(settings_->get_axis_velocity_y_initial());
-    ui->spinAxisAccelerationInitialX->setValue(settings_->get_axis_acceleration_x_initial());
-    ui->spinAxisAccelerationInitialY->setValue(settings_->get_axis_acceleration_y_initial());
-    ui->spinAxisAccelerationChangeX->setValue(settings_->get_axis_acceleration_x_max_change());
-    ui->spinAxisAccelerationChangeY->setValue(settings_->get_axis_acceleration_y_max_change());
+    ui->spinVelocityInitial->setValue(
+                static_cast<int>(settings_->get_velocity_initial() * FACTOR_));
+    ui->spinVelocityChange->setValue(
+                static_cast<int>(settings_->get_velocity_max_change() * FACTOR_));
+    ui->spinAccelerationInitial->setValue(
+                static_cast<int>(settings_->get_acceleration_initial() * FACTOR_));
+    ui->spinAccelerationChange->setValue(
+                static_cast<int>(settings_->get_acceleration_max_change() * FACTOR_));
+    ui->spinAngularInitial->setValue(
+                static_cast<int>(settings_->get_angular_velocity_initial() * FACTOR_));
+    ui->spinAngularChange->setValue(
+                static_cast<int>(settings_->get_angular_velocity_max_change() * FACTOR_));
+    ui->spinAxisVelocityInitialX->setValue(
+                static_cast<int>(settings_->get_axis_velocity_x_initial() * FACTOR_));
+    ui->spinAxisVelocityInitialY->setValue(
+                static_cast<int>(settings_->get_axis_velocity_y_initial() * FACTOR_));
+    ui->spinAxisVelocityChangeX->setValue(
+                static_cast<int>(settings_->get_axis_velocity_x_max_change() * FACTOR_));
+    ui->spinAxisVelocityChangeY->setValue(
+                static_cast<int>(settings_->get_axis_velocity_y_initial() * FACTOR_));
+    ui->spinAxisAccelerationInitialX->setValue(
+                static_cast<int>(settings_->get_axis_acceleration_x_initial() * FACTOR_));
+    ui->spinAxisAccelerationInitialY->setValue(
+                static_cast<int>(settings_->get_axis_acceleration_y_initial() * FACTOR_));
+    ui->spinAxisAccelerationChangeX->setValue(
+                static_cast<int>(settings_->get_axis_acceleration_x_max_change() * FACTOR_));
+    ui->spinAxisAccelerationChangeY->setValue(
+                static_cast<int>(settings_->get_axis_acceleration_y_max_change() * FACTOR_));
 
     switch (settings_->get_spawn_location()) {
     case CENTER:
@@ -71,7 +85,7 @@ void SubjectWindow::cancel()
 
 void SubjectWindow::defaultSettings()
 {
-    ui->spinVelocityInitial->setValue(20);
+    ui->spinVelocityInitial->setValue(500);
     ui->spinVelocityChange->setValue(0);
     ui->spinAccelerationInitial->setValue(0);
     ui->spinAccelerationChange->setValue(0);
@@ -90,20 +104,34 @@ void SubjectWindow::defaultSettings()
 
 void SubjectWindow::applyChanges()
 {
-    settings_->set_velocity_initial(ui->spinVelocityInitial->value());
-    settings_->set_velocity_max_change(ui->spinVelocityChange->value());
-    settings_->set_acceleration_initial(ui->spinAccelerationInitial->value());
-    settings_->set_acceleration_max_change(ui->spinAccelerationChange->value());
-    settings_->set_angular_velocity_initial(ui->spinAngularInitial->value());
-    settings_->set_angular_velocity_max_change(ui->spinAngularChange->value());
-    settings_->set_axis_velocity_x_initial(ui->spinAxisVelocityInitialX->value());
-    settings_->set_axis_velocity_y_initial(ui->spinAxisVelocityInitialY->value());
-    settings_->set_axis_velocity_x_max_change(ui->spinAxisVelocityChangeX->value());
-    settings_->set_axis_velocity_y_initial(ui->spinAxisVelocityChangeY->value());
-    settings_->set_axis_acceleration_x_initial(ui->spinAxisAccelerationInitialX->value());
-    settings_->set_axis_acceleration_y_initial(ui->spinAxisAccelerationInitialY->value());
-    settings_->set_axis_acceleration_x_max_change(ui->spinAxisAccelerationChangeX->value());
-    settings_->set_axis_acceleration_y_max_change(ui->spinAxisAccelerationChangeY->value());
+    settings_->set_velocity_initial(
+                ui->spinVelocityInitial->value() / FACTOR_);
+    settings_->set_velocity_max_change(
+                ui->spinVelocityChange->value() / FACTOR_);
+    settings_->set_acceleration_initial(
+                ui->spinAccelerationInitial->value() / FACTOR_);
+    settings_->set_acceleration_max_change(
+                ui->spinAccelerationChange->value() / FACTOR_);
+    settings_->set_angular_velocity_initial(
+                ui->spinAngularInitial->value() / FACTOR_);
+    settings_->set_angular_velocity_max_change(
+                ui->spinAngularChange->value() / FACTOR_);
+    settings_->set_axis_velocity_x_initial(
+                ui->spinAxisVelocityInitialX->value() / FACTOR_);
+    settings_->set_axis_velocity_y_initial(
+                ui->spinAxisVelocityInitialY->value() / FACTOR_);
+    settings_->set_axis_velocity_x_max_change(
+                ui->spinAxisVelocityChangeX->value() / FACTOR_);
+    settings_->set_axis_velocity_y_initial(
+                ui->spinAxisVelocityChangeY->value() / FACTOR_);
+    settings_->set_axis_acceleration_x_initial(
+                ui->spinAxisAccelerationInitialX->value() / FACTOR_);
+    settings_->set_axis_acceleration_y_initial(
+                ui->spinAxisAccelerationInitialY->value() / FACTOR_);
+    settings_->set_axis_acceleration_x_max_change(
+                ui->spinAxisAccelerationChangeX->value() / FACTOR_);
+    settings_->set_axis_acceleration_y_max_change(
+                ui->spinAxisAccelerationChangeY->value() / FACTOR_);
 
     if (ui->radioCenter->isChecked()) {
         settings_->set_spawn_location(CENTER);

@@ -12,7 +12,7 @@ Settings::Settings():
     instance_count_(50),
     offspring_count_(25),
     time_delta_(10),
-    velocity_initial_(20),
+    velocity_initial_(5),
     velocity_max_change_(0),
     acceleration_initial_(0),
     acceleration_max_change_(0),
@@ -142,72 +142,72 @@ unsigned int Settings::get_time_delta()
     return time_delta_;
 }
 
-void Settings::set_velocity_initial(int var)
+void Settings::set_velocity_initial(double var)
 {
     velocity_initial_ = var;
 }
 
-void Settings::set_velocity_max_change(int var)
+void Settings::set_velocity_max_change(double var)
 {
     velocity_max_change_ = var;
 }
 
-void Settings::set_acceleration_initial(int var)
+void Settings::set_acceleration_initial(double var)
 {
     acceleration_initial_ = var;
 }
 
-void Settings::set_acceleration_max_change(int var)
+void Settings::set_acceleration_max_change(double var)
 {
     acceleration_max_change_ = var;
 }
 
-void Settings::set_angular_velocity_initial(int var)
+void Settings::set_angular_velocity_initial(double var)
 {
     angular_velocity_initial_ = var;
 }
 
-void Settings::set_angular_velocity_max_change(int var)
+void Settings::set_angular_velocity_max_change(double var)
 {
     angular_velocity_max_change_ = var;
 }
 
-void Settings::set_axis_velocity_x_initial(int var)
+void Settings::set_axis_velocity_x_initial(double var)
 {
     axis_velocity_x_initial_ = var;
 }
 
-void Settings::set_axis_velocity_y_initial(int var)
+void Settings::set_axis_velocity_y_initial(double var)
 {
     axis_velocity_y_initial_ = var;
 }
 
-void Settings::set_axis_velocity_x_max_change(int var)
+void Settings::set_axis_velocity_x_max_change(double var)
 {
     axis_velocity_x_max_change_ = var;
 }
 
-void Settings::set_axis_velocity_y_max_change(int var)
+void Settings::set_axis_velocity_y_max_change(double var)
 {
     axis_velocity_y_max_change_ = var;
 }
 
-void Settings::set_axis_acceleration_x_initial(int var)
+void Settings::set_axis_acceleration_x_initial(double var)
 {
     axis_acceleration_x_initial_ = var;
 }
 
-void Settings::set_axis_acceleration_y_initial(int var)
+void Settings::set_axis_acceleration_y_initial(double var)
 {
     axis_acceleration_y_initial_ = var;
 }
 
-void Settings::set_axis_acceleration_x_max_change(int var)
+void Settings::set_axis_acceleration_x_max_change(double var)
 {
     axis_acceleration_x_max_change_ = var;
 }
 
-void Settings::set_axis_acceleration_y_max_change(int var)
+void Settings::set_axis_acceleration_y_max_change(double var)
 {
     axis_acceleration_y_max_change_ = var;
 }
@@ -217,72 +217,72 @@ void Settings::set_spawn_location(spawn_point location)
     spawn_location_ = location;
 }
 
-int Settings::get_velocity_initial()
+double Settings::get_velocity_initial()
 {
     return velocity_initial_;
 }
 
-int Settings::get_velocity_max_change()
+double Settings::get_velocity_max_change()
 {
     return velocity_max_change_;
 }
 
-int Settings::get_acceleration_initial()
+double Settings::get_acceleration_initial()
 {
     return acceleration_initial_;
 }
 
-int Settings::get_acceleration_max_change()
+double Settings::get_acceleration_max_change()
 {
     return acceleration_max_change_;
 }
 
-int Settings::get_angular_velocity_initial()
+double Settings::get_angular_velocity_initial()
 {
     return angular_velocity_initial_;
 }
 
-int Settings::get_angular_velocity_max_change()
+double Settings::get_angular_velocity_max_change()
 {
     return angular_velocity_max_change_;
 }
 
-int Settings::get_axis_velocity_x_initial()
+double Settings::get_axis_velocity_x_initial()
 {
     return axis_velocity_x_initial_;
 }
 
-int Settings::get_axis_velocity_y_initial()
+double Settings::get_axis_velocity_y_initial()
 {
     return axis_velocity_y_initial_;
 }
 
-int Settings::get_axis_velocity_x_max_change()
+double Settings::get_axis_velocity_x_max_change()
 {
     return axis_velocity_x_max_change_;
 }
 
-int Settings::get_axis_velocity_y_max_change()
+double Settings::get_axis_velocity_y_max_change()
 {
     return axis_velocity_y_max_change_;
 }
 
-int Settings::get_axis_acceleration_x_initial()
+double Settings::get_axis_acceleration_x_initial()
 {
     return axis_acceleration_x_initial_;
 }
 
-int Settings::get_axis_acceleration_y_initial()
+double Settings::get_axis_acceleration_y_initial()
 {
     return axis_acceleration_y_initial_;
 }
 
-int Settings::get_axis_acceleration_x_max_change()
+double Settings::get_axis_acceleration_x_max_change()
 {
     return axis_acceleration_x_max_change_;
 }
 
-int Settings::get_axis_acceleration_y_max_change()
+double Settings::get_axis_acceleration_y_max_change()
 {
     return axis_acceleration_y_max_change_;
 }

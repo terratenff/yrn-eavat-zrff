@@ -20,6 +20,7 @@ private:
     Ui::SubjectWindow *ui;
 
     Settings *settings_;
+    const double FACTOR_ = 1000;
 private slots:
     void cancel();
     void defaultSettings();
