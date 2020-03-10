@@ -165,4 +165,17 @@ void Manager::set_subject_parameters(Subject *subject)
                 XY(settings_->get_axis_acceleration_x_initial(),
                    settings_->get_axis_acceleration_y_initial())
                 );
+
+    subject->setAxisVelocityFactor(
+                XY(settings_->get_axis_velocity_x_max_change(),
+                   settings_->get_axis_velocity_y_max_change())
+                );
+    subject->setAxisAccelerationFactor(
+                XY(settings_->get_axis_acceleration_x_max_change(),
+                   settings_->get_axis_acceleration_y_max_change())
+                );
+
+    subject->setVelocityFactor(settings_->get_velocity_max_change());
+    subject->setAccelerationFactor(settings_->get_acceleration_max_change());
+    subject->setAngularVelocityFactor(settings_->get_angular_velocity_max_change());
 }

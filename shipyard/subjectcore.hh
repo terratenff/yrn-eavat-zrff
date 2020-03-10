@@ -33,6 +33,20 @@ public:
     double getAcceleration();
     double getAngle();
     double getAngularVelocity();
+
+    void setAxisVelocityFactor(XY xy);
+    void setAxisAccelerationFactor(XY xy);
+
+    void setVelocityFactor(double var);
+    void setAccelerationFactor(double var);
+    void setAngularVelocityFactor(double var);
+
+    XY getAxisVelocityFactor();
+    XY getAxisAccelerationFactor();
+
+    double getVelocityFactor();
+    double getAccelerationFactor();
+    double getAngularVelocityFactor();
 private:
     static SubjectCore *primaryTarget_;
     static SubjectCore *secondaryTarget_;
@@ -48,10 +62,17 @@ private:
     XY axis_velocity_;
     XY axis_acceleration_;
 
+    XY axis_velocity_factor_;
+    XY axis_acceleration_factor_;
+
+    double angle_;
     double velocity_;
     double acceleration_;
-    double angle_;
     double angular_velocity_;
+
+    double velocity_factor_;
+    double acceleration_factor_;
+    double angular_velocity_factor_;
 
     void updateMovement();
     void makeInputs();

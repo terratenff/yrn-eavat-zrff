@@ -26,10 +26,15 @@ SubjectCore::SubjectCore():
     coordinates_(XY(0,0)),
     axis_velocity_(XY(0,0)),
     axis_acceleration_(XY(0,0)),
+    axis_velocity_factor_(XY(0,0)),
+    axis_acceleration_factor_(XY(0,0)),
+    angle_(0),
     velocity_(0),
     acceleration_(0),
-    angle_(0),
-    angular_velocity_(0)
+    angular_velocity_(0),
+    velocity_factor_(0),
+    acceleration_factor_(0),
+    angular_velocity_factor_(0)
 {
     // TODO
 }
@@ -132,6 +137,56 @@ double SubjectCore::getAngularVelocity()
     return angular_velocity_;
 }
 
+void SubjectCore::setAxisVelocityFactor(XY xy)
+{
+    axis_velocity_factor_ = xy;
+}
+
+void SubjectCore::setAxisAccelerationFactor(XY xy)
+{
+    axis_acceleration_factor_ = xy;
+}
+
+void SubjectCore::setVelocityFactor(double var)
+{
+    velocity_factor_ = var;
+}
+
+void SubjectCore::setAccelerationFactor(double var)
+{
+    acceleration_factor_ = var;
+}
+
+void SubjectCore::setAngularVelocityFactor(double var)
+{
+    angular_velocity_factor_ = var;
+}
+
+XY SubjectCore::getAxisVelocityFactor()
+{
+    return axis_velocity_factor_;
+}
+
+XY SubjectCore::getAxisAccelerationFactor()
+{
+    return axis_acceleration_factor_;
+}
+
+double SubjectCore::getVelocityFactor()
+{
+    return velocity_factor_;
+}
+
+double SubjectCore::getAccelerationFactor()
+{
+    return acceleration_factor_;
+}
+
+double SubjectCore::getAngularVelocityFactor()
+{
+    return angular_velocity_factor_;
+}
+
 void SubjectCore::updateMovement()
 {
     angle_ += angular_velocity_;
@@ -176,7 +231,7 @@ void SubjectCore::applyOutputs()
         if (outputs_.size() != 1) return;
         outputValues = Output::angular_velocity(outputs_);
         if (outputValues.size() != 1) return;
-        setAngularVelocity(outputValues[0]);
+        setAngularVelocity(outputValues[0] * angular_velocity_factor_);
         break;
     case AXIS_VELOCITY:
         break;
