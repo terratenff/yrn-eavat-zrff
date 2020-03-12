@@ -46,6 +46,7 @@ public:
     void set_fitness_type(fitness_type type);
     void set_hidden_layer_count(unsigned int count);
     void set_hidden_neuron_count(unsigned int count);
+    void set_initial_bias(int var);
 
     void set_iteration_count(unsigned int count);
     void set_instance_count(unsigned int count);
@@ -57,6 +58,7 @@ public:
     fitness_type get_fitness_type();
     unsigned int get_hidden_layer_count();
     unsigned int get_hidden_neuron_count();
+    int get_initial_bias();
 
     unsigned int get_iteration_count();
     unsigned int get_instance_count();
@@ -103,6 +105,7 @@ private:
     fitness_type fitness_type_;
     unsigned int hidden_layer_count_;
     unsigned int hidden_neuron_count_;
+    int initial_bias_;
 
     unsigned int iteration_count_;
     unsigned int instance_count_;

@@ -67,14 +67,6 @@ MainWindow::MainWindow(QWidget *parent) :
                      SIGNAL(clicked()),
                      this,
                      SLOT(buttonRunClicked()));
-    QObject::connect(ui->buttonTrain,
-                     SIGNAL(clicked()),
-                     this,
-                     SLOT(buttonTrainClicked()));
-    QObject::connect(ui->buttonGenerate,
-                     SIGNAL(clicked()),
-                     this,
-                     SLOT(buttonGenerateClicked()));
     QObject::connect(ui->buttonReset,
                      SIGNAL(clicked()),
                      this,
@@ -250,8 +242,6 @@ void MainWindow::buttonRunClicked()
         ui->sliderHiddenLayer->setDisabled(false);
         ui->sliderHiddenNeuron->setDisabled(false);
         ui->buttonReset->setDisabled(false);
-        ui->buttonTrain->setDisabled(false);
-        ui->buttonGenerate->setDisabled(false);
         ui->comboInput->setDisabled(false);
         ui->comboOutput->setDisabled(false);
         ui->comboFitness->setDisabled(false);
@@ -264,8 +254,6 @@ void MainWindow::buttonRunClicked()
         ui->sliderHiddenLayer->setDisabled(true);
         ui->sliderHiddenNeuron->setDisabled(true);
         ui->buttonReset->setDisabled(true);
-        ui->buttonTrain->setDisabled(true);
-        ui->buttonGenerate->setDisabled(true);
         ui->comboInput->setDisabled(true);
         ui->comboOutput->setDisabled(true);
         ui->comboFitness->setDisabled(true);
@@ -283,16 +271,6 @@ void MainWindow::buttonRunClicked()
     }
 }
 
-void MainWindow::buttonTrainClicked()
-{
-    // TODO
-}
-
-void MainWindow::buttonGenerateClicked()
-{
-    // TODO
-}
-
 void MainWindow::buttonResetClicked()
 {
     settings_->use_default_settings();
@@ -307,6 +285,7 @@ void MainWindow::buttonResetClicked()
     int time = static_cast<int>(settings_->get_time_delta());
     int hiddenLayer = static_cast<int>(settings_->get_hidden_layer_count());
     int hiddenNeuron = static_cast<int>(settings_->get_hidden_neuron_count());
+    int initialBias = settings_->get_initial_bias();
 
     ui->sliderIteration->setValue(iteration);
     ui->sliderInstance->setValue(instance);
@@ -314,6 +293,7 @@ void MainWindow::buttonResetClicked()
     ui->sliderTime->setValue(time);
     ui->sliderHiddenLayer->setValue(hiddenLayer);
     ui->sliderHiddenNeuron->setValue(hiddenNeuron);
+    ui->sliderBias->setValue(initialBias);
     ui->labelInstanceCount->setText(QString::number(instance));
     ui->labelOffspringCount->setText(QString::number(offspring));
     ui->sliderOffspring->setMaximum(instance - 1);

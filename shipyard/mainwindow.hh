@@ -51,8 +51,6 @@ private:
 
 private slots:
     void buttonRunClicked();
-    void buttonTrainClicked();
-    void buttonGenerateClicked();
     void buttonResetClicked();
     void buttonExitClicked();
     void iterationChanged(int change);

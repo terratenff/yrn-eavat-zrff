@@ -462,6 +462,44 @@
         </layout>
        </item>
        <item>
+        <widget class="QLabel" name="labelBias">
+         <property name="enabled">
+          <bool>true</bool>
+         </property>
+         <property name="text">
+          <string>Initial Bias</string>
+         </property>
+         <property name="alignment">
+          <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+         </property>
+         <property name="margin">
+          <number>5</number>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <widget class="QSpinBox" name="sliderBias">
+         <property name="alignment">
+          <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+         </property>
+         <property name="buttonSymbols">
+          <enum>QAbstractSpinBox::UpDownArrows</enum>
+         </property>
+         <property name="minimum">
+          <number>-10000</number>
+         </property>
+         <property name="maximum">
+          <number>10000</number>
+         </property>
+         <property name="singleStep">
+          <number>1</number>
+         </property>
+         <property name="value">
+          <number>0</number>
+         </property>
+        </widget>
+       </item>
+       <item>
         <widget class="QLabel" name="labelOutput">
          <property name="enabled">
           <bool>true</bool>
@@ -542,20 +580,6 @@
         <widget class="QPushButton" name="buttonRun">
          <property name="text">
           <string>Run Simulation</string>
-         </property>
-        </widget>
-       </item>
-       <item>
-        <widget class="QPushButton" name="buttonTrain">
-         <property name="text">
-          <string>Pre-Train Network</string>
-         </property>
-        </widget>
-       </item>
-       <item>
-        <widget class="QPushButton" name="buttonGenerate">
-         <property name="text">
-          <string>Generate Training Data</string>
          </property>
         </widget>
        </item>

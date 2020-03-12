@@ -8,6 +8,7 @@ Settings::Settings():
     fitness_type_(CLOSE_PROXIMITY),
     hidden_layer_count_(2),
     hidden_neuron_count_(10),
+    initial_bias_(0),
     iteration_count_(1000),
     instance_count_(50),
     offspring_count_(25),
@@ -77,6 +78,11 @@ void Settings::set_hidden_neuron_count(unsigned int count)
     hidden_neuron_count_ = count;
 }
 
+void Settings::set_initial_bias(int var)
+{
+    initial_bias_ = var;
+}
+
 void Settings::set_iteration_count(unsigned int count)
 {
     iteration_count_ = count;
@@ -120,6 +126,11 @@ unsigned int Settings::get_hidden_layer_count()
 unsigned int Settings::get_hidden_neuron_count()
 {
     return hidden_neuron_count_;
+}
+
+int Settings::get_initial_bias()
+{
+    return initial_bias_;
 }
 
 unsigned int Settings::get_iteration_count()
