@@ -59,6 +59,7 @@ private slots:
     void timeChanged(int change);
     void hiddenLayerChanged(int change);
     void hiddenNeuronChanged(int change);
+    void biasChanged(int change);
     void inputChanged(int change);
     void outputChanged(int change);
     void fitnessChanged(int change);

@@ -71,7 +71,7 @@ Row NeuralNetwork::feedForward(Row &inputs)
 
     for (unsigned int i = 1; i < layers_.size(); i++) {
         for (unsigned int j = 0; j < neurons_[i].size(); j++) {
-            double value = 0;
+            double value = bias_;
             for (unsigned int k = 0; k < neurons_[i - 1].size(); k++) {
                 value += weights_[i - 1][j][k] * neurons_[i - 1][k];
             }
@@ -95,6 +95,16 @@ output_type NeuralNetwork::getOutputCode()
 fitness_type NeuralNetwork::getFitnessCode()
 {
     return fitness_code_;
+}
+
+void NeuralNetwork::setBias(double var)
+{
+    bias_ = var;
+}
+
+double NeuralNetwork::getBias()
+{
+    return bias_;
 }
 
 void NeuralNetwork::addFitness(double var)

@@ -23,6 +23,9 @@ public:
     output_type getOutputCode();
     fitness_type getFitnessCode();
 
+    void setBias(double var);
+    double getBias();
+
     void addFitness(double var);
     void setFitness(double var);
     double getFitness();
@@ -36,6 +39,7 @@ private:
     vector<unsigned int> layers_;
     Matrix neurons_;
     vector<Matrix> weights_;
+    double bias_ = 0;
 
     input_type input_code_;
     output_type output_code_;

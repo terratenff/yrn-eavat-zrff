@@ -467,7 +467,7 @@
           <bool>true</bool>
          </property>
          <property name="text">
-          <string>Initial Bias</string>
+          <string>Initial Bias (1 / 1000)</string>
          </property>
          <property name="alignment">
           <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
@@ -486,10 +486,10 @@
           <enum>QAbstractSpinBox::UpDownArrows</enum>
          </property>
          <property name="minimum">
-          <number>-10000</number>
+          <number>-10000000</number>
          </property>
          <property name="maximum">
-          <number>10000</number>
+          <number>10000000</number>
          </property>
          <property name="singleStep">
           <number>1</number>

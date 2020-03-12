@@ -129,6 +129,7 @@ void Manager::sort_networks()
 void Manager::set_subject_parameters(Subject *subject)
 {
     subject->getNeuralNetwork()->setFitness(0);
+    subject->getNeuralNetwork()->setBias(static_cast<double>(settings_->get_initial_bias()) / 1000);
 
     switch (settings_->get_spawn_location()) {
     case CENTER:

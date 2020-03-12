@@ -132,6 +132,10 @@ MainWindow::MainWindow(QWidget *parent) :
                      SIGNAL(valueChanged(int)),
                      this,
                      SLOT(hiddenNeuronChanged(int)));
+    QObject::connect(ui->sliderBias,
+                     SIGNAL(valueChanged(int)),
+                     this,
+                     SLOT(biasChanged(int)));
 
     timer_ = new QTimer();
     QObject::connect(timer_, SIGNAL(timeout()), this, SLOT(update()));
@@ -241,6 +245,7 @@ void MainWindow::buttonRunClicked()
         ui->sliderOffspring->setDisabled(false);
         ui->sliderHiddenLayer->setDisabled(false);
         ui->sliderHiddenNeuron->setDisabled(false);
+        ui->sliderBias->setDisabled(false);
         ui->buttonReset->setDisabled(false);
         ui->comboInput->setDisabled(false);
         ui->comboOutput->setDisabled(false);
@@ -253,6 +258,7 @@ void MainWindow::buttonRunClicked()
         ui->sliderOffspring->setDisabled(true);
         ui->sliderHiddenLayer->setDisabled(true);
         ui->sliderHiddenNeuron->setDisabled(true);
+        ui->sliderBias->setDisabled(true);
         ui->buttonReset->setDisabled(true);
         ui->comboInput->setDisabled(true);
         ui->comboOutput->setDisabled(true);
@@ -355,6 +361,11 @@ void MainWindow::hiddenNeuronChanged(int change)
 {
     settings_->set_hidden_neuron_count(static_cast<unsigned>(change));
     ui->labelHiddenNeuronCount->setText(QString::number(change));
+}
+
+void MainWindow::biasChanged(int change)
+{
+    settings_->set_initial_bias(change);
 }
 
 void MainWindow::inputChanged(int change)
