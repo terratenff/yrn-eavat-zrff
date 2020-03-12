@@ -41,7 +41,7 @@ SubjectWindow::SubjectWindow(QWidget *parent) :
     ui->spinAxisVelocityChangeX->setValue(
                 static_cast<int>(settings_->get_axis_velocity_x_max_change() * FACTOR_));
     ui->spinAxisVelocityChangeY->setValue(
-                static_cast<int>(settings_->get_axis_velocity_y_initial() * FACTOR_));
+                static_cast<int>(settings_->get_axis_velocity_y_max_change() * FACTOR_));
     ui->spinAxisAccelerationInitialX->setValue(
                 static_cast<int>(settings_->get_axis_acceleration_x_initial() * FACTOR_));
     ui->spinAxisAccelerationInitialY->setValue(
@@ -122,7 +122,7 @@ void SubjectWindow::applyChanges()
                 ui->spinAxisVelocityInitialY->value() / FACTOR_);
     settings_->set_axis_velocity_x_max_change(
                 ui->spinAxisVelocityChangeX->value() / FACTOR_);
-    settings_->set_axis_velocity_y_initial(
+    settings_->set_axis_velocity_y_max_change(
                 ui->spinAxisVelocityChangeY->value() / FACTOR_);
     settings_->set_axis_acceleration_x_initial(
                 ui->spinAxisAccelerationInitialX->value() / FACTOR_);
