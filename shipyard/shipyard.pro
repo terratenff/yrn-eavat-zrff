@@ -22,6 +22,7 @@ SOURCES += \
     mainwindow.cpp \
     manager.cpp \
     math.cpp \
+    networkwindow.cpp \
     neuralnetwork.cpp \
     settings.cpp \
     subject.cpp \
@@ -35,6 +36,7 @@ HEADERS += \
     mainwindow.hh \
     manager.hh \
     math.hh \
+    networkwindow.hh \
     neuralnetwork.hh \
     settings.hh \
     subject.hh \
@@ -44,6 +46,7 @@ HEADERS += \
 
 FORMS += \
     mainwindow.ui \
+    networkwindow.ui \
     subjectwindow.ui
 
 # Default rules for deployment.

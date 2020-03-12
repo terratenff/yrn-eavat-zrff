@@ -480,7 +480,8 @@ void MainWindow::editSubjectParameters()
 
 void MainWindow::editNetworkParameters()
 {
-    //
+    nw = new NetworkWindow();
+    nw->show();
 }
 
 void MainWindow::helpGeneral()

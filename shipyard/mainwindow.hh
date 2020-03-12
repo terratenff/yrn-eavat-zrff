@@ -8,6 +8,7 @@
 #include <QMouseEvent>
 #include <QTimer>
 #include "subjectwindow.hh"
+#include "networkwindow.hh"
 #include "settings.hh"
 #include "manager.hh"
 #include "target.hh"
@@ -35,6 +36,7 @@ protected:
 private:
     Ui::MainWindow *ui;
     SubjectWindow *sw;
+    NetworkWindow *nw;
 
     Settings *settings_;
     QGraphicsScene *scene_;
