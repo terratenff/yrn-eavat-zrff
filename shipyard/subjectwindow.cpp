@@ -85,20 +85,20 @@ void SubjectWindow::cancel()
 
 void SubjectWindow::defaultSettings()
 {
-    ui->spinVelocityInitial->setValue(500);
-    ui->spinVelocityChange->setValue(0);
+    ui->spinVelocityInitial->setValue(5000);
+    ui->spinVelocityChange->setValue(1000);
     ui->spinAccelerationInitial->setValue(0);
-    ui->spinAccelerationChange->setValue(0);
+    ui->spinAccelerationChange->setValue(1000);
     ui->spinAngularInitial->setValue(0);
-    ui->spinAngularChange->setValue(0);
+    ui->spinAngularChange->setValue(1000);
     ui->spinAxisVelocityInitialX->setValue(0);
     ui->spinAxisVelocityInitialY->setValue(0);
-    ui->spinAxisVelocityChangeX->setValue(0);
-    ui->spinAxisVelocityChangeY->setValue(0);
+    ui->spinAxisVelocityChangeX->setValue(1000);
+    ui->spinAxisVelocityChangeY->setValue(1000);
     ui->spinAxisAccelerationInitialX->setValue(0);
     ui->spinAxisAccelerationInitialY->setValue(0);
-    ui->spinAxisAccelerationChangeX->setValue(0);
-    ui->spinAxisAccelerationChangeY->setValue(0);
+    ui->spinAxisAccelerationChangeX->setValue(1000);
+    ui->spinAxisAccelerationChangeY->setValue(1000);
     ui->radioCenter->setChecked(true);
 }
 
