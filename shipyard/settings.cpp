@@ -27,7 +27,16 @@ Settings::Settings():
     axis_acceleration_y_initial_(0),
     axis_acceleration_x_max_change_(1),
     axis_acceleration_y_max_change_(1),
-    spawn_location_(CENTER)
+    spawn_location_(CENTER),
+    initial_weight_minimum_(-0.5),
+    initial_weight_maximum_(0.5),
+    activation_function_hidden_(SIGMOID),
+    activation_function_output_(SIGMOID),
+    breeding_method_(COPY),
+    population_retention_rate_(10),
+    mutation_probability_(10),
+    mutation_scale_minimum_(1.0),
+    mutation_scale_maximum_(2.0)
 {
 }
 
