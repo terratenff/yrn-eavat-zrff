@@ -302,3 +302,93 @@ spawn_point Settings::get_spawn_location()
 {
     return spawn_location_;
 }
+
+void Settings::set_initial_weight_minimum(double var)
+{
+    initial_weight_minimum_ = var;
+}
+
+void Settings::set_initial_weight_maximum(double var)
+{
+    initial_weight_maximum_ = var;
+}
+
+void Settings::set_activation_function_hidden(activation_type type)
+{
+    activation_function_hidden_ = type;
+}
+
+void Settings::set_activation_function_output(activation_type type)
+{
+    activation_function_output_ = type;
+}
+
+void Settings::set_breeding_method(breeding_type type)
+{
+    breeding_method_ = type;
+}
+
+void Settings::set_population_retention_rate(int var)
+{
+    population_retention_rate_ = var;
+}
+
+void Settings::set_mutation_probability(int var)
+{
+    mutation_probability_ = var;
+}
+
+void Settings::set_mutation_scale_minimum(double var)
+{
+    mutation_scale_minimum_ = var;
+}
+
+void Settings::set_mutation_scale_maximum(double var)
+{
+    mutation_scale_maximum_ = var;
+}
+
+double Settings::get_initial_weight_minimum()
+{
+    return initial_weight_minimum_;
+}
+
+double Settings::get_initial_weight_maximum()
+{
+    return initial_weight_maximum_;
+}
+
+activation_type Settings::get_activation_function_hidden()
+{
+    return activation_function_hidden_;
+}
+
+activation_type Settings::get_activation_function_output()
+{
+    return activation_function_output_;
+}
+
+breeding_type Settings::get_breeding_method()
+{
+    return breeding_method_;
+}
+
+int Settings::get_population_retention_rate()
+{
+    return population_retention_rate_;
+}
+
+int Settings::get_mutation_probability()
+{
+    return mutation_probability_;
+}
+
+double Settings::get_mutation_scale_minimum()
+{
+    return mutation_scale_minimum_;
+}
+
+double Settings::get_mutation_scale_maximum()
+{
+    return mutation_scale_maximum_;
+}
