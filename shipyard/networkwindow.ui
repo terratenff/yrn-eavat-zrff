@@ -10,8 +10,20 @@
     <height>400</height>
    </rect>
   </property>
+  <property name="minimumSize">
+   <size>
+    <width>300</width>
+    <height>400</height>
+   </size>
+  </property>
+  <property name="maximumSize">
+   <size>
+    <width>300</width>
+    <height>400</height>
+   </size>
+  </property>
   <property name="windowTitle">
-   <string>Form</string>
+   <string>Network Settings</string>
   </property>
   <widget class="QWidget" name="layoutWidget">
    <property name="geometry">
@@ -27,7 +39,7 @@
      <number>10</number>
     </property>
     <item>
-     <widget class="QLabel" name="label_5">
+     <widget class="QLabel" name="labelActivationFunctionHidden">
       <property name="minimumSize">
        <size>
         <width>150</width>
@@ -46,7 +58,7 @@
      </widget>
     </item>
     <item>
-     <widget class="QComboBox" name="comboBox"/>
+     <widget class="QComboBox" name="comboActivationFunctionHidden"/>
     </item>
    </layout>
   </widget>
@@ -64,7 +76,7 @@
      <number>10</number>
     </property>
     <item>
-     <widget class="QLabel" name="label_6">
+     <widget class="QLabel" name="labelActivationFunctionOutput">
       <property name="minimumSize">
        <size>
         <width>150</width>
@@ -83,7 +95,7 @@
      </widget>
     </item>
     <item>
-     <widget class="QComboBox" name="comboBox_2"/>
+     <widget class="QComboBox" name="comboActivationFunctionOutput"/>
     </item>
    </layout>
   </widget>
@@ -101,16 +113,16 @@
      <number>10</number>
     </property>
     <item>
-     <widget class="QLabel" name="label_7">
+     <widget class="QLabel" name="labelBreedingMethod">
       <property name="minimumSize">
        <size>
-        <width>150</width>
+        <width>100</width>
         <height>0</height>
        </size>
       </property>
       <property name="maximumSize">
        <size>
-        <width>150</width>
+        <width>100</width>
         <height>16777215</height>
        </size>
       </property>
@@ -120,7 +132,7 @@
      </widget>
     </item>
     <item>
-     <widget class="QComboBox" name="comboBox_3"/>
+     <widget class="QComboBox" name="comboBreedingMethod"/>
     </item>
    </layout>
   </widget>
@@ -138,7 +150,7 @@
      <number>10</number>
     </property>
     <item>
-     <widget class="QLabel" name="label_8">
+     <widget class="QLabel" name="labelMutationSettings">
       <property name="minimumSize">
        <size>
         <width>150</width>
@@ -175,7 +187,7 @@
      <number>10</number>
     </property>
     <item>
-     <widget class="QLabel" name="label_9">
+     <widget class="QLabel" name="labelPopulationRetentionRate">
       <property name="minimumSize">
        <size>
         <width>130</width>
@@ -194,7 +206,7 @@
      </widget>
     </item>
     <item>
-     <widget class="QLabel" name="label_10">
+     <widget class="QLabel" name="labelPopulationRetentionRateValue">
       <property name="minimumSize">
        <size>
         <width>40</width>
@@ -216,7 +228,7 @@
      </widget>
     </item>
     <item>
-     <widget class="QSlider" name="horizontalSlider_3">
+     <widget class="QSlider" name="sliderPopulationRetentionRate">
       <property name="minimum">
        <number>0</number>
       </property>
@@ -247,7 +259,7 @@
      <number>10</number>
     </property>
     <item>
-     <widget class="QLabel" name="label_11">
+     <widget class="QLabel" name="labelInitializationSettings">
       <property name="minimumSize">
        <size>
         <width>150</width>
@@ -284,7 +296,7 @@
      <number>10</number>
     </property>
     <item>
-     <widget class="QLabel" name="label_12">
+     <widget class="QLabel" name="labelMutationProbability">
       <property name="minimumSize">
        <size>
         <width>130</width>
@@ -303,7 +315,7 @@
      </widget>
     </item>
     <item>
-     <widget class="QLabel" name="label_13">
+     <widget class="QLabel" name="labelMutationProbabilityValue">
       <property name="minimumSize">
        <size>
         <width>40</width>
@@ -325,7 +337,7 @@
      </widget>
     </item>
     <item>
-     <widget class="QSlider" name="horizontalSlider_4">
+     <widget class="QSlider" name="sliderMutationProbability">
       <property name="minimum">
        <number>0</number>
       </property>
@@ -356,7 +368,7 @@
      <number>10</number>
     </property>
     <item>
-     <widget class="QLabel" name="label_14">
+     <widget class="QLabel" name="labelMutationScaleMin">
       <property name="minimumSize">
        <size>
         <width>110</width>
@@ -375,7 +387,7 @@
      </widget>
     </item>
     <item>
-     <widget class="QLabel" name="label_15">
+     <widget class="QLabel" name="labelMutationScaleMinValue">
       <property name="minimumSize">
        <size>
         <width>40</width>
@@ -389,7 +401,7 @@
        </size>
       </property>
       <property name="text">
-       <string>-0.5</string>
+       <string>1.0</string>
       </property>
       <property name="alignment">
        <set>Qt::AlignCenter</set>
@@ -397,15 +409,15 @@
      </widget>
     </item>
     <item>
-     <widget class="QSlider" name="horizontalSlider_5">
+     <widget class="QSlider" name="sliderMutationScaleMin">
       <property name="minimum">
-       <number>-999999</number>
+       <number>1</number>
       </property>
       <property name="maximum">
-       <number>999999</number>
+       <number>10000</number>
       </property>
       <property name="value">
-       <number>-500</number>
+       <number>1000</number>
       </property>
       <property name="orientation">
        <enum>Qt::Horizontal</enum>
@@ -428,7 +440,7 @@
      <number>10</number>
     </property>
     <item>
-     <widget class="QLabel" name="label_16">
+     <widget class="QLabel" name="labelMutationScaleMax">
       <property name="minimumSize">
        <size>
         <width>110</width>
@@ -447,7 +459,7 @@
      </widget>
     </item>
     <item>
-     <widget class="QLabel" name="label_17">
+     <widget class="QLabel" name="labelMutationScaleMaxValue">
       <property name="minimumSize">
        <size>
         <width>40</width>
@@ -461,7 +473,7 @@
        </size>
       </property>
       <property name="text">
-       <string>0.5</string>
+       <string>2.0</string>
       </property>
       <property name="alignment">
        <set>Qt::AlignCenter</set>
@@ -469,15 +481,15 @@
      </widget>
     </item>
     <item>
-     <widget class="QSlider" name="horizontalSlider_6">
+     <widget class="QSlider" name="sliderMutationScaleMax">
       <property name="minimum">
-       <number>-999999</number>
+       <number>1</number>
       </property>
       <property name="maximum">
-       <number>999999</number>
+       <number>10000</number>
       </property>
       <property name="value">
-       <number>500</number>
+       <number>2000</number>
       </property>
       <property name="orientation">
        <enum>Qt::Horizontal</enum>
@@ -500,7 +512,7 @@
      <number>10</number>
     </property>
     <item>
-     <widget class="QLabel" name="label">
+     <widget class="QLabel" name="labelInitialWeightMin">
       <property name="minimumSize">
        <size>
         <width>100</width>
@@ -519,7 +531,7 @@
      </widget>
     </item>
     <item>
-     <widget class="QLabel" name="label_3">
+     <widget class="QLabel" name="labelInitialWeightMinValue">
       <property name="minimumSize">
        <size>
         <width>50</width>
@@ -541,12 +553,12 @@
      </widget>
     </item>
     <item>
-     <widget class="QSlider" name="horizontalSlider">
+     <widget class="QSlider" name="sliderInitialWeightMin">
       <property name="minimum">
-       <number>-999999</number>
+       <number>-10000</number>
       </property>
       <property name="maximum">
-       <number>999999</number>
+       <number>10000</number>
       </property>
       <property name="value">
        <number>-500</number>
@@ -572,7 +584,7 @@
      <number>10</number>
     </property>
     <item>
-     <widget class="QLabel" name="label_2">
+     <widget class="QLabel" name="labelInitialWeightMax">
       <property name="minimumSize">
        <size>
         <width>100</width>
@@ -591,7 +603,7 @@
      </widget>
     </item>
     <item>
-     <widget class="QLabel" name="label_4">
+     <widget class="QLabel" name="labelInitialWeightMaxValue">
       <property name="minimumSize">
        <size>
         <width>50</width>
@@ -605,7 +617,7 @@
        </size>
       </property>
       <property name="text">
-       <string>-0.5</string>
+       <string>0.5</string>
       </property>
       <property name="alignment">
        <set>Qt::AlignCenter</set>
@@ -613,12 +625,12 @@
      </widget>
     </item>
     <item>
-     <widget class="QSlider" name="horizontalSlider_2">
+     <widget class="QSlider" name="sliderInitialWeightMax">
       <property name="minimum">
-       <number>-999999</number>
+       <number>-10000</number>
       </property>
       <property name="maximum">
-       <number>999999</number>
+       <number>10000</number>
       </property>
       <property name="value">
        <number>500</number>
@@ -641,16 +653,16 @@
    </property>
    <layout class="QHBoxLayout" name="horizontalLayout">
     <item>
-     <widget class="QPushButton" name="pushButton_4">
+     <widget class="QPushButton" name="buttonDefault">
       <property name="minimumSize">
        <size>
-        <width>65</width>
+        <width>85</width>
         <height>0</height>
        </size>
       </property>
       <property name="maximumSize">
        <size>
-        <width>65</width>
+        <width>85</width>
         <height>16777215</height>
        </size>
       </property>
@@ -660,35 +672,16 @@
      </widget>
     </item>
     <item>
-     <widget class="QPushButton" name="pushButton_3">
+     <widget class="QPushButton" name="buttonOK">
       <property name="minimumSize">
        <size>
-        <width>65</width>
+        <width>85</width>
         <height>0</height>
        </size>
       </property>
       <property name="maximumSize">
        <size>
-        <width>65</width>
-        <height>16777215</height>
-       </size>
-      </property>
-      <property name="text">
-       <string>Apply</string>
-      </property>
-     </widget>
-    </item>
-    <item>
-     <widget class="QPushButton" name="pushButton_2">
-      <property name="minimumSize">
-       <size>
-        <width>65</width>
-        <height>0</height>
-       </size>
-      </property>
-      <property name="maximumSize">
-       <size>
-        <width>65</width>
+        <width>85</width>
         <height>16777215</height>
        </size>
       </property>
@@ -698,16 +691,16 @@
      </widget>
     </item>
     <item>
-     <widget class="QPushButton" name="pushButton">
+     <widget class="QPushButton" name="buttonCancel">
       <property name="minimumSize">
        <size>
-        <width>65</width>
+        <width>85</width>
         <height>0</height>
        </size>
       </property>
       <property name="maximumSize">
        <size>
-        <width>65</width>
+        <width>85</width>
         <height>16777215</height>
        </size>
       </property>

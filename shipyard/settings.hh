@@ -41,8 +41,8 @@ enum activation_type {
     HEAVISIDE,
     RELU,
     RELU_LEAKY,
-    SOFTMAX,
     GAUSSIAN,
+    SOFTMAX,
     NO_ACTIVATION
 };
 enum breeding_type {

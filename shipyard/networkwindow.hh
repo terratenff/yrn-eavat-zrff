@@ -2,6 +2,7 @@
 #define NETWORKWINDOW_HH
 
 #include <QWidget>
+#include <settings.hh>
 
 namespace Ui {
 class NetworkWindow;
@@ -17,6 +18,20 @@ public:
 
 private:
     Ui::NetworkWindow *ui;
+
+    Settings *settings_;
+    const double FACTOR_ = 1000;
+private slots:
+    void cancel();
+    void defaultSettings();
+    void applyChanges();
+
+    void initialWeightMinChanged(int change);
+    void initialWeightMaxChanged(int change);
+    void populationRetentionRateChanged(int change);
+    void mutationProbabilityChanged(int change);
+    void mutationScaleMinChanged(int change);
+    void mutationScaleMaxChanged(int change);
 };
 
 #endif // NETWORKWINDOW_HH
