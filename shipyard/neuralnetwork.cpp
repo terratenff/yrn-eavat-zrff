@@ -191,13 +191,18 @@ Row NeuralNetwork::feedForward(Row &inputs)
     }
 
     for (unsigned int i = 1; i < layers_.size(); i++) {
+        bool outputLayer = i == layers_.size() - 1;
         for (unsigned int j = 0; j < neurons_[i].size(); j++) {
             double value = bias_;
             for (unsigned int k = 0; k < neurons_[i - 1].size(); k++) {
                 value += weights_[i - 1][j][k] * neurons_[i - 1][k];
             }
 
-            neurons_[i][j] = activation(value, i == layers_.size() - 1);
+            neurons_[i][j] = activation(value, outputLayer);
+        }
+        if ((outputLayer && output_activation_ == SOFTMAX)
+                || (!outputLayer && hidden_activation_ == SOFTMAX)) {
+            neurons_[i] = softmax(neurons_[i]);
         }
     }
     Row outputs = neurons_[neurons_.size() - 1];
@@ -351,23 +356,23 @@ double NeuralNetwork::activation(double value, bool output)
         activation_function = hidden_activation_;
     }
 
-    switch(activation_function) { // TODO
+    switch(activation_function) {
     case SIGMOID:
         return sigmoid(value);
     case HYPERBOLIC_TANGENT:
-        return sigmoid(value);
+        return hyperbolic_tangent(value);
     case SIGN:
-        return sigmoid(value);
+        return sign(value);
     case HEAVISIDE:
-        return sigmoid(value);
+        return heaviside(value);
     case RELU:
-        return sigmoid(value);
+        return ReLU(value);
     case RELU_LEAKY:
-        return sigmoid(value);
+        return ReLU_leaky(value);
     case GAUSSIAN:
-        return sigmoid(value);
+        return gaussian(value);
     case SOFTMAX:
-        return sigmoid(value);
+        return value; // computed somewhere else.
     case NO_ACTIVATION:
         return sigmoid(value);
     }

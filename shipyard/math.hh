@@ -80,6 +80,14 @@ Matrix sigmoid(Matrix &matr);
 double sigmoid_curve_gradient(double &x);
 Matrix sigmoid_curve_gradient(Matrix &matr);
 
+double hyperbolic_tangent(double &x);
+double sign(double &x);
+double heaviside(double &x);
+double ReLU(double &x);
+double ReLU_leaky(double &x);
+double gaussian(double &x);
+Row softmax(Row &x);
+
 class Random
 {
 public:

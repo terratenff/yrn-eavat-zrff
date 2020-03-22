@@ -240,6 +240,54 @@ Matrix sigmoid_curve_gradient(Matrix &matr)
     return result;
 }
 
+double hyperbolic_tangent(double &x)
+{
+    return (2 / (1 + std::exp(-2*x))) - 1;
+}
+
+double sign(double &x)
+{
+    if (near_zero(x)) return 0;
+    else if (x > 0) return 1;
+    else return -1;
+}
+
+double heaviside(double &x)
+{
+    if (near_zero(x) || x > 0) return 1;
+    else return 0;
+}
+
+double ReLU(double &x)
+{
+    return fmax(0, x);
+}
+
+double ReLU_leaky(double &x)
+{
+    if (x > 0) return x;
+    else return x * 0.01;
+}
+
+double gaussian(double &x)
+{
+    return std::exp(-(x*x));
+}
+
+Row softmax(Row &x)
+{
+    double total = 0;
+    std::for_each(x.begin(), x.end(), [&] (double n) {
+        total += std::exp(n);
+    });
+
+    Row y;
+    std::for_each(x.begin(), x.end(), [&] (double n) {
+        y.push_back(std::exp(n) / total);
+    });
+    return y;
+}
+
 Random::Random():
     rd_(),
     rng_(rd_()),

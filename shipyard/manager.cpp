@@ -87,12 +87,6 @@ void Manager::update()
                                   topSubjects,
                                   retentionSubjects);
 
-        // TODO:
-        // 1. Use retentionSubjects to skip them in the loop below.
-        // 2. Use breedingMethod (along with breeders) to create
-        //    new NeuralNetworks.
-        // 3. ERROR: Vector Subscript out of range.
-
         unsigned int j = 0;
         for (unsigned int i = population - offspringCount; i < population; i++) {
             if (std::find(retentionSubjects.begin(), retentionSubjects.end(), i) != retentionSubjects.end()) {
@@ -137,10 +131,6 @@ void Manager::update()
                 break;
             }
             }
-
-//            networks_[i] = new NeuralNetwork(
-//                        *networks_[j % (population - offspringCount)]
-//            );
 
             networks_[i]->mutate();
 

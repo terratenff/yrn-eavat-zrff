@@ -53,22 +53,22 @@ NetworkWindow::NetworkWindow(QWidget *parent) :
                 static_cast<int>(settings_->get_initial_weight_maximum() * FACTOR_));
 
     ui->comboActivationFunctionHidden->addItem("Sigmoid");
-    ui->comboActivationFunctionHidden->addItem("(WIP) Hyperbolic Tangent");
-    ui->comboActivationFunctionHidden->addItem("(WIP) Sign");
-    ui->comboActivationFunctionHidden->addItem("(WIP) Heaviside");
-    ui->comboActivationFunctionHidden->addItem("(WIP) ReLU");
-    ui->comboActivationFunctionHidden->addItem("(WIP) Leaky ReLU");
-    ui->comboActivationFunctionHidden->addItem("(WIP) Gaussian");
-    ui->comboActivationFunctionHidden->addItem("(WIP) Softmax (*)");
+    ui->comboActivationFunctionHidden->addItem("Hyperbolic Tangent");
+    ui->comboActivationFunctionHidden->addItem("Sign");
+    ui->comboActivationFunctionHidden->addItem("Heaviside");
+    ui->comboActivationFunctionHidden->addItem("ReLU (*)");
+    ui->comboActivationFunctionHidden->addItem("Leaky ReLU (*)");
+    ui->comboActivationFunctionHidden->addItem("Gaussian");
+    ui->comboActivationFunctionHidden->addItem("Softmax");
 
     ui->comboActivationFunctionOutput->addItem("Sigmoid");
-    ui->comboActivationFunctionOutput->addItem("(WIP) Hyperbolic Tangent");
-    ui->comboActivationFunctionOutput->addItem("(WIP) Sign");
-    ui->comboActivationFunctionOutput->addItem("(WIP) Heaviside");
-    ui->comboActivationFunctionOutput->addItem("(WIP) ReLU");
-    ui->comboActivationFunctionOutput->addItem("(WIP) Leaky ReLU");
-    ui->comboActivationFunctionOutput->addItem("(WIP) Gaussian");
-    ui->comboActivationFunctionOutput->addItem("(WIP) Softmax");
+    ui->comboActivationFunctionOutput->addItem("Hyperbolic Tangent");
+    ui->comboActivationFunctionOutput->addItem("Sign");
+    ui->comboActivationFunctionOutput->addItem("Heaviside");
+    ui->comboActivationFunctionOutput->addItem("ReLU (*)");
+    ui->comboActivationFunctionOutput->addItem("Leaky ReLU (*)");
+    ui->comboActivationFunctionOutput->addItem("Gaussian");
+    ui->comboActivationFunctionOutput->addItem("Softmax");
 
     switch(settings_->get_activation_function_hidden()) {
     case SIGMOID:
@@ -131,9 +131,9 @@ NetworkWindow::NetworkWindow(QWidget *parent) :
     }
 
     ui->comboBreedingMethod->addItem("Copy");
-    ui->comboBreedingMethod->addItem("(WIP) Heavily Mutated Copy");
-    ui->comboBreedingMethod->addItem("(WIP) Child of Two");
-    ui->comboBreedingMethod->addItem("(WIP) Child of Three");
+    ui->comboBreedingMethod->addItem("Heavily Mutated Copy");
+    ui->comboBreedingMethod->addItem("Child of Two");
+    ui->comboBreedingMethod->addItem("Child of Three");
 
     switch(settings_->get_breeding_method()) {
     case COPY:
