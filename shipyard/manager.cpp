@@ -34,14 +34,7 @@ void Manager::initialize(SubjectCore *p,
     unsigned int instances = settings_->get_instance_count();
 
     for (unsigned int i = 0; i < instances; i++) {
-        NeuralNetwork *nn = new NeuralNetwork(
-                   settings_->get_input_type(),
-                   settings_->get_output_type(),
-                   settings_->get_fitness_type(),
-                   settings_->get_hidden_layer_count(),
-                   settings_->get_hidden_neuron_count(),
-                   rand_
-        );
+        NeuralNetwork *nn = new NeuralNetwork(settings_, rand_);
         nn->mutate();
         networks_.push_back(nn);
     }
@@ -72,12 +65,82 @@ void Manager::update()
         iteration_count_ = 0;
         unsigned int population = settings_->get_instance_count();
         unsigned int offspringCount = settings_->get_offspring_count();
+        breeding_type breedingMethod = settings_->get_breeding_method();
+        int populationRetentionRate = settings_->get_population_retention_rate();
+
         sort_networks();
+
+        std::vector<int> topSubjects =
+                get_top_subjects(population - offspringCount);
+        std::vector<int> retentionSubjects =
+                get_retention_subjects(populationRetentionRate,
+                                       population,
+                                       population - offspringCount);
+
+        int targetCount =
+                static_cast<int>(offspringCount - retentionSubjects.size());
+        if (targetCount < 0) targetCount = 0;
+
+        std::vector<std::vector<int>> breeders =
+                generate_breeders(breedingMethod,
+                                  targetCount,
+                                  topSubjects,
+                                  retentionSubjects);
+
+        // TODO:
+        // 1. Use retentionSubjects to skip them in the loop below.
+        // 2. Use breedingMethod (along with breeders) to create
+        //    new NeuralNetworks.
+        // 3. ERROR: Vector Subscript out of range.
+
         unsigned int j = 0;
         for (unsigned int i = population - offspringCount; i < population; i++) {
-            networks_[i] = new NeuralNetwork(
-                        *networks_[j % (population - offspringCount)]
-            );
+            if (std::find(retentionSubjects.begin(), retentionSubjects.end(), i) != retentionSubjects.end()) {
+                continue;
+            }
+
+            switch(breedingMethod) {
+            case COPY:
+            {
+                unsigned int slot = static_cast<unsigned int>(breeders[j][0]);
+                networks_[i] = new NeuralNetwork(*networks_[slot]);
+                break;
+            }
+            case HEAVILY_MUTATED_COPY:
+            {
+                unsigned int slot = static_cast<unsigned int>(breeders[j][0]);
+                networks_[i] = new NeuralNetwork(*networks_[slot], true);
+                break;
+            }
+            case CHILD_OF_TWO:
+            {
+                unsigned int slot1 = static_cast<unsigned int>(breeders[j][0]);
+                unsigned int slot2 = static_cast<unsigned int>(breeders[j][1]);
+                networks_[i] = new NeuralNetwork(*networks_[slot1],
+                                                 *networks_[slot2]);
+                break;
+            }
+            case CHILD_OF_THREE:
+            {
+                unsigned int slot1 = static_cast<unsigned int>(breeders[j][0]);
+                unsigned int slot2 = static_cast<unsigned int>(breeders[j][1]);
+                unsigned int slot3 = static_cast<unsigned int>(breeders[j][2]);
+                networks_[i] = new NeuralNetwork(*networks_[slot1],
+                                                 *networks_[slot2],
+                                                 *networks_[slot3]);
+                break;
+            }
+            case NO_BREEDING:
+            {
+                unsigned int slot = static_cast<unsigned int>(breeders[j][0]);
+                networks_[i] = new NeuralNetwork(*networks_[slot]);
+                break;
+            }
+            }
+
+//            networks_[i] = new NeuralNetwork(
+//                        *networks_[j % (population - offspringCount)]
+//            );
 
             networks_[i]->mutate();
 
@@ -179,4 +242,78 @@ void Manager::set_subject_parameters(Subject *subject)
     subject->setVelocityFactor(settings_->get_velocity_max_change());
     subject->setAccelerationFactor(settings_->get_acceleration_max_change());
     subject->setAngularVelocityFactor(settings_->get_angular_velocity_max_change());
+}
+
+std::vector<int> Manager::get_top_subjects(unsigned int count)
+{
+    std::vector<int> top_subjects;
+    unsigned int i = 0;
+    while (i < count) {
+        top_subjects.push_back(static_cast<int>(i));
+        ++i;
+    }
+    return top_subjects;
+}
+
+std::vector<int> Manager::get_retention_subjects(int retention_rate,
+                                                 unsigned int population,
+                                                 unsigned int top_subject_count)
+{
+    std::vector<int> retention_subjects;
+    for (unsigned int i = top_subject_count; i < population; i++) {
+        int decisionMaker = rand_.random_int(0,100);
+        if (decisionMaker < retention_rate) {
+            retention_subjects.push_back(static_cast<int>(i));
+        }
+    }
+    return retention_subjects;
+}
+
+std::vector<std::vector<int>>
+Manager::generate_breeders(breeding_type method,
+                           int target_count,
+                           std::vector<int> top_subjects,
+                           std::vector<int> retention_subjects)
+{
+
+    std::vector<int> candidates = top_subjects;
+    candidates.insert(candidates.end(),
+                      retention_subjects.begin(),
+                      retention_subjects.end());
+
+    std::vector<std::vector<int>> breeders;
+    int breederCount;
+    switch(method) {
+    case COPY:
+        breederCount = 1;
+        break;
+    case HEAVILY_MUTATED_COPY:
+        breederCount = 1;
+        break;
+    case CHILD_OF_TWO:
+        breederCount = 2;
+        break;
+    case CHILD_OF_THREE:
+        breederCount = 3;
+        break;
+    case NO_BREEDING:
+        breederCount = 1;
+        break;
+    }
+
+    for (int i = 0; i < target_count; i++) {
+        std::vector<int> breederSet;
+        for (int j = 0; j < breederCount; j++) {
+
+            unsigned int selector = static_cast<unsigned int>(
+                        rand_.random_int(
+                            0,
+                            static_cast<int>(candidates.size())));
+
+            breederSet.push_back(candidates[selector]);
+        }
+        breeders.push_back(breederSet);
+    }
+
+    return breeders;
 }

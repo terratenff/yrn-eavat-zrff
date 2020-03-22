@@ -27,6 +27,16 @@ private:
     void sort_networks();
     void set_subject_parameters(Subject *subject);
 
+    std::vector<int> get_top_subjects(unsigned int count);
+    std::vector<int> get_retention_subjects(int retention_rate,
+                                            unsigned int population,
+                                            unsigned int top_subject_count);
+    std::vector<std::vector<int>>
+    generate_breeders(breeding_type method,
+                      int target_count,
+                      std::vector<int> top_subjects,
+                      std::vector<int> retention_subjects);
+
     SubjectCore *primaryTarget_;
     SubjectCore *secondaryTarget_;
     SubjectCore *tertiaryTarget_;
