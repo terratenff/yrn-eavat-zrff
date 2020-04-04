@@ -250,7 +250,7 @@ void SubjectCore::applyOutputs()
     case DIRECT_ANGLE:
         if (outputs_.size() != 1) return;
         outputValues = Output::direct_angle(outputs_);
-        // TODO
+        setAngle(outputValues[0]);
         break;
     case ANGLE_VELOCITY_ACCELERATION:
         if (outputs_.size() != 3) return;
@@ -259,37 +259,57 @@ void SubjectCore::applyOutputs()
                     angular_velocity_factor_,
                     velocity_factor_,
                     acceleration_factor_);
-        // TODO
+        setAngularVelocity(outputValues[0]);
+        setVelocity(outputValues[1]);
+        setAcceleration(outputValues[2]);
         break;
     case AXIS_VELOCITY:
         if (outputs_.size() != 2) return;
         outputValues = Output::axis_velocity(outputs_,
                                              axis_velocity_factor_);
-        // TODO
+        setAxisVelocity(XY(outputValues[0], outputValues[1]));
+        // TODO: Set Angle via Unit Vector.
         break;
     case AXIS_ACCELERATION:
         if (outputs_.size() != 2) return;
         outputValues = Output::axis_acceleration(outputs_,
                                                  axis_acceleration_factor_);
-        // TODO
+        setAxisAcceleration(XY(outputValues[0], outputValues[1]));
+        // TODO: Set Angle via Unit Vector.
         break;
     case BOTH_AXES:
         if (outputs_.size() != 4) return;
         outputValues = Output::both_axes(outputs_,
                                          axis_velocity_factor_,
                                          axis_acceleration_factor_);
-        // TODO
+        setAxisVelocity(XY(outputValues[0], outputValues[1]));
+        setAxisAcceleration(XY(outputValues[2], outputValues[3]));
+        // TODO: Set Angle via Unit Vector.
         break;
     case SMALL_HOPS:
+    {
         if (outputs_.size() != 2) return;
         outputValues = Output::small_hops(outputs_);
-        // TODO
+        XY xy = getCoordinates();
+        setCoordinates(XY(xy.x + outputValues[0], xy.y + outputValues[1]));
+        // TODO: Set Angle via Unit Vector.
         break;
+    }
     case FIXED_MOVEMENT:
+    {
         if (outputs_.size() != 4) return;
         outputValues = Output::fixed_movement(outputs_);
-        // TODO
+        double targetAngle = 0;
+        for (double i : outputValues) {
+            if (!near_zero(i)) {
+                setAngle(targetAngle);
+                break;
+            } else {
+                targetAngle += 90;
+            }
+        }
         break;
+    }
     case NO_OUTPUT:
         break;
     }
