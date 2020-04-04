@@ -17,7 +17,7 @@ NeuralNetwork::NeuralNetwork(Settings *settings, Random &rand):
     hidden_activation_ = settings->get_activation_function_hidden();
     output_activation_ = settings->get_activation_function_output();
 
-    switch(input_code_) { // TODO
+    switch(input_code_) {
     case ANGULAR_DIFFERENCE:
         layers_.push_back(1);
         break;
@@ -25,13 +25,13 @@ NeuralNetwork::NeuralNetwork(Settings *settings, Random &rand):
         layers_.push_back(1);
         break;
     case SPACE_AXIS_DIFFERENCE:
-        layers_.push_back(1);
+        layers_.push_back(2);
         break;
     case WALL_DISTANCES:
-        layers_.push_back(1);
+        layers_.push_back(4);
         break;
     case FOUR_WAY_SEARCH:
-        layers_.push_back(1);
+        layers_.push_back(4);
         break;
     case NO_INPUT:
         layers_.push_back(1);
@@ -42,21 +42,30 @@ NeuralNetwork::NeuralNetwork(Settings *settings, Random &rand):
         layers_.push_back(hiddenNeurons);
     }
 
-    switch(output_code_) { // TODO
+    switch(output_code_) {
     case ANGULAR_VELOCITY:
         layers_.push_back(1);
         break;
-    case AXIS_VELOCITY:
+    case DIRECT_ANGLE:
         layers_.push_back(1);
+        break;
+    case ANGLE_VELOCITY_ACCELERATION:
+        layers_.push_back(3);
+        break;
+    case AXIS_VELOCITY:
+        layers_.push_back(2);
         break;
     case AXIS_ACCELERATION:
-        layers_.push_back(1);
+        layers_.push_back(2);
+        break;
+    case BOTH_AXES:
+        layers_.push_back(4);
         break;
     case SMALL_HOPS:
-        layers_.push_back(1);
+        layers_.push_back(2);
         break;
     case FIXED_MOVEMENT:
-        layers_.push_back(1);
+        layers_.push_back(4);
         break;
     case NO_OUTPUT:
         layers_.push_back(1);

@@ -93,16 +93,19 @@ MainWindow::MainWindow(QWidget *parent) :
                      SLOT(timeChanged(int)));
 
     ui->comboInput->addItem("Angular Difference");
-    ui->comboInput->addItem("(WIP) Space Difference");
-    ui->comboInput->addItem("(WIP) Axis-wise Difference");
-    ui->comboInput->addItem("(WIP) Distances to 4 walls");
-    ui->comboInput->addItem("(WIP) Search in 4 Directions");
+    ui->comboInput->addItem("Space Difference");
+    ui->comboInput->addItem("Axis-wise Difference");
+    ui->comboInput->addItem("Distances to 4 walls");
+    ui->comboInput->addItem("Search in 4 Directions");
 
     ui->comboOutput->addItem("Angular Velocity");
-    ui->comboOutput->addItem("(WIP) Axis-wise Velocities");
-    ui->comboOutput->addItem("(WIP) Axis-wise Accelerations");
-    ui->comboOutput->addItem("(WIP) Small Hops");
-    ui->comboOutput->addItem("(WIP) Horizontal/Vertical Movement");
+    ui->comboOutput->addItem("Direct Angle");
+    ui->comboOutput->addItem("Angle-Velocity-Acceleration");
+    ui->comboOutput->addItem("Axis-wise Velocity");
+    ui->comboOutput->addItem("Axis-wise Acceleration");
+    ui->comboOutput->addItem("Axis-wise Velocity + Acceleration");
+    ui->comboOutput->addItem("Small Hops");
+    ui->comboOutput->addItem("Horizontal/Vertical Movement");
 
     ui->comboFitness->addItem("Correct Angle");
     ui->comboFitness->addItem("Close Proximity");
@@ -399,15 +402,24 @@ void MainWindow::outputChanged(int change)
         settings_->set_output_type(ANGULAR_VELOCITY);
         break;
     case 1:
-        settings_->set_output_type(AXIS_VELOCITY);
+        settings_->set_output_type(DIRECT_ANGLE);
         break;
     case 2:
-        settings_->set_output_type(AXIS_ACCELERATION);
+        settings_->set_output_type(ANGLE_VELOCITY_ACCELERATION);
         break;
     case 3:
-        settings_->set_output_type(SMALL_HOPS);
+        settings_->set_output_type(AXIS_VELOCITY);
         break;
     case 4:
+        settings_->set_output_type(AXIS_ACCELERATION);
+        break;
+    case 5:
+        settings_->set_output_type(BOTH_AXES);
+        break;
+    case 6:
+        settings_->set_output_type(SMALL_HOPS);
+        break;
+    case 7:
         settings_->set_output_type(FIXED_MOVEMENT);
         break;
     default:

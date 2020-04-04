@@ -36,7 +36,6 @@ SubjectCore::SubjectCore():
     acceleration_factor_(0),
     angular_velocity_factor_(0)
 {
-    // TODO
 }
 
 SubjectCore::~SubjectCore()
@@ -205,19 +204,34 @@ void SubjectCore::makeInputs()
     if (primaryTarget_ == nullptr) return;
     switch(nn_->getInputCode()) {
     case ANGULAR_DIFFERENCE:
-        inputs_ = Input::angular_difference(getAngle(),
-                                            getCoordinates(),
-                                            primaryTarget_->getCoordinates());
+        inputs_ = Input::angular_difference(
+                    getAngle(),
+                    getCoordinates(),
+                    primaryTarget_->getCoordinates());
         break;
     case SPACE_TOTAL_DIFFERENCE:
+        inputs_ = Input::space_scalar_difference(
+                    getCoordinates(),
+                    primaryTarget_->getCoordinates());
         break;
     case SPACE_AXIS_DIFFERENCE:
+        inputs_ = Input::space_axis_difference(
+                    getCoordinates(),
+                    primaryTarget_->getCoordinates());
         break;
     case WALL_DISTANCES:
+        inputs_ = Input::wall_distances(getCoordinates());
         break;
     case FOUR_WAY_SEARCH:
+        inputs_ = Input::four_way_search(
+                    getCoordinates(),
+                    primaryTarget_->getCoordinates());
         break;
     case NO_INPUT:
+        inputs_ = Input::angular_difference(
+                    getAngle(),
+                    getCoordinates(),
+                    primaryTarget_->getCoordinates());
         break;
     }
 }
@@ -229,17 +243,52 @@ void SubjectCore::applyOutputs()
     switch(nn_->getOutputCode()) {
     case ANGULAR_VELOCITY:
         if (outputs_.size() != 1) return;
-        outputValues = Output::angular_velocity(outputs_);
-        if (outputValues.size() != 1) return;
-        setAngularVelocity(outputValues[0] * angular_velocity_factor_);
+        outputValues = Output::angular_velocity(outputs_,
+                                                angular_velocity_factor_);
+        setAngularVelocity(outputValues[0]);
+        break;
+    case DIRECT_ANGLE:
+        if (outputs_.size() != 1) return;
+        outputValues = Output::direct_angle(outputs_);
+        // TODO
+        break;
+    case ANGLE_VELOCITY_ACCELERATION:
+        if (outputs_.size() != 3) return;
+        outputValues = Output::angle_velocity_acceleration(
+                    outputs_,
+                    angular_velocity_factor_,
+                    velocity_factor_,
+                    acceleration_factor_);
+        // TODO
         break;
     case AXIS_VELOCITY:
+        if (outputs_.size() != 2) return;
+        outputValues = Output::axis_velocity(outputs_,
+                                             axis_velocity_factor_);
+        // TODO
         break;
     case AXIS_ACCELERATION:
+        if (outputs_.size() != 2) return;
+        outputValues = Output::axis_acceleration(outputs_,
+                                                 axis_acceleration_factor_);
+        // TODO
+        break;
+    case BOTH_AXES:
+        if (outputs_.size() != 4) return;
+        outputValues = Output::both_axes(outputs_,
+                                         axis_velocity_factor_,
+                                         axis_acceleration_factor_);
+        // TODO
         break;
     case SMALL_HOPS:
+        if (outputs_.size() != 2) return;
+        outputValues = Output::small_hops(outputs_);
+        // TODO
         break;
     case FIXED_MOVEMENT:
+        if (outputs_.size() != 4) return;
+        outputValues = Output::fixed_movement(outputs_);
+        // TODO
         break;
     case NO_OUTPUT:
         break;

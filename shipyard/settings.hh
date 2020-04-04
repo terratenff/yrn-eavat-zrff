@@ -12,8 +12,11 @@ enum input_type {
 enum output_type {
     NO_OUTPUT,
     ANGULAR_VELOCITY,
+    DIRECT_ANGLE,
+    ANGLE_VELOCITY_ACCELERATION,
     AXIS_VELOCITY,
     AXIS_ACCELERATION,
+    BOTH_AXES,
     SMALL_HOPS,
     FIXED_MOVEMENT
 };
