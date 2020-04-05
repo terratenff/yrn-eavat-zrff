@@ -252,16 +252,23 @@ void SubjectCore::applyOutputs()
         outputValues = Output::direct_angle(outputs_);
         setAngle(outputValues[0]);
         break;
-    case ANGLE_VELOCITY_ACCELERATION:
-        if (outputs_.size() != 3) return;
-        outputValues = Output::angle_velocity_acceleration(
+    case ANGLE_VELOCITY:
+        if (outputs_.size() != 2) return;
+        outputValues = Output::angle_velocity(
                     outputs_,
                     angular_velocity_factor_,
-                    velocity_factor_,
-                    acceleration_factor_);
+                    velocity_factor_);
         setAngularVelocity(outputValues[0]);
         setVelocity(outputValues[1]);
-        setAcceleration(outputValues[2]);
+        break;
+    case ANGLE_ACCELERATION:
+        if (outputs_.size() != 2) return;
+        outputValues = Output::angle_acceleration(
+                    outputs_,
+                    angular_velocity_factor_,
+                    acceleration_factor_);
+        setAngularVelocity(outputValues[0]);
+        setAcceleration(outputValues[1]);
         break;
     case AXIS_VELOCITY:
         if (outputs_.size() != 2) return;
@@ -275,15 +282,6 @@ void SubjectCore::applyOutputs()
         outputValues = Output::axis_acceleration(outputs_,
                                                  axis_acceleration_factor_);
         setAxisAcceleration(XY(outputValues[0], outputValues[1]));
-        // TODO: Set Angle via Unit Vector.
-        break;
-    case BOTH_AXES:
-        if (outputs_.size() != 4) return;
-        outputValues = Output::both_axes(outputs_,
-                                         axis_velocity_factor_,
-                                         axis_acceleration_factor_);
-        setAxisVelocity(XY(outputValues[0], outputValues[1]));
-        setAxisAcceleration(XY(outputValues[2], outputValues[3]));
         // TODO: Set Angle via Unit Vector.
         break;
     case SMALL_HOPS:

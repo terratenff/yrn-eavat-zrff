@@ -27,18 +27,17 @@ namespace Output
 
     Row direct_angle(const Row &outputs);
 
-    Row angle_velocity_acceleration(const Row &outputs,
-                                    double factor_angular_velocity,
-                                    double factor_velocity,
-                                    double factor_acceleration);
+    Row angle_velocity(const Row &outputs,
+                       double factor_angular_velocity,
+                       double factor_velocity);
+
+    Row angle_acceleration(const Row &outputs,
+                           double factor_angular_velocity,
+                           double factor_acceleration);
 
     Row axis_velocity(const Row &outputs, XY factor);
 
     Row axis_acceleration(const Row &outputs, XY factor);
-
-    Row both_axes(const Row &outputs,
-                  XY factor_velocity,
-                  XY factor_acceleration);
 
     Row small_hops(const Row &outputs);
 

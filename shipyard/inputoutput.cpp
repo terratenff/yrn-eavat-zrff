@@ -36,11 +36,11 @@ Row Input::space_axis_difference(XY position,
 {
     Row inputs;
     XY difference = target_position - position;
-    XY scaled_difference(difference.x / 500.0, difference.y / 500.0);
+    XY scaled_difference(difference.x / 1920.0, difference.y / 1080.0);
+    if (scaled_difference.x < -1.0) scaled_difference.x = -1.0;
+    if (scaled_difference.y < -1.0) scaled_difference.y = -1.0;
     if (scaled_difference.x > 1.0) scaled_difference.x = 1.0;
-    else if (scaled_difference.x < -1.0) scaled_difference.x = -1.0;
     if (scaled_difference.y > 1.0) scaled_difference.y = 1.0;
-    else if (scaled_difference.y < -1.0) scaled_difference.y = -1.0;
 
     inputs.push_back(scaled_difference.x);
     inputs.push_back(scaled_difference.y);
@@ -83,8 +83,6 @@ Row Input::four_way_search(XY position,
     bool down = near_double(position.x, target_position.x, 10)
             && position.y < target_position.y;
 
-    // Input Size: 4
-    // Input Range: 0 or 1 (0 = Not found, 1 = Found)
     if (left)  inputs.push_back(1.0);
     else       inputs.push_back(0.0);
     if (right) inputs.push_back(1.0);
@@ -110,15 +108,23 @@ Row Output::direct_angle(const Row &outputs)
     return outputValues;
 }
 
-Row Output::angle_velocity_acceleration(const Row &outputs,
-                                        double factor_angular_velocity,
-                                        double factor_velocity,
-                                        double factor_acceleration)
+Row Output::angle_velocity(const Row &outputs,
+                           double factor_angular_velocity,
+                           double factor_velocity)
 {
     Row outputValues;
     outputValues.push_back(outputs[0] * factor_angular_velocity);
     outputValues.push_back(outputs[1] * factor_velocity);
-    outputValues.push_back(outputs[2] * factor_acceleration);
+    return outputValues;
+}
+
+Row Output::angle_acceleration(const Row &outputs,
+                               double factor_angular_velocity,
+                               double factor_acceleration)
+{
+    Row outputValues;
+    outputValues.push_back(outputs[0] * factor_angular_velocity);
+    outputValues.push_back(outputs[1] * factor_acceleration);
     return outputValues;
 }
 
@@ -135,18 +141,6 @@ Row Output::axis_acceleration(const Row &outputs, XY factor)
     Row outputValues;
     outputValues.push_back(outputs[0] * factor.x);
     outputValues.push_back(outputs[1] * factor.y);
-    return outputValues;
-}
-
-Row Output::both_axes(const Row &outputs,
-                      XY factor_velocity,
-                      XY factor_acceleration)
-{
-    Row outputValues;
-    outputValues.push_back(outputs[0] * factor_velocity.x);
-    outputValues.push_back(outputs[1] * factor_velocity.y);
-    outputValues.push_back(outputs[2] * factor_acceleration.x);
-    outputValues.push_back(outputs[3] * factor_acceleration.y);
     return outputValues;
 }
 

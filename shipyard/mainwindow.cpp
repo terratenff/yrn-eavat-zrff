@@ -92,20 +92,20 @@ MainWindow::MainWindow(QWidget *parent) :
                      this,
                      SLOT(timeChanged(int)));
 
-    ui->comboInput->addItem("Angular Difference");
-    ui->comboInput->addItem("Space Difference");
-    ui->comboInput->addItem("Axis-wise Difference");
-    ui->comboInput->addItem("Distances to 4 walls");
-    ui->comboInput->addItem("Search in 4 Directions");
+    ui->comboInput->addItem("Angular Difference [0,1]");
+    ui->comboInput->addItem("Space Difference [0,1]");
+    ui->comboInput->addItem("Axis-wise Difference [-1,1]");
+    ui->comboInput->addItem("Distances to 4 walls [0,1]");
+    ui->comboInput->addItem("Search in 4 Directions (0/1)");
 
-    ui->comboOutput->addItem("Angular Velocity");
-    ui->comboOutput->addItem("Direct Angle");
-    ui->comboOutput->addItem("Angle-Velocity-Acceleration");
-    ui->comboOutput->addItem("Axis-wise Velocity");
-    ui->comboOutput->addItem("Axis-wise Acceleration");
-    ui->comboOutput->addItem("Axis-wise Velocity + Acceleration");
-    ui->comboOutput->addItem("Small Hops");
-    ui->comboOutput->addItem("Horizontal/Vertical Movement");
+    ui->comboOutput->addItem("Angular Velocity [0,1]");
+    ui->comboOutput->addItem("Direct Angle [0,1]");
+    ui->comboOutput->addItem("Angle-Velocity [0,1]");
+    ui->comboOutput->addItem("Angle-Acceleration [-1,1]");
+    ui->comboOutput->addItem("Axis-wise Velocity [0,1]");
+    ui->comboOutput->addItem("Axis-wise Acceleration [-1,1]");
+    ui->comboOutput->addItem("Small Hops [-1,1]");
+    ui->comboOutput->addItem("Horizontal/Vertical Movement (0/1)");
 
     ui->comboFitness->addItem("Correct Angle");
     ui->comboFitness->addItem("Close Proximity");
@@ -405,16 +405,16 @@ void MainWindow::outputChanged(int change)
         settings_->set_output_type(DIRECT_ANGLE);
         break;
     case 2:
-        settings_->set_output_type(ANGLE_VELOCITY_ACCELERATION);
+        settings_->set_output_type(ANGLE_VELOCITY);
         break;
     case 3:
-        settings_->set_output_type(AXIS_VELOCITY);
+        settings_->set_output_type(ANGLE_ACCELERATION);
         break;
     case 4:
-        settings_->set_output_type(AXIS_ACCELERATION);
+        settings_->set_output_type(AXIS_VELOCITY);
         break;
     case 5:
-        settings_->set_output_type(BOTH_AXES);
+        settings_->set_output_type(AXIS_ACCELERATION);
         break;
     case 6:
         settings_->set_output_type(SMALL_HOPS);

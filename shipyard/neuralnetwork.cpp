@@ -49,17 +49,17 @@ NeuralNetwork::NeuralNetwork(Settings *settings, Random &rand):
     case DIRECT_ANGLE:
         layers_.push_back(1);
         break;
-    case ANGLE_VELOCITY_ACCELERATION:
-        layers_.push_back(3);
+    case ANGLE_VELOCITY:
+        layers_.push_back(2);
+        break;
+    case ANGLE_ACCELERATION:
+        layers_.push_back(2);
         break;
     case AXIS_VELOCITY:
         layers_.push_back(2);
         break;
     case AXIS_ACCELERATION:
         layers_.push_back(2);
-        break;
-    case BOTH_AXES:
-        layers_.push_back(4);
         break;
     case SMALL_HOPS:
         layers_.push_back(2);
