@@ -321,8 +321,6 @@ void SubjectCore::updateFitness()
 
     switch(nn_->getFitnessCode()) {
     case CORRECT_ANGLE:
-        //if (inputs_.size() != 1) return;
-        //fitnessValue = 1 - inputs_[0];
         fitnessValue = Fitness::correct_angle(
             getAngle(),
             getCoordinates(),
@@ -336,14 +334,37 @@ void SubjectCore::updateFitness()
         );
         break;
     case FIXED_DISTANCE:
+        fitnessValue = Fitness::fixed_distance(
+            getCoordinates(),
+            primaryTarget_->getCoordinates()
+        );
         break;
     case NOT_OUT_OF_BOUNDS:
+        fitnessValue = Fitness::not_out_of_bounds(
+            getCoordinates()
+        );
         break;
     case LOOK_FROM_DISTANCE:
+        fitnessValue = Fitness::look_from_distance(
+            getAngle(),
+            getCoordinates(),
+            primaryTarget_->getCoordinates()
+        );
         break;
     case AVOID_EYE_CONTACT:
+        fitnessValue = Fitness::avoid_eye_contact(
+            getAngle(),
+            primaryTarget_->getAngle(),
+            getCoordinates(),
+            primaryTarget_->getCoordinates()
+        );
         break;
     case NO_FITNESS:
+        fitnessValue = Fitness::correct_angle(
+            getAngle(),
+            getCoordinates(),
+            primaryTarget_->getCoordinates()
+        );
         break;
     }
 

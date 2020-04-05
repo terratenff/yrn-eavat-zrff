@@ -109,10 +109,10 @@ MainWindow::MainWindow(QWidget *parent) :
 
     ui->comboFitness->addItem("Correct Angle");
     ui->comboFitness->addItem("Close Proximity");
-    ui->comboFitness->addItem("(WIP) Not too far/close");
-    ui->comboFitness->addItem("(WIP) Not Out of Bounds");
-    ui->comboFitness->addItem("(WIP) Look from a Distance");
-    ui->comboFitness->addItem("(WIP) Avoid Eye Contact");
+    ui->comboFitness->addItem("Not too far/close");
+    ui->comboFitness->addItem("Not Out of Bounds");
+    ui->comboFitness->addItem("Look from a Distance");
+    ui->comboFitness->addItem("Avoid Eye Contact");
 
     QObject::connect(ui->comboInput,
                      SIGNAL(currentIndexChanged(int)),
