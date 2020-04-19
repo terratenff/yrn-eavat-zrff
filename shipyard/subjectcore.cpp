@@ -196,6 +196,11 @@ void SubjectCore::updateMovement()
 
     axis_velocity_ = axis_velocity_ + axis_acceleration_;
     coordinates_ = coordinates_ + axis_velocity_;
+
+    if (!near_zero(axis_velocity_.x) ||
+            !near_zero(axis_velocity_.y)) {
+        angle_ = calculate_angle(axis_velocity_ + velocity_components);
+    }
 }
 
 void SubjectCore::makeInputs()
@@ -275,14 +280,12 @@ void SubjectCore::applyOutputs()
         outputValues = Output::axis_velocity(outputs_,
                                              axis_velocity_factor_);
         setAxisVelocity(XY(outputValues[0], outputValues[1]));
-        // TODO: Set Angle via Unit Vector.
         break;
     case AXIS_ACCELERATION:
         if (outputs_.size() != 2) return;
         outputValues = Output::axis_acceleration(outputs_,
                                                  axis_acceleration_factor_);
         setAxisAcceleration(XY(outputValues[0], outputValues[1]));
-        // TODO: Set Angle via Unit Vector.
         break;
     case SMALL_HOPS:
     {
@@ -290,7 +293,7 @@ void SubjectCore::applyOutputs()
         outputValues = Output::small_hops(outputs_);
         XY xy = getCoordinates();
         setCoordinates(XY(xy.x + outputValues[0], xy.y + outputValues[1]));
-        // TODO: Set Angle via Unit Vector.
+        setAngle(calculate_angle(XY(outputValues[0], outputValues[1])));
         break;
     }
     case FIXED_MOVEMENT:
