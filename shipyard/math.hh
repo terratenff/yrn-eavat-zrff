@@ -58,6 +58,7 @@ double distance(XY point1, XY point2);
 XY unit_vector(XY point1, XY point2);
 XY unit_vector(double angle, bool radians = false);
 
+double calculate_angle(XY vector);
 double calculate_angle(XY point1, XY point2);
 XY calculate_components(double angle, double space);
 double to_degrees(double angle_radians);

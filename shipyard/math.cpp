@@ -65,18 +65,23 @@ XY unit_vector(double angle, bool radians)
     else return XY(cos(to_radians(angle)), sin(to_radians(angle)));
 }
 
+double calculate_angle(XY vector)
+{
+    if (near_zero(vector.x) && vector.y > 0) {
+        return 90;
+    } else if (near_zero(vector.x) && vector.y < 0) {
+        return 270;
+    } else {
+        double radians = atan(vector.y / vector.x);
+        if (vector.x > 0) return to_degrees(radians);
+        else return 180 + to_degrees(radians);
+    }
+}
+
 double calculate_angle(XY point1, XY point2)
 {
     XY difference = point2 - point1;
-    if (near_zero(difference.x) && difference.y > 0) {
-        return 90;
-    } else if (near_zero(difference.x) && difference.y < 0) {
-        return 270;
-    } else {
-        double radians = atan(difference.y / difference.x);
-        if (difference.x > 0) return to_degrees(radians);
-        else return 180 + to_degrees(radians);
-    }
+    return calculate_angle(difference);
 }
 
 XY calculate_components(double angle, double space)
