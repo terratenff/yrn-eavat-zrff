@@ -24,6 +24,7 @@ SOURCES += \
     math.cpp \
     networkwindow.cpp \
     neuralnetwork.cpp \
+    scenario.cpp \
     settings.cpp \
     subject.cpp \
     subjectcore.cpp \
@@ -38,6 +39,7 @@ HEADERS += \
     math.hh \
     networkwindow.hh \
     neuralnetwork.hh \
+    scenario.hh \
     settings.hh \
     subject.hh \
     subjectcore.hh \

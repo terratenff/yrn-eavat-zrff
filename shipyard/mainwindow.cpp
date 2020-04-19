@@ -474,22 +474,22 @@ void MainWindow::fitnessChanged(int change)
 
 void MainWindow::fileNewScenario()
 {
-    //
+    // TODO
 }
 
 void MainWindow::fileLoadScenario()
 {
-    //
+    // TODO
 }
 
 void MainWindow::fileSaveScenario()
 {
-    //
+    // TODO
 }
 
 void MainWindow::fileExit()
 {
-    //
+    // TODO
 }
 
 void MainWindow::editSubjectParameters()
