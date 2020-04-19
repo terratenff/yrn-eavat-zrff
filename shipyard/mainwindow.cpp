@@ -103,6 +103,7 @@ MainWindow::MainWindow(QWidget *parent) :
     ui->comboInput->addItem("Axis-wise Difference [-1,1]");
     ui->comboInput->addItem("Distances to 4 walls [0,1]");
     ui->comboInput->addItem("Search in 4 Directions (0/1)");
+    ui->comboInput->addItem("Search in 4 Corners (0/1)");
 
     ui->comboOutput->addItem("Angular Velocity [0,1]");
     ui->comboOutput->addItem("Direct Angle [0,1]");
@@ -111,7 +112,7 @@ MainWindow::MainWindow(QWidget *parent) :
     ui->comboOutput->addItem("Axis-wise Velocity [0,1]");
     ui->comboOutput->addItem("Axis-wise Acceleration [-1,1]");
     ui->comboOutput->addItem("Small Hops [-1,1]");
-    ui->comboOutput->addItem("Horizontal/Vertical Movement (0/1)");
+    ui->comboOutput->addItem("Horizontal/Vertical (0/1)");
 
     ui->comboFitness->addItem("Correct Angle");
     ui->comboFitness->addItem("Close Proximity");
@@ -401,6 +402,9 @@ void MainWindow::inputChanged(int change)
         break;
     case 4:
         settings_->set_input_type(FOUR_WAY_SEARCH);
+        break;
+    case 5:
+        settings_->set_input_type(FOUR_CORNER_SEARCH);
         break;
     default:
         settings_->set_input_type(NO_INPUT);

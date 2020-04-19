@@ -232,6 +232,11 @@ void SubjectCore::makeInputs()
                     getCoordinates(),
                     primaryTarget_->getCoordinates());
         break;
+    case FOUR_CORNER_SEARCH:
+        inputs_ = Input::four_corner_search(
+                    getCoordinates(),
+                    primaryTarget_->getCoordinates());
+        break;
     case NO_INPUT:
         inputs_ = Input::angular_difference(
                     getAngle(),

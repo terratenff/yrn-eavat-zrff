@@ -19,6 +19,9 @@ namespace Input
 
     Row four_way_search(XY position,
                         XY target_position);
+
+    Row four_corner_search(XY position,
+                           XY target_position);
 }
 
 namespace Output

@@ -7,7 +7,8 @@ enum input_type {
     SPACE_TOTAL_DIFFERENCE,
     SPACE_AXIS_DIFFERENCE,
     WALL_DISTANCES,
-    FOUR_WAY_SEARCH
+    FOUR_WAY_SEARCH,
+    FOUR_CORNER_SEARCH
 };
 enum output_type {
     NO_OUTPUT,

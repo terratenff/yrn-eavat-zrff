@@ -74,13 +74,13 @@ Row Input::four_way_search(XY position,
                            XY target_position)
 {
     Row inputs;
-    bool left = near_double(position.y, target_position.y, 10)
+    bool left = near_double(position.y, target_position.y, 30)
             && position.x >= target_position.x;
-    bool right = near_double(position.y, target_position.y, 10)
+    bool right = near_double(position.y, target_position.y, 30)
             && position.x < target_position.x;
-    bool up = near_double(position.x, target_position.x, 10)
+    bool up = near_double(position.x, target_position.x, 30)
             && position.y >= target_position.y;
-    bool down = near_double(position.x, target_position.x, 10)
+    bool down = near_double(position.x, target_position.x, 30)
             && position.y < target_position.y;
 
     if (left)  inputs.push_back(1.0);
@@ -91,6 +91,27 @@ Row Input::four_way_search(XY position,
     else       inputs.push_back(0.0);
     if (down)  inputs.push_back(1.0);
     else       inputs.push_back(0.0);
+    return inputs;
+}
+
+Row Input::four_corner_search(XY position, XY target_position)
+{
+    Row inputs;
+
+    XY difference = target_position - position;
+    inputs.push_back(0.0);
+    inputs.push_back(0.0);
+    inputs.push_back(0.0);
+    inputs.push_back(0.0);
+    bool left = difference.x < 0.0;
+    bool right = difference.x > 0.0;
+    bool up = difference.y < 0.0;
+    bool down = difference.y > 0.0;
+    if      (left && up)    inputs[0] = 1.0;
+    else if (left && down)  inputs[1] = 1.0;
+    else if (right && up)   inputs[2] = 1.0;
+    else if (right && down) inputs[3] = 1.0;
+
     return inputs;
 }
 

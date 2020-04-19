@@ -33,6 +33,9 @@ NeuralNetwork::NeuralNetwork(Settings *settings, Random &rand):
     case FOUR_WAY_SEARCH:
         layers_.push_back(4);
         break;
+    case FOUR_CORNER_SEARCH:
+        layers_.push_back(4);
+        break;
     case NO_INPUT:
         layers_.push_back(1);
         break;
