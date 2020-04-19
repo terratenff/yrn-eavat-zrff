@@ -164,6 +164,11 @@ unsigned int Manager::get_iteration_max()
     return iteration_max_;
 }
 
+void Manager::skip_generation()
+{
+    iteration_count_ = iteration_max_;
+}
+
 void Manager::clear_subjects()
 {
     for (auto subject : subjects_)

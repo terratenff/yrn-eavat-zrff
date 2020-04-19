@@ -70,7 +70,7 @@
         </sizepolicy>
        </property>
       </widget>
-      <widget class="QWidget" name="">
+      <widget class="QWidget" name="layoutWidget">
        <layout class="QVBoxLayout" name="verticalLayout">
         <property name="spacing">
          <number>25</number>
@@ -547,6 +547,13 @@
             </property>
             <property name="textVisible">
              <bool>false</bool>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QPushButton" name="buttonGeneration">
+            <property name="text">
+             <string>Skip to Next Generation</string>
             </property>
            </widget>
           </item>

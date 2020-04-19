@@ -53,6 +53,7 @@ private slots:
     void buttonRunClicked();
     void buttonResetClicked();
     void buttonExitClicked();
+    void buttonGenerationClicked();
     void iterationChanged(int change);
     void instanceChanged(int change);
     void offspringChanged(int change);

@@ -22,6 +22,8 @@ public:
     unsigned int get_generation_count();
     unsigned int get_iteration_count();
     unsigned int get_iteration_max();
+
+    void skip_generation();
 private:
     void clear_subjects();
     void sort_networks();

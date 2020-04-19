@@ -75,6 +75,10 @@ MainWindow::MainWindow(QWidget *parent) :
                      SIGNAL(clicked()),
                      this,
                      SLOT(buttonExitClicked()));
+    QObject::connect(ui->buttonGeneration,
+                     SIGNAL(clicked()),
+                     this,
+                     SLOT(buttonGenerationClicked()));
     QObject::connect(ui->sliderIteration,
                      SIGNAL(valueChanged(int)),
                      this,
@@ -91,6 +95,8 @@ MainWindow::MainWindow(QWidget *parent) :
                      SIGNAL(valueChanged(int)),
                      this,
                      SLOT(timeChanged(int)));
+
+    ui->buttonGeneration->setDisabled(true);
 
     ui->comboInput->addItem("Angular Difference [0,1]");
     ui->comboInput->addItem("Space Difference [0,1]");
@@ -250,6 +256,7 @@ void MainWindow::buttonRunClicked()
         ui->sliderHiddenNeuron->setDisabled(false);
         ui->sliderBias->setDisabled(false);
         ui->buttonReset->setDisabled(false);
+        ui->buttonGeneration->setDisabled(true);
         ui->comboInput->setDisabled(false);
         ui->comboOutput->setDisabled(false);
         ui->comboFitness->setDisabled(false);
@@ -263,6 +270,7 @@ void MainWindow::buttonRunClicked()
         ui->sliderHiddenNeuron->setDisabled(true);
         ui->sliderBias->setDisabled(true);
         ui->buttonReset->setDisabled(true);
+        ui->buttonGeneration->setDisabled(false);
         ui->comboInput->setDisabled(true);
         ui->comboOutput->setDisabled(true);
         ui->comboFitness->setDisabled(true);
@@ -314,6 +322,11 @@ void MainWindow::buttonResetClicked()
 void MainWindow::buttonExitClicked()
 {
     this->close();
+}
+
+void MainWindow::buttonGenerationClicked()
+{
+    manager_->skip_generation();
 }
 
 void MainWindow::iterationChanged(int change)
