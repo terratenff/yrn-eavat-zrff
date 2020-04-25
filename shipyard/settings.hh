@@ -78,17 +78,17 @@ public:
     void set_offspring_count(unsigned int count);
     void set_time_delta(unsigned int time);
 
-    input_type get_input_type();
-    output_type get_output_type();
-    fitness_type get_fitness_type();
-    unsigned int get_hidden_layer_count();
-    unsigned int get_hidden_neuron_count();
-    int get_initial_bias();
+    input_type get_input_type() const;
+    output_type get_output_type() const;
+    fitness_type get_fitness_type() const;
+    unsigned int get_hidden_layer_count() const;
+    unsigned int get_hidden_neuron_count() const;
+    int get_initial_bias() const;
 
-    unsigned int get_iteration_count();
-    unsigned int get_instance_count();
-    unsigned int get_offspring_count();
-    unsigned int get_time_delta();
+    unsigned int get_iteration_count() const;
+    unsigned int get_instance_count() const;
+    unsigned int get_offspring_count() const;
+    unsigned int get_time_delta() const;
 
     // Subject Settings (SubjectWindow)
 
@@ -108,21 +108,21 @@ public:
     void set_axis_acceleration_y_max_change(double var);
     void set_spawn_location(spawn_point location);
 
-    double get_velocity_initial();
-    double get_velocity_max_change();
-    double get_acceleration_initial();
-    double get_acceleration_max_change();
-    double get_angular_velocity_initial();
-    double get_angular_velocity_max_change();
-    double get_axis_velocity_x_initial();
-    double get_axis_velocity_y_initial();
-    double get_axis_velocity_x_max_change();
-    double get_axis_velocity_y_max_change();
-    double get_axis_acceleration_x_initial();
-    double get_axis_acceleration_y_initial();
-    double get_axis_acceleration_x_max_change();
-    double get_axis_acceleration_y_max_change();
-    spawn_point get_spawn_location();
+    double get_velocity_initial() const;
+    double get_velocity_max_change() const;
+    double get_acceleration_initial() const;
+    double get_acceleration_max_change() const;
+    double get_angular_velocity_initial() const;
+    double get_angular_velocity_max_change() const;
+    double get_axis_velocity_x_initial() const;
+    double get_axis_velocity_y_initial() const;
+    double get_axis_velocity_x_max_change() const;
+    double get_axis_velocity_y_max_change() const;
+    double get_axis_acceleration_x_initial() const;
+    double get_axis_acceleration_y_initial() const;
+    double get_axis_acceleration_x_max_change() const;
+    double get_axis_acceleration_y_max_change() const;
+    spawn_point get_spawn_location() const;
 
     // Network Settings (NetworkWindow)
 
@@ -137,16 +137,16 @@ public:
     void set_mutation_scale_minimum(double var);
     void set_mutation_scale_maximum(double var);
 
-    double get_initial_weight_minimum();
-    double get_initial_weight_maximum();
-    activation_type get_activation_function_hidden();
-    activation_type get_activation_function_output();
+    double get_initial_weight_minimum() const;
+    double get_initial_weight_maximum() const;
+    activation_type get_activation_function_hidden() const;
+    activation_type get_activation_function_output() const;
 
-    breeding_type get_breeding_method();
-    int get_population_retention_rate();
-    int get_mutation_probability();
-    double get_mutation_scale_minimum();
-    double get_mutation_scale_maximum();
+    breeding_type get_breeding_method() const;
+    int get_population_retention_rate() const;
+    int get_mutation_probability() const;
+    double get_mutation_scale_minimum() const;
+    double get_mutation_scale_maximum() const;
 
 private:
     Settings();

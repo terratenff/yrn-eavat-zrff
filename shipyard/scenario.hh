@@ -20,7 +20,9 @@ enum setting_type {
     INITIAL_WEIGHT_MINIMUM, INITIAL_WEIGHT_MAXIMUM,
     ACTIVATION_FUNCTION_HIDDEN, ACTIVATION_FUNCTION_OUTPUT,
     BREEDING_METHOD, POPULATION_RETENTION_RATE,
-    MUTATION_PROBABILITY, MUTATION_SCALE_MINIMUM, MUTATION_SCALE_MAXIMUM
+    MUTATION_PROBABILITY, MUTATION_SCALE_MINIMUM, MUTATION_SCALE_MAXIMUM,
+
+    SETTING_END
 };
 
 static const char *setting_enum_strings[] = {
@@ -38,12 +40,24 @@ static const char *setting_enum_strings[] = {
     "INITIAL_WEIGHT_MINIMUM", "INITIAL_WEIGHT_MAXIMUM",
     "ACTIVATION_FUNCTION_HIDDEN", "ACTIVATION_FUNCTION_OUTPUT",
     "BREEDING_METHOD", "POPULATION_RETENTION_RATE",
-    "MUTATION_PROBABILITY", "MUTATION_SCALE_MINIMUM", "MUTATION_SCALE_MAXIMUM"
+    "MUTATION_PROBABILITY", "MUTATION_SCALE_MINIMUM", "MUTATION_SCALE_MAXIMUM",
+    "SETTING_END"
 };
 
 inline std::string get_setting_string(setting_type type)
 {
     return setting_enum_strings[type];
+}
+
+inline setting_type get_setting_type(std::string str)
+{
+    for (int setting = INPUT_TYPE; setting != SETTING_END; setting++) {
+        setting_type type = static_cast<setting_type>(setting);
+        if (str == setting_enum_strings[type]) {
+            return type;
+        }
+    }
+    return SETTING_END;
 }
 
 class Scenario
@@ -55,6 +69,7 @@ public:
     void load_scenario(const std::string path);
 private:
     std::unordered_map<setting_type, int> settings_data_;
+    const double FACTOR_ = 1000;
 };
 
 #endif // SCENARIO_HH

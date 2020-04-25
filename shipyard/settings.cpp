@@ -112,52 +112,52 @@ void Settings::set_time_delta(unsigned int time)
     time_delta_ = time;
 }
 
-input_type Settings::get_input_type()
+input_type Settings::get_input_type() const
 {
     return input_type_;
 }
 
-output_type Settings::get_output_type()
+output_type Settings::get_output_type() const
 {
     return output_type_;
 }
 
-fitness_type Settings::get_fitness_type()
+fitness_type Settings::get_fitness_type() const
 {
     return fitness_type_;
 }
 
-unsigned int Settings::get_hidden_layer_count()
+unsigned int Settings::get_hidden_layer_count() const
 {
     return hidden_layer_count_;
 }
 
-unsigned int Settings::get_hidden_neuron_count()
+unsigned int Settings::get_hidden_neuron_count() const
 {
     return hidden_neuron_count_;
 }
 
-int Settings::get_initial_bias()
+int Settings::get_initial_bias() const
 {
     return initial_bias_;
 }
 
-unsigned int Settings::get_iteration_count()
+unsigned int Settings::get_iteration_count() const
 {
     return iteration_count_;
 }
 
-unsigned int Settings::get_instance_count()
+unsigned int Settings::get_instance_count() const
 {
     return instance_count_;
 }
 
-unsigned int Settings::get_offspring_count()
+unsigned int Settings::get_offspring_count() const
 {
     return offspring_count_;
 }
 
-unsigned int Settings::get_time_delta()
+unsigned int Settings::get_time_delta() const
 {
     return time_delta_;
 }
@@ -237,77 +237,77 @@ void Settings::set_spawn_location(spawn_point location)
     spawn_location_ = location;
 }
 
-double Settings::get_velocity_initial()
+double Settings::get_velocity_initial() const
 {
     return velocity_initial_;
 }
 
-double Settings::get_velocity_max_change()
+double Settings::get_velocity_max_change() const
 {
     return velocity_max_change_;
 }
 
-double Settings::get_acceleration_initial()
+double Settings::get_acceleration_initial() const
 {
     return acceleration_initial_;
 }
 
-double Settings::get_acceleration_max_change()
+double Settings::get_acceleration_max_change() const
 {
     return acceleration_max_change_;
 }
 
-double Settings::get_angular_velocity_initial()
+double Settings::get_angular_velocity_initial() const
 {
     return angular_velocity_initial_;
 }
 
-double Settings::get_angular_velocity_max_change()
+double Settings::get_angular_velocity_max_change() const
 {
     return angular_velocity_max_change_;
 }
 
-double Settings::get_axis_velocity_x_initial()
+double Settings::get_axis_velocity_x_initial() const
 {
     return axis_velocity_x_initial_;
 }
 
-double Settings::get_axis_velocity_y_initial()
+double Settings::get_axis_velocity_y_initial() const
 {
     return axis_velocity_y_initial_;
 }
 
-double Settings::get_axis_velocity_x_max_change()
+double Settings::get_axis_velocity_x_max_change() const
 {
     return axis_velocity_x_max_change_;
 }
 
-double Settings::get_axis_velocity_y_max_change()
+double Settings::get_axis_velocity_y_max_change() const
 {
     return axis_velocity_y_max_change_;
 }
 
-double Settings::get_axis_acceleration_x_initial()
+double Settings::get_axis_acceleration_x_initial() const
 {
     return axis_acceleration_x_initial_;
 }
 
-double Settings::get_axis_acceleration_y_initial()
+double Settings::get_axis_acceleration_y_initial() const
 {
     return axis_acceleration_y_initial_;
 }
 
-double Settings::get_axis_acceleration_x_max_change()
+double Settings::get_axis_acceleration_x_max_change() const
 {
     return axis_acceleration_x_max_change_;
 }
 
-double Settings::get_axis_acceleration_y_max_change()
+double Settings::get_axis_acceleration_y_max_change() const
 {
     return axis_acceleration_y_max_change_;
 }
 
-spawn_point Settings::get_spawn_location()
+spawn_point Settings::get_spawn_location() const
 {
     return spawn_location_;
 }
@@ -357,47 +357,47 @@ void Settings::set_mutation_scale_maximum(double var)
     mutation_scale_maximum_ = var;
 }
 
-double Settings::get_initial_weight_minimum()
+double Settings::get_initial_weight_minimum() const
 {
     return initial_weight_minimum_;
 }
 
-double Settings::get_initial_weight_maximum()
+double Settings::get_initial_weight_maximum() const
 {
     return initial_weight_maximum_;
 }
 
-activation_type Settings::get_activation_function_hidden()
+activation_type Settings::get_activation_function_hidden() const
 {
     return activation_function_hidden_;
 }
 
-activation_type Settings::get_activation_function_output()
+activation_type Settings::get_activation_function_output() const
 {
     return activation_function_output_;
 }
 
-breeding_type Settings::get_breeding_method()
+breeding_type Settings::get_breeding_method() const
 {
     return breeding_method_;
 }
 
-int Settings::get_population_retention_rate()
+int Settings::get_population_retention_rate() const
 {
     return population_retention_rate_;
 }
 
-int Settings::get_mutation_probability()
+int Settings::get_mutation_probability() const
 {
     return mutation_probability_;
 }
 
-double Settings::get_mutation_scale_minimum()
+double Settings::get_mutation_scale_minimum() const
 {
     return mutation_scale_minimum_;
 }
 
-double Settings::get_mutation_scale_maximum()
+double Settings::get_mutation_scale_maximum() const
 {
     return mutation_scale_maximum_;
 }
