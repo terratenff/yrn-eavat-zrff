@@ -10,10 +10,6 @@ MainWindow::MainWindow(QWidget *parent) :
     ui->setupUi(this);
     sw = nullptr;
 
-    QObject::connect(ui->actionNew,
-                     SIGNAL(triggered()),
-                     this,
-                     SLOT(fileNewScenario()));
     QObject::connect(ui->actionLoad,
                      SIGNAL(triggered()),
                      this,
@@ -470,11 +466,6 @@ void MainWindow::fitnessChanged(int change)
         settings_->set_fitness_type(NO_FITNESS);
         break;
     }
-}
-
-void MainWindow::fileNewScenario()
-{
-    // TODO
 }
 
 void MainWindow::fileLoadScenario()

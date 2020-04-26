@@ -65,7 +65,6 @@ private slots:
     void outputChanged(int change);
     void fitnessChanged(int change);
 
-    void fileNewScenario();
     void fileLoadScenario();
     void fileSaveScenario();
     void fileExit();

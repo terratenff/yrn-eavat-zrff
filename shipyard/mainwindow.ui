@@ -621,7 +621,6 @@
     <property name="title">
      <string>File</string>
     </property>
-    <addaction name="actionNew"/>
     <addaction name="actionLoad"/>
     <addaction name="actionSave"/>
     <addaction name="separator"/>
@@ -663,7 +662,7 @@
   </action>
   <action name="actionNew">
    <property name="text">
-    <string>New Scenario</string>
+    <string>Default Scenario</string>
    </property>
   </action>
   <action name="actionLoad">
