@@ -1,6 +1,9 @@
 #include "mainwindow.hh"
 #include "ui_mainwindow.h"
 #include <QMessageBox>
+#include <QFileDialog>
+#include <QDebug>
+#include <QDir>
 
 MainWindow::MainWindow(QWidget *parent) :
     QMainWindow(parent),
@@ -14,6 +17,10 @@ MainWindow::MainWindow(QWidget *parent) :
                      SIGNAL(triggered()),
                      this,
                      SLOT(fileLoadScenario()));
+    QObject::connect(ui->actionSave,
+                     SIGNAL(triggered()),
+                     this,
+                     SLOT(fileSaveScenario()));
     QObject::connect(ui->actionExit,
                      SIGNAL(triggered()),
                      this,
@@ -40,6 +47,7 @@ MainWindow::MainWindow(QWidget *parent) :
                      SLOT(helpAbout()));
 
     settings_ = Settings::get_settings();
+    scenario_ = new Scenario();
     scene_ = new QGraphicsScene();
     manager_ = new Manager(settings_, scene_, rand_);
 
@@ -160,34 +168,29 @@ MainWindow::~MainWindow()
 
 void MainWindow::closeEvent(QCloseEvent *event)
 {
+    QString title = "Neural Network Demonstrator";
+    QString description;
+    QString info;
     if (is_running_) {
-        QMessageBox msgBox;
-        msgBox.setWindowTitle("Neural Network Demonstrator");
-        msgBox.setIcon(QMessageBox::Information);
-        msgBox.setText("A simulation is currently underway.");
-        msgBox.setInformativeText("Exit either way? (Any changes will not be saved automatically)");
-        msgBox.setStandardButtons(QMessageBox::No | QMessageBox::Yes);
-        msgBox.setDefaultButton(QMessageBox::No);
-        int choice = msgBox.exec();
-        if (choice == QMessageBox::Yes) {
-            event->accept();
-        } else {
-            event->ignore();
-        }
+        description = "A simulation is currently underway.";
+        info = "Exit either way? (Any changes will not be saved automatically)";
     } else {
-        QMessageBox msgBox;
-        msgBox.setWindowTitle("Neural Network Demonstrator");
-        msgBox.setIcon(QMessageBox::Information);
-        msgBox.setText("Are you sure you want to close the application?");
-        msgBox.setInformativeText("Any changes will not be saved automatically.");
-        msgBox.setStandardButtons(QMessageBox::No | QMessageBox::Yes);
-        msgBox.setDefaultButton(QMessageBox::No);
-        int choice = msgBox.exec();
-        if (choice == QMessageBox::Yes) {
-            event->accept();
-        } else {
-            event->ignore();
-        }
+        description = "Are you sure you want to close the application?";
+        info = "Any changes will not be saved automatically.";
+    }
+
+    QMessageBox msgBox;
+    msgBox.setWindowTitle(title);
+    msgBox.setIcon(QMessageBox::Information);
+    msgBox.setText(description);
+    msgBox.setInformativeText(info);
+    msgBox.setStandardButtons(QMessageBox::No | QMessageBox::Yes);
+    msgBox.setDefaultButton(QMessageBox::No);
+    int choice = msgBox.exec();
+    if (choice == QMessageBox::Yes) {
+        event->accept();
+    } else {
+        event->ignore();
     }
 }
 
@@ -240,6 +243,39 @@ void MainWindow::mousePressEvent(QMouseEvent *event)
     }
 }
 
+void MainWindow::setControls()
+{
+    int input = settings_->get_input_type();
+    int output = settings_->get_output_type();
+    int fitness = settings_->get_fitness_type();
+
+    int iteration = static_cast<int>(settings_->get_iteration_count());
+    int instance = static_cast<int>(settings_->get_instance_count());
+    int offspring = static_cast<int>(settings_->get_offspring_count());
+    int time = static_cast<int>(settings_->get_time_delta());
+    int hiddenLayer = static_cast<int>(settings_->get_hidden_layer_count());
+    int hiddenNeuron = static_cast<int>(settings_->get_hidden_neuron_count());
+    int initialBias = settings_->get_initial_bias();
+
+    ui->comboInput->setCurrentIndex(input - 1);
+    ui->comboOutput->setCurrentIndex(output - 1);
+    ui->comboFitness->setCurrentIndex(fitness - 1);
+
+    ui->sliderIteration->setValue(iteration);
+    ui->sliderInstance->setValue(instance);
+    ui->sliderOffspring->setValue(offspring);
+    ui->sliderTime->setValue(time);
+    ui->sliderHiddenLayer->setValue(hiddenLayer);
+    ui->sliderHiddenNeuron->setValue(hiddenNeuron);
+    ui->sliderBias->setValue(initialBias);
+    ui->labelInstanceCount->setText(QString::number(instance));
+    ui->labelOffspringCount->setText(QString::number(offspring));
+    ui->sliderOffspring->setMaximum(instance - 1);
+    ui->labelDelta->setText(QString::number(time) + " ms");
+    ui->labelHiddenLayerCount->setText(QString::number(hiddenLayer));
+    ui->labelHiddenNeuronCount->setText(QString::number(hiddenNeuron));
+}
+
 void MainWindow::buttonRunClicked()
 {
     if (is_running_) {
@@ -287,33 +323,21 @@ void MainWindow::buttonRunClicked()
 
 void MainWindow::buttonResetClicked()
 {
-    settings_->use_default_settings();
-
-    ui->comboInput->setCurrentIndex(0);
-    ui->comboOutput->setCurrentIndex(0);
-    ui->comboFitness->setCurrentIndex(0);
-
-    int iteration = static_cast<int>(settings_->get_iteration_count());
-    int instance = static_cast<int>(settings_->get_instance_count());
-    int offspring = static_cast<int>(settings_->get_offspring_count());
-    int time = static_cast<int>(settings_->get_time_delta());
-    int hiddenLayer = static_cast<int>(settings_->get_hidden_layer_count());
-    int hiddenNeuron = static_cast<int>(settings_->get_hidden_neuron_count());
-    int initialBias = settings_->get_initial_bias();
-
-    ui->sliderIteration->setValue(iteration);
-    ui->sliderInstance->setValue(instance);
-    ui->sliderOffspring->setValue(offspring);
-    ui->sliderTime->setValue(time);
-    ui->sliderHiddenLayer->setValue(hiddenLayer);
-    ui->sliderHiddenNeuron->setValue(hiddenNeuron);
-    ui->sliderBias->setValue(initialBias);
-    ui->labelInstanceCount->setText(QString::number(instance));
-    ui->labelOffspringCount->setText(QString::number(offspring));
-    ui->sliderOffspring->setMaximum(instance - 1);
-    ui->labelDelta->setText(QString::number(time) + " ms");
-    ui->labelHiddenLayerCount->setText(QString::number(hiddenLayer));
-    ui->labelHiddenNeuronCount->setText(QString::number(hiddenNeuron));
+    QString title = "Neural Networks Demonstrator";
+    QString description = "Are you sure you want to reset to default settings?";
+    QString info = "Current settings will not be saved automatically.";
+    QMessageBox msgBox;
+    msgBox.setWindowTitle(title);
+    msgBox.setIcon(QMessageBox::Information);
+    msgBox.setText(description);
+    msgBox.setInformativeText(info);
+    msgBox.setStandardButtons(QMessageBox::No | QMessageBox::Yes);
+    msgBox.setDefaultButton(QMessageBox::No);
+    int choice = msgBox.exec();
+    if (choice == QMessageBox::Yes) {
+        settings_->use_default_settings();
+        setControls();
+    }
 }
 
 void MainWindow::buttonExitClicked()
@@ -470,29 +494,74 @@ void MainWindow::fitnessChanged(int change)
 
 void MainWindow::fileLoadScenario()
 {
-    // TODO
+    QString filename = QFileDialog::getOpenFileName(
+                this,
+                tr("Load Scenario"),
+                QDir::homePath() + "/desktop",
+                tr("Scenario-formatted Text Files (*.txt)")
+    );
+    qDebug() << filename;
+    scenario_->load_scenario(filename.toStdString());
+    scenario_->set_settings(settings_);
+
+    if (sw != nullptr) sw->close();
+    if (nw != nullptr) nw->close();
+
+    setControls();
 }
 
 void MainWindow::fileSaveScenario()
 {
-    // TODO
+    QString filename = QFileDialog::getSaveFileName(
+                this,
+                tr("Save Scenario"),
+                QDir::homePath() + "/desktop",
+                tr("Scenario-formatted Text Files (*.txt)")
+    );
+    qDebug() << filename;
+    scenario_->apply_settings(settings_);
+    scenario_->save_scenario(filename.toStdString());
 }
 
 void MainWindow::fileExit()
 {
-    // TODO
+    this->close();
 }
 
 void MainWindow::editSubjectParameters()
 {
-    sw = new SubjectWindow();
-    sw->show();
+    bool open = false;
+
+    if (sw != nullptr) {
+        if (!sw->isVisible()) {
+            open = true;
+        }
+    } else {
+        open = true;
+    }
+
+    if (open) {
+        sw = new SubjectWindow();
+        sw->show();
+    }
 }
 
 void MainWindow::editNetworkParameters()
 {
-    nw = new NetworkWindow();
-    nw->show();
+    bool open = false;
+
+    if (nw != nullptr) {
+        if (!nw->isVisible()) {
+            open = true;
+        }
+    } else {
+        open = true;
+    }
+
+    if (open) {
+        nw = new NetworkWindow();
+        nw->show();
+    }
 }
 
 void MainWindow::helpGeneral()

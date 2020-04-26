@@ -10,6 +10,7 @@
 #include "subjectwindow.hh"
 #include "networkwindow.hh"
 #include "settings.hh"
+#include "scenario.hh"
 #include "manager.hh"
 #include "target.hh"
 
@@ -34,11 +35,14 @@ protected:
     void mousePressEvent(QMouseEvent *event);
 
 private:
+    void setControls();
+
     Ui::MainWindow *ui;
-    SubjectWindow *sw;
-    NetworkWindow *nw;
+    SubjectWindow *sw = nullptr;
+    NetworkWindow *nw = nullptr;
 
     Settings *settings_;
+    Scenario *scenario_;
     QGraphicsScene *scene_;
     QTimer *timer_;
     bool is_running_;

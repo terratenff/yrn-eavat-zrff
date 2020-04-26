@@ -68,6 +68,75 @@ void Scenario::apply_settings(const Settings *settings)
     settings_data_[MUTATION_SCALE_MAXIMUM] =
             static_cast<int>(settings->get_mutation_scale_maximum() * FACTOR_);
 }
+#include <iostream>
+void Scenario::set_settings(Settings *settings)
+{
+    settings->set_input_type(
+                static_cast<input_type>(settings_data_[INPUT_TYPE]));
+    settings->set_output_type(
+                static_cast<output_type>(settings_data_[OUTPUT_TYPE]));
+    settings->set_fitness_type(
+                static_cast<fitness_type>(settings_data_[FITNESS_TYPE]));
+    settings->set_hidden_layer_count(
+                static_cast<unsigned>(settings_data_[HIDDEN_LAYER_COUNT]));
+    settings->set_hidden_neuron_count(
+                static_cast<unsigned>(settings_data_[HIDDEN_NEURON_COUNT]));
+    settings->set_initial_bias(settings_data_[INITIAL_BIAS]);
+    settings->set_iteration_count(
+                static_cast<unsigned>(settings_data_[ITERATION_COUNT]));
+    settings->set_instance_count(
+                static_cast<unsigned>(settings_data_[INSTANCE_COUNT]));
+    settings->set_offspring_count(
+                static_cast<unsigned>(settings_data_[OFFSPRING_COUNT]));
+    settings->set_time_delta(
+                static_cast<unsigned>(settings_data_[TIME_DELTA]));
+    settings->set_velocity_initial(
+                static_cast<double>(settings_data_[VELOCITY_INITIAL] / FACTOR_));
+    settings->set_velocity_max_change(
+                static_cast<double>(settings_data_[VELOCITY_MAX_CHANGE] / FACTOR_));
+    settings->set_acceleration_initial(
+                static_cast<double>(settings_data_[ACCELERATION_INITIAL] / FACTOR_));
+    settings->set_acceleration_max_change(
+                static_cast<double>(settings_data_[ACCELERATION_MAX_CHANGE] / FACTOR_));
+    settings->set_angular_velocity_initial(
+                static_cast<double>(settings_data_[ANGULAR_VELOCITY_INITIAL] / FACTOR_));
+    settings->set_angular_velocity_max_change(
+                static_cast<double>(settings_data_[ANGULAR_VELOCITY_MAX_CHANGE] / FACTOR_));
+    settings->set_axis_velocity_x_initial(
+                static_cast<double>(settings_data_[AXIS_VELOCITY_X_INITIAL] / FACTOR_));
+    settings->set_axis_velocity_x_max_change(
+                static_cast<double>(settings_data_[AXIS_VELOCITY_X_MAX_CHANGE] / FACTOR_));
+    settings->set_axis_velocity_y_initial(
+                static_cast<double>(settings_data_[AXIS_VELOCITY_Y_INITIAL] / FACTOR_));
+    settings->set_axis_velocity_y_max_change(
+                static_cast<double>(settings_data_[AXIS_VELOCITY_Y_MAX_CHANGE] / FACTOR_));
+    settings->set_axis_acceleration_x_initial(
+                static_cast<double>(settings_data_[AXIS_ACCELERATION_X_INITIAL] / FACTOR_));
+    settings->set_axis_acceleration_x_max_change(
+                static_cast<double>(settings_data_[AXIS_ACCELERATION_X_MAX_CHANGE] / FACTOR_));
+    settings->set_axis_acceleration_y_initial(
+                static_cast<double>(settings_data_[AXIS_ACCELERATION_Y_INITIAL] / FACTOR_));
+    settings->set_axis_acceleration_y_max_change(
+                static_cast<double>(settings_data_[AXIS_ACCELERATION_Y_MAX_CHANGE] / FACTOR_));
+    settings->set_spawn_location(
+                static_cast<spawn_point>(settings_data_[SPAWN_LOCATION]));
+    settings->set_initial_weight_minimum(
+                static_cast<double>(settings_data_[INITIAL_WEIGHT_MINIMUM] / FACTOR_));
+    settings->set_initial_weight_maximum(
+                static_cast<double>(settings_data_[INITIAL_WEIGHT_MAXIMUM] / FACTOR_));
+    settings->set_activation_function_hidden(
+                static_cast<activation_type>(settings_data_[ACTIVATION_FUNCTION_HIDDEN]));
+    settings->set_activation_function_output(
+                static_cast<activation_type>(settings_data_[ACTIVATION_FUNCTION_OUTPUT]));
+    settings->set_breeding_method(
+                static_cast<breeding_type>(settings_data_[BREEDING_METHOD]));
+    settings->set_population_retention_rate(settings_data_[POPULATION_RETENTION_RATE]);
+    settings->set_mutation_probability(settings_data_[MUTATION_PROBABILITY]);
+    settings->set_mutation_scale_minimum(
+                static_cast<double>(settings_data_[MUTATION_SCALE_MINIMUM] / FACTOR_));
+    settings->set_mutation_scale_maximum(
+                static_cast<double>(settings_data_[MUTATION_SCALE_MAXIMUM] / FACTOR_));
+}
 
 void Scenario::save_scenario(const std::string path)
 {

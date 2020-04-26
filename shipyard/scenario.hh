@@ -65,6 +65,7 @@ class Scenario
 public:
     Scenario();
     void apply_settings(const Settings *settings);
+    void set_settings(Settings *settings);
     void save_scenario(const std::string path);
     void load_scenario(const std::string path);
 private:

@@ -5,7 +5,7 @@ Settings *Settings::instance_ = nullptr;
 Settings::Settings():
     input_type_(ANGULAR_DIFFERENCE),
     output_type_(ANGULAR_VELOCITY),
-    fitness_type_(CLOSE_PROXIMITY),
+    fitness_type_(CORRECT_ANGLE),
     hidden_layer_count_(2),
     hidden_neuron_count_(10),
     initial_bias_(0),
@@ -52,7 +52,7 @@ void Settings::use_default_settings()
 {
     input_type_ = ANGULAR_DIFFERENCE;
     output_type_ = ANGULAR_VELOCITY;
-    fitness_type_ = CLOSE_PROXIMITY;
+    fitness_type_ = CORRECT_ANGLE;
     hidden_layer_count_ = 2;
     hidden_neuron_count_ = 10;
 
@@ -60,6 +60,33 @@ void Settings::use_default_settings()
     instance_count_ = 50;
     offspring_count_ = 25;
     time_delta_ = 10;
+
+    /*
+    velocity_initial_(2.5),
+    velocity_max_change_(10),
+    acceleration_initial_(0.001),
+    acceleration_max_change_(10),
+    angular_velocity_initial_(0),
+    angular_velocity_max_change_(20),
+    axis_velocity_x_initial_(0),
+    axis_velocity_y_initial_(0),
+    axis_velocity_x_max_change_(5),
+    axis_velocity_y_max_change_(5),
+    axis_acceleration_x_initial_(0),
+    axis_acceleration_y_initial_(0),
+    axis_acceleration_x_max_change_(5),
+    axis_acceleration_y_max_change_(5),
+    spawn_location_(CENTER),
+    initial_weight_minimum_(-0.5),
+    initial_weight_maximum_(0.5),
+    activation_function_hidden_(SIGMOID),
+    activation_function_output_(SIGMOID),
+    breeding_method_(COPY),
+    population_retention_rate_(10),
+    mutation_probability_(10),
+    mutation_scale_minimum_(1.0),
+    mutation_scale_maximum_(2.0)
+    */
 }
 
 void Settings::set_input_type(input_type type)
