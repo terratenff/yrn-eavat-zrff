@@ -63,11 +63,11 @@ inline setting_type get_setting_type(std::string str)
 class Scenario
 {
 public:
-    Scenario();
+    Scenario(const Settings *settings);
     void apply_settings(const Settings *settings);
     void set_settings(Settings *settings);
     void save_scenario(const std::string path);
-    void load_scenario(const std::string path);
+    int load_scenario(const std::string path);
 private:
     std::unordered_map<setting_type, int> settings_data_;
     const double FACTOR_ = 1000;

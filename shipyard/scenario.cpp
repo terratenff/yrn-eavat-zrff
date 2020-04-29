@@ -2,8 +2,10 @@
 #include <fstream>
 #include <string>
 
-Scenario::Scenario()
-{}
+Scenario::Scenario(const Settings *settings)
+{
+    apply_settings(settings);
+}
 
 void Scenario::apply_settings(const Settings *settings)
 {
@@ -68,7 +70,7 @@ void Scenario::apply_settings(const Settings *settings)
     settings_data_[MUTATION_SCALE_MAXIMUM] =
             static_cast<int>(settings->get_mutation_scale_maximum() * FACTOR_);
 }
-#include <iostream>
+
 void Scenario::set_settings(Settings *settings)
 {
     settings->set_input_type(
@@ -157,7 +159,7 @@ void Scenario::save_scenario(const std::string path)
     file.close();
 }
 
-void Scenario::load_scenario(const std::string path)
+int Scenario::load_scenario(const std::string path)
 {
     std::ifstream file;
     file.open(path);
@@ -166,16 +168,31 @@ void Scenario::load_scenario(const std::string path)
         std::string prefix;
         std::string middle = ":";
         std::string suffix;
-        while (std::getline(file, line)) {
-            if (line.size() == 0) continue;
-            prefix = line.substr(0, line.find(middle));
-            suffix = line.substr(line.find(middle) + 1, line.size());
-            setting_type type = get_setting_type(prefix);
-            int value = std::stoi(suffix);
-            settings_data_[type] = value;
+        std::unordered_map<setting_type, int> temp_settings;
+
+        try {
+            while (std::getline(file, line)) {
+                if (line.size() == 0) continue;
+                prefix = line.substr(0, line.find(middle));
+                suffix = line.substr(line.find(middle) + 1, line.size());
+                setting_type type = get_setting_type(prefix);
+                int value = std::stoi(suffix);
+                //settings_data_[type] = value;
+                temp_settings[type] = value;
+            }
+            file.close();
+        } catch (std::exception e) {
+            file.close();
+            return 2;
         }
-        file.close();
+
+        std::unordered_map<setting_type, int>::iterator it;
+        for (it = temp_settings.begin(); it != temp_settings.end(); it++) {
+            settings_data_[it->first] = it->second;
+        }
+
     } else {
-        // TODO: Error
+        return 1;
     }
+    return 0;
 }

@@ -47,7 +47,7 @@ MainWindow::MainWindow(QWidget *parent) :
                      SLOT(helpAbout()));
 
     settings_ = Settings::get_settings();
-    scenario_ = new Scenario();
+    scenario_ = new Scenario(settings_);
     scene_ = new QGraphicsScene();
     manager_ = new Manager(settings_, scene_, rand_);
 
@@ -501,7 +501,38 @@ void MainWindow::fileLoadScenario()
                 tr("Scenario-formatted Text Files (*.txt)")
     );
     qDebug() << filename;
-    scenario_->load_scenario(filename.toStdString());
+    int outcome = scenario_->load_scenario(filename.toStdString());
+    if (outcome > 0) {
+        QString title = "Neural Networks Demonstrator";
+        QString description;
+        QString info;
+        switch(outcome) {
+        case 1:
+            description = "Could not open file.";
+            info = "Something prevented the opening of selected file.";
+            break;
+        case 2:
+            description = "Error while reading file.";
+            info = "The file in question does not heed the format of the application.";
+            break;
+        default:
+            description = "An unknown error has occurred.";
+            info = "Something unexpected happened.";
+            break;
+        }
+
+        QMessageBox msgBox;
+        msgBox.setWindowTitle(title);
+        msgBox.setIcon(QMessageBox::Critical);
+        msgBox.setText(description);
+        msgBox.setInformativeText(info);
+        msgBox.setStandardButtons(QMessageBox::Ok);
+        msgBox.setDefaultButton(QMessageBox::Ok);
+        msgBox.exec();
+
+        return;
+    }
+
     scenario_->set_settings(settings_);
 
     if (sw != nullptr) sw->close();
