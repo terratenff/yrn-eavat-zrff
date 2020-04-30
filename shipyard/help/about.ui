@@ -23,7 +23,7 @@
    </size>
   </property>
   <property name="windowTitle">
-   <string>Form</string>
+   <string>Neural Networks Demonstrator - About</string>
   </property>
   <widget class="QLabel" name="label">
    <property name="geometry">
