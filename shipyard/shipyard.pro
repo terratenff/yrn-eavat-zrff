@@ -17,6 +17,8 @@ DEFINES += QT_DEPRECATED_WARNINGS
 
 SOURCES += \
     fitness.cpp \
+    help/about.cpp \
+    help/instructions.cpp \
     inputoutput.cpp \
     main.cpp \
     mainwindow.cpp \
@@ -32,6 +34,8 @@ SOURCES += \
 
 HEADERS += \
     fitness.hh \
+    help/about.hh \
+    help/instructions.hh \
     inputoutput.hh \
     mainwindow.hh \
     manager.hh \
@@ -45,6 +49,8 @@ HEADERS += \
     target.hh
 
 FORMS += \
+    help/about.ui \
+    help/instructions.ui \
     mainwindow.ui \
     networkwindow.ui \
     subjectwindow.ui

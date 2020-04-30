@@ -9,6 +9,9 @@ MainWindow::MainWindow(QWidget *parent) :
 {
     ui->setupUi(this);
     sw = nullptr;
+    nw = nullptr;
+    in = nullptr;
+    ab = nullptr;
 
     QObject::connect(ui->actionNew,
                      SIGNAL(triggered()),
@@ -30,10 +33,6 @@ MainWindow::MainWindow(QWidget *parent) :
                      SIGNAL(triggered()),
                      this,
                      SLOT(editNetworkParameters()));
-    QObject::connect(ui->actionGeneral,
-                     SIGNAL(triggered()),
-                     this,
-                     SLOT(helpGeneral()));
     QObject::connect(ui->actionInstructions,
                      SIGNAL(triggered()),
                      this,
@@ -504,17 +503,14 @@ void MainWindow::editNetworkParameters()
     nw->show();
 }
 
-void MainWindow::helpGeneral()
-{
-    //
-}
-
 void MainWindow::helpInstructions()
 {
-    //
+    in = new Instructions();
+    in->show();
 }
 
 void MainWindow::helpAbout()
 {
-    //
+    ab = new About();
+    ab->show();
 }

@@ -7,6 +7,8 @@
 #include <QKeyEvent>
 #include <QMouseEvent>
 #include <QTimer>
+#include "help/instructions.hh"
+#include "help/about.hh"
 #include "subjectwindow.hh"
 #include "networkwindow.hh"
 #include "settings.hh"
@@ -37,6 +39,8 @@ private:
     Ui::MainWindow *ui;
     SubjectWindow *sw;
     NetworkWindow *nw;
+    Instructions *in;
+    About *ab;
 
     Settings *settings_;
     QGraphicsScene *scene_;
@@ -73,7 +77,6 @@ private slots:
     void editSubjectParameters();
     void editNetworkParameters();
 
-    void helpGeneral();
     void helpInstructions();
     void helpAbout();
 };
