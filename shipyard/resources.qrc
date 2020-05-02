@@ -1,0 +1,12 @@
+<RCC>
+    <qresource prefix="/images">
+        <file>help-images/controls1.png</file>
+        <file>help-images/controls2.png</file>
+        <file>help-images/controls3.png</file>
+        <file>help-images/uicontrols.png</file>
+        <file>help-images/network1.png</file>
+        <file>help-images/network2.png</file>
+        <file>help-images/subject1.png</file>
+        <file>help-images/subject2.png</file>
+    </qresource>
+</RCC>
