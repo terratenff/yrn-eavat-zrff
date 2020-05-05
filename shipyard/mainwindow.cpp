@@ -596,12 +596,36 @@ void MainWindow::editNetworkParameters()
 
 void MainWindow::helpInstructions()
 {
-    in = new Instructions();
-    in->show();
+    bool open = false;
+
+    if (in != nullptr) {
+        if (!in->isVisible()) {
+            open = true;
+        }
+    } else {
+        open = true;
+    }
+
+    if (open) {
+        in = new Instructions();
+        in->show();
+    }
 }
 
 void MainWindow::helpAbout()
 {
-    ab = new About();
-    ab->show();
+    bool open = false;
+
+    if (ab != nullptr) {
+        if (!ab->isVisible()) {
+            open = true;
+        }
+    } else {
+        open = true;
+    }
+
+    if (open) {
+        ab = new About();
+        ab->show();
+    }
 }
