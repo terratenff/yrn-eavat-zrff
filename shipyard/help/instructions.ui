@@ -35,7 +35,7 @@
     </rect>
    </property>
    <property name="currentIndex">
-    <number>3</number>
+    <number>0</number>
    </property>
    <widget class="QWidget" name="tab">
     <attribute name="title">
@@ -293,9 +293,9 @@
      <property name="geometry">
       <rect>
        <x>310</x>
-       <y>60</y>
+       <y>40</y>
        <width>10</width>
-       <height>461</height>
+       <height>480</height>
       </rect>
      </property>
      <property name="lineWidth">
@@ -309,7 +309,7 @@
      <property name="geometry">
       <rect>
        <x>0</x>
-       <y>160</y>
+       <y>140</y>
        <width>311</width>
        <height>101</height>
       </rect>
@@ -521,7 +521,7 @@
      <property name="geometry">
       <rect>
        <x>320</x>
-       <y>60</y>
+       <y>40</y>
        <width>311</width>
        <height>101</height>
       </rect>
@@ -574,9 +574,9 @@
      <property name="geometry">
       <rect>
        <x>320</x>
-       <y>160</y>
+       <y>140</y>
        <width>311</width>
-       <height>51</height>
+       <height>61</height>
       </rect>
      </property>
      <layout class="QVBoxLayout" name="verticalLayout_7" stretch="20,70">
@@ -627,9 +627,9 @@
      <property name="geometry">
       <rect>
        <x>320</x>
-       <y>210</y>
+       <y>200</y>
        <width>311</width>
-       <height>51</height>
+       <height>61</height>
       </rect>
      </property>
      <layout class="QVBoxLayout" name="verticalLayout_8" stretch="20,70">
@@ -835,11 +835,11 @@
       </item>
      </layout>
     </widget>
-    <widget class="QWidget" name="">
+    <widget class="QWidget" name="layoutWidget">
      <property name="geometry">
       <rect>
        <x>0</x>
-       <y>60</y>
+       <y>40</y>
        <width>311</width>
        <height>101</height>
       </rect>
@@ -896,8 +896,8 @@
     <widget class="QLabel" name="label_9">
      <property name="geometry">
       <rect>
-       <x>10</x>
-       <y>310</y>
+       <x>40</x>
+       <y>280</y>
        <width>500</width>
        <height>200</height>
       </rect>
@@ -918,8 +918,8 @@
     <widget class="QLabel" name="label_10">
      <property name="geometry">
       <rect>
-       <x>580</x>
-       <y>330</y>
+       <x>590</x>
+       <y>300</y>
        <width>140</width>
        <height>150</height>
       </rect>
@@ -940,8 +940,8 @@
     <widget class="QLabel" name="label_42">
      <property name="geometry">
       <rect>
-       <x>10</x>
-       <y>290</y>
+       <x>40</x>
+       <y>260</y>
        <width>501</width>
        <height>20</height>
       </rect>
@@ -956,8 +956,8 @@
     <widget class="QLabel" name="label_43">
      <property name="geometry">
       <rect>
-       <x>580</x>
-       <y>310</y>
+       <x>590</x>
+       <y>280</y>
        <width>140</width>
        <height>20</height>
       </rect>
@@ -973,7 +973,7 @@
      <property name="geometry">
       <rect>
        <x>0</x>
-       <y>0</y>
+       <y>20</y>
        <width>792</width>
        <height>51</height>
       </rect>
@@ -995,7 +995,7 @@
      <property name="geometry">
       <rect>
        <x>0</x>
-       <y>60</y>
+       <y>80</y>
        <width>792</width>
        <height>51</height>
       </rect>
@@ -1017,7 +1017,7 @@
      <property name="geometry">
       <rect>
        <x>0</x>
-       <y>120</y>
+       <y>140</y>
        <width>792</width>
        <height>51</height>
       </rect>
@@ -1060,7 +1060,7 @@
      <property name="geometry">
       <rect>
        <x>40</x>
-       <y>360</y>
+       <y>330</y>
        <width>300</width>
        <height>160</height>
       </rect>
@@ -1195,7 +1195,7 @@
      <property name="geometry">
       <rect>
        <x>40</x>
-       <y>340</y>
+       <y>310</y>
        <width>300</width>
        <height>20</height>
       </rect>
@@ -1509,11 +1509,137 @@
     <attribute name="title">
      <string>Scenarios</string>
     </attribute>
+    <widget class="QLabel" name="label_63">
+     <property name="geometry">
+      <rect>
+       <x>540</x>
+       <y>10</y>
+       <width>241</width>
+       <height>501</height>
+      </rect>
+     </property>
+     <property name="frameShape">
+      <enum>QFrame::Box</enum>
+     </property>
+     <property name="text">
+      <string/>
+     </property>
+     <property name="pixmap">
+      <pixmap resource="../resources.qrc">:/images/help-images/scenario.png</pixmap>
+     </property>
+     <property name="scaledContents">
+      <bool>true</bool>
+     </property>
+    </widget>
+    <widget class="QLabel" name="label_64">
+     <property name="geometry">
+      <rect>
+       <x>80</x>
+       <y>100</y>
+       <width>300</width>
+       <height>70</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string>Scenarios are used to save desirable settings so that the user does not have to manually set them up every time the application is launched.</string>
+     </property>
+     <property name="alignment">
+      <set>Qt::AlignJustify|Qt::AlignTop</set>
+     </property>
+     <property name="wordWrap">
+      <bool>true</bool>
+     </property>
+     <property name="margin">
+      <number>5</number>
+     </property>
+    </widget>
+    <widget class="QLabel" name="label_65">
+     <property name="geometry">
+      <rect>
+       <x>80</x>
+       <y>190</y>
+       <width>300</width>
+       <height>70</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string>The format for the scenarios is shown on the right side of this window. They are saved on a text file as key-value-pairs. A Template of the keys can be created by simply saving current scenario.</string>
+     </property>
+     <property name="alignment">
+      <set>Qt::AlignJustify|Qt::AlignTop</set>
+     </property>
+     <property name="wordWrap">
+      <bool>true</bool>
+     </property>
+     <property name="margin">
+      <number>5</number>
+     </property>
+    </widget>
+    <widget class="QLabel" name="label_66">
+     <property name="geometry">
+      <rect>
+       <x>80</x>
+       <y>280</y>
+       <width>300</width>
+       <height>70</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string>There are limits to what some variables can be. These limits are controlled in the application; however, they are not enforced while loading them (might change later), so limit-breaking changes might crash the application.</string>
+     </property>
+     <property name="alignment">
+      <set>Qt::AlignJustify|Qt::AlignTop</set>
+     </property>
+     <property name="wordWrap">
+      <bool>true</bool>
+     </property>
+     <property name="margin">
+      <number>5</number>
+     </property>
+    </widget>
+    <widget class="Line" name="line_5">
+     <property name="geometry">
+      <rect>
+       <x>500</x>
+       <y>10</y>
+       <width>10</width>
+       <height>501</height>
+      </rect>
+     </property>
+     <property name="lineWidth">
+      <number>10</number>
+     </property>
+     <property name="orientation">
+      <enum>Qt::Vertical</enum>
+     </property>
+    </widget>
    </widget>
    <widget class="QWidget" name="tab_8">
     <attribute name="title">
      <string>Other</string>
     </attribute>
+    <widget class="QLabel" name="label_67">
+     <property name="geometry">
+      <rect>
+       <x>0</x>
+       <y>0</y>
+       <width>792</width>
+       <height>31</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string>More instructions will be added here later.</string>
+     </property>
+     <property name="alignment">
+      <set>Qt::AlignJustify|Qt::AlignTop</set>
+     </property>
+     <property name="wordWrap">
+      <bool>true</bool>
+     </property>
+     <property name="margin">
+      <number>5</number>
+     </property>
+    </widget>
    </widget>
   </widget>
   <widget class="QLabel" name="label">

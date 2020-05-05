@@ -8,5 +8,6 @@
         <file>help-images/network2.png</file>
         <file>help-images/subject1.png</file>
         <file>help-images/subject2.png</file>
+        <file>help-images/scenario.png</file>
     </qresource>
 </RCC>
