@@ -630,7 +630,6 @@
     <property name="title">
      <string>Help</string>
     </property>
-    <addaction name="actionGeneral"/>
     <addaction name="actionInstructions"/>
     <addaction name="actionAbout"/>
    </widget>
