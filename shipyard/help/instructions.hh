@@ -7,6 +7,13 @@ namespace Ui {
 class Instructions;
 }
 
+/*!
+ * \class Instructions
+ * \brief Guides the user to using the application.
+ * The instructions themselves are hard-coded into the form that
+ * this class takes over.
+ * \author terratenff
+ */
 class Instructions : public QWidget
 {
     Q_OBJECT
