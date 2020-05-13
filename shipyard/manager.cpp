@@ -23,6 +23,7 @@ void Manager::initialize(SubjectCore *p,
 {
     clear_subjects();
 
+    // Random spawn point for its spawn point option.
     random_point_ = rand_.random_coordinates();
 
     primaryTarget_ = p;
@@ -33,12 +34,14 @@ void Manager::initialize(SubjectCore *p,
 
     unsigned int instances = settings_->get_instance_count();
 
+    // Initialize neural networks.
     for (unsigned int i = 0; i < instances; i++) {
         NeuralNetwork *nn = new NeuralNetwork(settings_, rand_);
         nn->mutate();
         networks_.push_back(nn);
     }
 
+    // Initialize subjects.
     for (unsigned int i = 0; i < instances; i++) {
         Subject *subject = new Subject(scene_);
         subject->setNeuralNetwork(networks_[i]);
@@ -46,6 +49,7 @@ void Manager::initialize(SubjectCore *p,
         subject->update();
         subjects_.push_back(subject);
     }
+
     generation_count_ = 1;
     iteration_count_ = 0;
     iteration_max_ = settings_->get_iteration_count();
@@ -53,43 +57,59 @@ void Manager::initialize(SubjectCore *p,
 
 void Manager::update()
 {
+    // Update each subject.
     for (Subject *subject : subjects_) {
         subject->update();
     }
 
-    random_point_ = rand_.random_coordinates();
-
     ++iteration_count_;
+
+    // Arrangements for the next generation, if it is time for it.
     if (iteration_count_ >= iteration_max_) {
         ++generation_count_;
         iteration_count_ = 0;
+
+        // New random point to act as a spawn point for a specific
+        // spawn point option.
+        random_point_ = rand_.random_coordinates();
+
         unsigned int population = settings_->get_instance_count();
         unsigned int offspringCount = settings_->get_offspring_count();
         breeding_type breedingMethod = settings_->get_breeding_method();
         int populationRetentionRate = settings_->get_population_retention_rate();
 
+        // Sort networks in descending order fitness-wise.
         sort_networks();
 
+        // Select the most fit subjects into the next generation.
         std::vector<int> topSubjects =
                 get_top_subjects(population - offspringCount);
+
+        // Select a small set of poor performers into the next generation,
+        // so as to make it unique.
         std::vector<int> retentionSubjects =
                 get_retention_subjects(populationRetentionRate,
                                        population,
                                        population - offspringCount);
 
+        // This number of subjects will be replaced by the children
+        // of the survivors.
         int targetCount =
                 static_cast<int>(offspringCount - retentionSubjects.size());
         if (targetCount < 0) targetCount = 0;
 
+        // Breeders for the children.
         std::vector<std::vector<int>> breeders =
                 generate_breeders(breedingMethod,
                                   targetCount,
                                   topSubjects,
                                   retentionSubjects);
 
+        // Creating the children one by one via selected crossover function.
         unsigned int j = 0;
         for (unsigned int i = population - offspringCount; i < population; i++) {
             if (std::find(retentionSubjects.begin(), retentionSubjects.end(), i) != retentionSubjects.end()) {
+                // Skip subjects that were selected via population retention.
                 continue;
             }
 
@@ -126,12 +146,14 @@ void Manager::update()
             }
             case NO_BREEDING:
             {
+                // Default crossover function: Copy
                 unsigned int slot = static_cast<unsigned int>(breeders[j][0]);
                 networks_[i] = new NeuralNetwork(*networks_[slot]);
                 break;
             }
             }
 
+            // Mutate upon creation.
             networks_[i]->mutate();
 
             if (j < population - offspringCount) {
@@ -140,6 +162,8 @@ void Manager::update()
             ++j;
         }
 
+        // Recreate subjects now that neural networks for next generation
+        // have been set.
         for (unsigned int i = 0; i < population; i++) {
             Subject *subject = subjects_[i];
             subject->setNeuralNetwork(networks_[i]);
@@ -189,6 +213,7 @@ void Manager::set_subject_parameters(Subject *subject)
     subject->getNeuralNetwork()->setFitness(0);
     subject->getNeuralNetwork()->setBias(static_cast<double>(settings_->get_initial_bias()) / 1000);
 
+    // Setting spawn location.
     switch (settings_->get_spawn_location()) {
     case CENTER:
         subject->setCoordinates(XY(960,540));
@@ -206,11 +231,12 @@ void Manager::set_subject_parameters(Subject *subject)
         subject->setCoordinates(rand_.random_coordinates());
         break;
     case NO_SPAWN_POINT:
+        // Default spawn point: Center.
         subject->setCoordinates(XY(960,540));
         break;
     }
 
-
+    // Movement parameters.
     subject->setAngle(rand_.random_int(0,360));
     subject->setVelocity(settings_->get_velocity_initial());
     subject->setAcceleration(settings_->get_acceleration_initial());
@@ -244,6 +270,10 @@ std::vector<int> Manager::get_top_subjects(unsigned int count)
     std::vector<int> top_subjects;
     unsigned int i = 0;
     while (i < count) {
+        // It is assumed that the list of neural networks is sorted.
+        // Therefore, the function simply generates a vector of
+        // integers ranging in [0,n).
+
         top_subjects.push_back(static_cast<int>(i));
         ++i;
     }
@@ -270,7 +300,7 @@ Manager::generate_breeders(breeding_type method,
                            std::vector<int> top_subjects,
                            std::vector<int> retention_subjects)
 {
-
+    // Merge candidate vectors into one.
     std::vector<int> candidates = top_subjects;
     candidates.insert(candidates.end(),
                       retention_subjects.begin(),
@@ -292,6 +322,7 @@ Manager::generate_breeders(breeding_type method,
         breederCount = 3;
         break;
     case NO_BREEDING:
+        // Default breeding method: Copy.
         breederCount = 1;
         break;
     }
@@ -300,6 +331,7 @@ Manager::generate_breeders(breeding_type method,
         std::vector<int> breederSet;
         for (int j = 0; j < breederCount; j++) {
 
+            // Select random candidate subject into a breeding group.
             unsigned int selector = static_cast<unsigned int>(
                         rand_.random_int(
                             0,
