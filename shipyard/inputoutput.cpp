@@ -1,4 +1,5 @@
 #include "inputoutput.hh"
+#include <algorithm>
 
 
 Row Input::angular_difference(double angle,
@@ -184,7 +185,7 @@ Row Output::small_hops(const Row &outputs)
 Row Output::fixed_movement(const Row &outputs)
 {
     Row outputValues;
-    auto iter = max_element(outputs.begin(), outputs.end());
+    auto iter = std::max_element(outputs.begin(), outputs.end());
     int index = static_cast<int>(std::distance(outputs.begin(), iter));
 
     for (int i = 0; i < 4; i++) {
