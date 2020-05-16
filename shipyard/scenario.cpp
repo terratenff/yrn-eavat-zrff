@@ -177,7 +177,6 @@ int Scenario::load_scenario(const std::string path)
                 suffix = line.substr(line.find(middle) + 1, line.size());
                 setting_type type = get_setting_type(prefix);
                 int value = std::stoi(suffix);
-                //settings_data_[type] = value;
                 temp_settings[type] = value;
             }
             file.close();
