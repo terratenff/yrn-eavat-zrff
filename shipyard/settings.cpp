@@ -15,18 +15,18 @@ Settings::Settings():
     time_delta_(10),
     velocity_initial_(2.5),
     velocity_max_change_(10),
-    acceleration_initial_(0.001),
-    acceleration_max_change_(10),
+    acceleration_initial_(0),
+    acceleration_max_change_(2.5),
     angular_velocity_initial_(0),
-    angular_velocity_max_change_(20),
+    angular_velocity_max_change_(10),
     axis_velocity_x_initial_(0),
     axis_velocity_y_initial_(0),
     axis_velocity_x_max_change_(5),
     axis_velocity_y_max_change_(5),
     axis_acceleration_x_initial_(0),
     axis_acceleration_y_initial_(0),
-    axis_acceleration_x_max_change_(5),
-    axis_acceleration_y_max_change_(5),
+    axis_acceleration_x_max_change_(2.5),
+    axis_acceleration_y_max_change_(2.5),
     spawn_location_(CENTER),
     initial_weight_minimum_(-0.5),
     initial_weight_maximum_(0.5),
@@ -61,32 +61,30 @@ void Settings::use_default_settings()
     offspring_count_ = 25;
     time_delta_ = 10;
 
-    /*
-    velocity_initial_(2.5),
-    velocity_max_change_(10),
-    acceleration_initial_(0.001),
-    acceleration_max_change_(10),
-    angular_velocity_initial_(0),
-    angular_velocity_max_change_(20),
-    axis_velocity_x_initial_(0),
-    axis_velocity_y_initial_(0),
-    axis_velocity_x_max_change_(5),
-    axis_velocity_y_max_change_(5),
-    axis_acceleration_x_initial_(0),
-    axis_acceleration_y_initial_(0),
-    axis_acceleration_x_max_change_(5),
-    axis_acceleration_y_max_change_(5),
-    spawn_location_(CENTER),
-    initial_weight_minimum_(-0.5),
-    initial_weight_maximum_(0.5),
-    activation_function_hidden_(SIGMOID),
-    activation_function_output_(SIGMOID),
-    breeding_method_(COPY),
-    population_retention_rate_(10),
-    mutation_probability_(10),
-    mutation_scale_minimum_(1.0),
-    mutation_scale_maximum_(2.0)
-    */
+    velocity_initial_ = 2.5;
+    velocity_max_change_ = 10;
+    acceleration_initial_ = 0;
+    acceleration_max_change_ = 2.5;
+    angular_velocity_initial_ = 0;
+    angular_velocity_max_change_ = 10;
+    axis_velocity_x_initial_ = 0;
+    axis_velocity_y_initial_ = 0;
+    axis_velocity_x_max_change_ = 5;
+    axis_velocity_y_max_change_ = 5;
+    axis_acceleration_x_initial_ = 0;
+    axis_acceleration_y_initial_ = 0;
+    axis_acceleration_x_max_change_ = 2.5;
+    axis_acceleration_y_max_change_ = 2.5;
+    spawn_location_ = CENTER;
+    initial_weight_minimum_ = -0.5;
+    initial_weight_maximum_ = 0.5;
+    activation_function_hidden_ = SIGMOID;
+    activation_function_output_ = SIGMOID;
+    breeding_method_ = COPY;
+    population_retention_rate_ = 10;
+    mutation_probability_ = 10;
+    mutation_scale_minimum_ = 1.0;
+    mutation_scale_maximum_ = 2.0;
 }
 
 void Settings::set_input_type(input_type type)

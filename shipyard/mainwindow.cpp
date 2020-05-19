@@ -324,7 +324,7 @@ void MainWindow::buttonResetClicked()
 {
     QString title = "Neural Networks Demonstrator";
     QString description = "Are you sure you want to reset to default settings?";
-    QString info = "Current settings will not be saved automatically.";
+    QString info = "Current settings will not be saved automatically. Subject & Network settings will also be reset!";
     QMessageBox msgBox;
     msgBox.setWindowTitle(title);
     msgBox.setIcon(QMessageBox::Information);
