@@ -9,6 +9,7 @@ SubjectCore *SubjectCore::adversary_ = nullptr;
 void SubjectCore::setPublicInstance(SubjectCore *core, int role)
 {
     switch(role) {
+    // See "target.hh".
     case 0: break;
     case 1: primaryTarget_ = core; break;
     case 2: secondaryTarget_ = core; break;
@@ -45,14 +46,24 @@ SubjectCore::~SubjectCore()
 
 void SubjectCore::update()
 {
+    // Step 1: Check if a neural network exists
+    //         (Exceptions do not have a neural network).
     if (nn_ == nullptr) return;
 
+    // Step 2: Update movement.
     updateMovement();
+
+    // Step 3: Create inputs for the neural network.
     makeInputs();
 
+    // Step 4: Obtain outputs from the neural network.
     outputs_ = nn_->feedForward(inputs_);
 
+    // Step 5: Customize outputs for proper use.
     applyOutputs();
+
+    // Step 6: Check the state of the subject for
+    //         the fitness value update.
     updateFitness();
 }
 
@@ -188,15 +199,29 @@ double SubjectCore::getAngularVelocityFactor()
 
 void SubjectCore::updateMovement()
 {
+    // Step 1: Update subject angle.
     angle_ += angular_velocity_;
     angle_ = std::remainder(angle_, 360);
+
+    // Step 2: Update velocity with acceleration.
     velocity_ += acceleration_;
+
+    // Step 3: Split velocity into two components, for
+    //         axis-wise velocities.
     XY velocity_components = calculate_components(angle_, abs(velocity_));
+
+    // Step 4: Update coordinates with said components.
     coordinates_ = coordinates_ + velocity_components;
 
+    // Step 5: Update other axis-wise velocities with respective
+    //         axis-wise accelerations.
     axis_velocity_ = axis_velocity_ + axis_acceleration_;
+
+    // Step 6: Update coordinates with other axis-wise velocities.
     coordinates_ = coordinates_ + axis_velocity_;
 
+    // Step 7: Update subject angle if other axis-wise velocities
+    //         were non-zero.
     if (!near_zero(axis_velocity_.x) ||
             !near_zero(axis_velocity_.y)) {
         angle_ = calculate_angle(axis_velocity_ + velocity_components);
@@ -208,35 +233,42 @@ void SubjectCore::makeInputs()
     inputs_.clear();
     if (primaryTarget_ == nullptr) return;
     switch(nn_->getInputCode()) {
+
     case ANGULAR_DIFFERENCE:
         inputs_ = Input::angular_difference(
                     getAngle(),
                     getCoordinates(),
                     primaryTarget_->getCoordinates());
         break;
+
     case SPACE_TOTAL_DIFFERENCE:
         inputs_ = Input::space_scalar_difference(
                     getCoordinates(),
                     primaryTarget_->getCoordinates());
         break;
+
     case SPACE_AXIS_DIFFERENCE:
         inputs_ = Input::space_axis_difference(
                     getCoordinates(),
                     primaryTarget_->getCoordinates());
         break;
+
     case WALL_DISTANCES:
         inputs_ = Input::wall_distances(getCoordinates());
         break;
+
     case FOUR_WAY_SEARCH:
         inputs_ = Input::four_way_search(
                     getCoordinates(),
                     primaryTarget_->getCoordinates());
         break;
+
     case FOUR_CORNER_SEARCH:
         inputs_ = Input::four_corner_search(
                     getCoordinates(),
                     primaryTarget_->getCoordinates());
         break;
+
     case NO_INPUT:
         inputs_ = Input::angular_difference(
                     getAngle(),
@@ -251,17 +283,20 @@ void SubjectCore::applyOutputs()
     Row outputValues;
 
     switch(nn_->getOutputCode()) {
+
     case ANGULAR_VELOCITY:
         if (outputs_.size() != 1) return;
         outputValues = Output::angular_velocity(outputs_,
                                                 angular_velocity_factor_);
         setAngularVelocity(outputValues[0]);
         break;
+
     case DIRECT_ANGLE:
         if (outputs_.size() != 1) return;
         outputValues = Output::direct_angle(outputs_);
         setAngle(outputValues[0]);
         break;
+
     case ANGLE_VELOCITY:
         if (outputs_.size() != 2) return;
         outputValues = Output::angle_velocity(
@@ -271,6 +306,7 @@ void SubjectCore::applyOutputs()
         setAngularVelocity(outputValues[0]);
         setVelocity(outputValues[1]);
         break;
+
     case ANGLE_ACCELERATION:
         if (outputs_.size() != 2) return;
         outputValues = Output::angle_acceleration(
@@ -280,18 +316,21 @@ void SubjectCore::applyOutputs()
         setAngularVelocity(outputValues[0]);
         setAcceleration(outputValues[1]);
         break;
+
     case AXIS_VELOCITY:
         if (outputs_.size() != 2) return;
         outputValues = Output::axis_velocity(outputs_,
                                              axis_velocity_factor_);
         setAxisVelocity(XY(outputValues[0], outputValues[1]));
         break;
+
     case AXIS_ACCELERATION:
         if (outputs_.size() != 2) return;
         outputValues = Output::axis_acceleration(outputs_,
                                                  axis_acceleration_factor_);
         setAxisAcceleration(XY(outputValues[0], outputValues[1]));
         break;
+
     case SMALL_HOPS:
     {
         if (outputs_.size() != 2) return;
@@ -301,6 +340,7 @@ void SubjectCore::applyOutputs()
         setAngle(calculate_angle(XY(outputValues[0], outputValues[1])));
         break;
     }
+
     case FIXED_MOVEMENT:
     {
         if (outputs_.size() != 4) return;
@@ -316,6 +356,7 @@ void SubjectCore::applyOutputs()
         }
         break;
     }
+
     case NO_OUTPUT:
         break;
     }
@@ -326,6 +367,7 @@ void SubjectCore::updateFitness()
     double fitnessValue = 0;
 
     switch(nn_->getFitnessCode()) {
+
     case CORRECT_ANGLE:
         fitnessValue = Fitness::correct_angle(
             getAngle(),
@@ -333,23 +375,27 @@ void SubjectCore::updateFitness()
             primaryTarget_->getCoordinates()
         );
         break;
+
     case CLOSE_PROXIMITY:
         fitnessValue = Fitness::close_proximity(
             getCoordinates(),
             primaryTarget_->getCoordinates()
         );
         break;
+
     case FIXED_DISTANCE:
         fitnessValue = Fitness::fixed_distance(
             getCoordinates(),
             primaryTarget_->getCoordinates()
         );
         break;
+
     case NOT_OUT_OF_BOUNDS:
         fitnessValue = Fitness::not_out_of_bounds(
             getCoordinates()
         );
         break;
+
     case LOOK_FROM_DISTANCE:
         fitnessValue = Fitness::look_from_distance(
             getAngle(),
@@ -357,6 +403,7 @@ void SubjectCore::updateFitness()
             primaryTarget_->getCoordinates()
         );
         break;
+
     case AVOID_EYE_CONTACT:
         fitnessValue = Fitness::avoid_eye_contact(
             getAngle(),
@@ -365,6 +412,7 @@ void SubjectCore::updateFitness()
             primaryTarget_->getCoordinates()
         );
         break;
+
     case NO_FITNESS:
         fitnessValue = Fitness::correct_angle(
             getAngle(),
