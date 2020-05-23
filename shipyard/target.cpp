@@ -85,12 +85,12 @@ void Target::updatePrimary()
 
 void Target::updateSecondary()
 {
-    // TODO
+    // NYI
 }
 
 void Target::updateTertiary()
 {
-    // TODO
+    // NYI
 }
 
 void Target::updateMousePoint()
@@ -100,5 +100,5 @@ void Target::updateMousePoint()
 
 void Target::updateAdversary()
 {
-    // TODO
+    // NYI
 }
