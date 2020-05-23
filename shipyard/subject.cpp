@@ -44,8 +44,6 @@ void Subject::update()
 {
     SubjectCore::update();
 
-    // TODO
-
     updateGraphics();
 }
 
