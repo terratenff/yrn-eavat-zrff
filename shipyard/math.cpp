@@ -71,6 +71,8 @@ double calculate_angle(XY vector)
         return 90;
     } else if (near_zero(vector.x) && vector.y < 0) {
         return 270;
+    } else if (near_zero(vector.x) && near_zero(vector.y)) {
+        return 0;
     } else {
         double radians = atan(vector.y / vector.x);
         if (vector.x > 0) return to_degrees(radians);
