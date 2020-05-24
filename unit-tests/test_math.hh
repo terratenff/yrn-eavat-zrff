@@ -20,7 +20,7 @@ public:
 private slots:
 
     /*!
-     * \brief Tests the function near_zero.
+     * \brief Tests the function "near_zero".
      *
      * Testing consists of two valid inputs and
      * multiple invalid inputs of decreasing value
@@ -30,7 +30,7 @@ private slots:
     void test_near_zero();
 
     /*!
-     * \brief Tests the function near_integer.
+     * \brief Tests the function "near_integer".
      *
      * Testing consists of a few valid inputs and
      * multiple invalid inputs that are similar to
@@ -40,7 +40,7 @@ private slots:
     void test_near_integer();
 
     /*!
-     * \brief Tests the function near_double.
+     * \brief Tests the function "near_double".
      *
      * Testing consists of a few valid inputs and
      * multiple invalid inputs that are similar to
@@ -50,7 +50,7 @@ private slots:
     void test_near_double();
 
     /*!
-     * \brief Tests the function degrees_to_radians.
+     * \brief Tests the function "to_radians".
      *
      * Testing consists of a few inputs in degrees that are
      * transformed into radians. These are then compared to
@@ -59,7 +59,7 @@ private slots:
     void test_degrees_to_radians();
 
     /*!
-     * \brief Tests the function radians_to_degrees.
+     * \brief Tests the function "to_degrees".
      *
      * Testing consists of a few inputs in radians that are
      * transformed into degrees. These are then compared to
@@ -109,7 +109,7 @@ private slots:
     void test_XY_assignment();
 
     /*!
-     * \brief Tests the function distance.
+     * \brief Tests the function "distance".
      *
      * Testing consists of a few instances: horizontal points,
      * vertical points, equal points and various diagonal points.
@@ -119,7 +119,8 @@ private slots:
     void test_XY_distance();
 
     /*!
-     * \brief Tests unit vector creation from XY structs.
+     * \brief Tests unit vector creation from XY structs (function
+     * "unit_vector").
      *
      * Testing consists of a few instances: horizontal vectors,
      * vertical vectors, point vectors and various diagonal vectors.
@@ -129,7 +130,8 @@ private slots:
     void test_XY_unit_vector_from_points();
 
     /*!
-     * \brief Tests unit vector creation from angles.
+     * \brief Tests unit vector creation from angles (function
+     * "unit_vector").
      *
      * Testing consists of various angles in degrees that are to be
      * converted into unit vectors. These are known beforehand, and
@@ -137,9 +139,167 @@ private slots:
      *
      * (radians are skipped because this function converts degrees to
      * radians - using a tested function - if they are specified)
-     *
      */
     void test_XY_unit_vector_from_angle();
+
+    /*!
+     * \brief Tests angle calculation from a vector
+     * (function "calculate_angle").
+     *
+     * Testing consists of various vectors as XY structs that
+     * point in specific directions. These are known beforehand,
+     * and function results are verified using them.
+     */
+    void test_angle_calculation_vector();
+
+    /*!
+     * \brief Tests angle calculation from a set of two points
+     * (function "calculate_angle").
+     *
+     * Testing consists of a collection of points (XY structs)
+     * distributed in the 2D space. Angles from the combinations
+     * are known beforehand, and function results are verified using them.
+     */
+    void test_angle_calculation_points();
+
+    /*!
+     * \brief Tests function "calculate_components" where X and Y
+     * components are determined using a given angle and distance.
+     *
+     * Testing consists of a small set of angles and distances that
+     * are combined for component calculations. The components for
+     * each combination are known beforehand, and function results
+     * are verified using them.
+     */
+    void test_component_calculation();
+
+    /*!
+     * \brief Tests matrix instantiation (function "matrix").
+     *
+     * Testing consists of a few simple instantiations of the
+     * matrix type variables, which are actually two-dimensional
+     * vectors of doubles.
+     */
+    void test_matrix_instantiation();
+
+    /*!
+     * \brief Tests matrix transposing (function "matrix_transpose").
+     *
+     * Testing consists of a few matrices, the transpositions of which
+     * are known beforehand. Function results are then verified using
+     * known information.
+     */
+    void test_matrix_transpose();
+
+    /*!
+     * \brief Tests matrix addition operations. (function "matrix_add").
+     *
+     * Testing consists of a collection of matrices being added
+     * together. Incompatible matrices are also tested. Valid
+     * operations are verified with expected results.
+     */
+    void test_matrix_addition();
+
+    /*!
+     * \brief Tests matrix subtraction operations (function
+     * "matrix_subtract").
+     *
+     * Testing consists of a collection of matrices being subtracted
+     * by one another. Incompatible matrices are also tested. Valid
+     * operations are verified with expected results.
+     */
+    void test_matrix_subtraction();
+
+    /*!
+     * \brief Tests matrix multiplication (function "matrix_dot").
+     *
+     * Testing consists of a collection of matrices being multiplied
+     * by one another. Incompatible matrices are also tested. Valid
+     * operations are verified with expected results.
+     */
+    void test_matrix_multiplication();
+
+    /*!
+     * \brief Tests scalar-wise matrix multiplication
+     * (function "matrix_dot_scalar").
+     *
+     * Testing consists of a collection of matrices being multiplied
+     * by one another. Incompatible matrices are also tested. Valid
+     * operations are verified with expected results.
+     */
+    void test_matrix_scalar_multiplication();
+
+    /*!
+     * \brief Tests activation function "sigmoid".
+     *
+     * Testing consists of five different values that are used with
+     * other activation functions during testing. The results are
+     * compared with the expected results.
+     */
+    void test_sigmoid();
+
+    /*!
+     * \brief Tests activation function "hyperbolic_tangent".
+     *
+     * Testing consists of five different values that are used with
+     * other activation functions during testing. The results are
+     * compared with the expected results.
+     */
+    void test_hyperbolic_tangent();
+
+    /*!
+     * \brief Tests activation function "sign".
+     *
+     * Testing consists of five different values that are used with
+     * other activation functions during testing. The results are
+     * compared with the expected results.
+     */
+    void test_sign();
+
+    /*!
+     * \brief Tests activation function "heaviside".
+     *
+     * Testing consists of five different values that are used with
+     * other activation functions during testing. The results are
+     * compared with the expected results.
+     */
+    void test_heaviside();
+
+    /*!
+     * \brief Tests activation function "ReLU".
+     *
+     * Testing consists of five different values that are used with
+     * other activation functions during testing. The results are
+     * compared with the expected results.
+     */
+    void test_ReLU();
+
+    /*!
+     * \brief Tests activation function "leaky_ReLU".
+     *
+     * Testing consists of five different values that are used with
+     * other activation functions during testing. The results are
+     * compared with the expected results.
+     */
+    void test_leaky_ReLU();
+
+    /*!
+     * \brief Tests activation function "gaussian".
+     *
+     * Testing consists of five different values that are used with
+     * other activation functions during testing. The results are
+     * compared with the expected results.
+     */
+    void test_gaussian();
+
+    /*!
+     * \brief Tests activation function "softmax".
+     *
+     * Testing consista of a collection of Rows (vectors)
+     * that are to be activated. The results are compared with
+     * the expected results.
+     */
+    void test_softmax();
 private:
 
     /*!

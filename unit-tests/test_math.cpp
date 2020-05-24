@@ -311,3 +311,88 @@ void TestMath::test_XY_unit_vector_from_angle()
                         .arg(unit_vector(angle5).x)
                         .arg(unit_vector(angle5).y)));
 }
+
+void TestMath::test_angle_calculation_vector()
+{
+    QFAIL("TODO");
+}
+
+void TestMath::test_angle_calculation_points()
+{
+    QFAIL("TODO");
+}
+
+void TestMath::test_component_calculation()
+{
+    QFAIL("TODO");
+}
+
+void TestMath::test_matrix_instantiation()
+{
+    QFAIL("TODO");
+}
+
+void TestMath::test_matrix_transpose()
+{
+    QFAIL("TODO");
+}
+
+void TestMath::test_matrix_addition()
+{
+    QFAIL("TODO");
+}
+
+void TestMath::test_matrix_subtraction()
+{
+    QFAIL("TODO");
+}
+
+void TestMath::test_matrix_multiplication()
+{
+    QFAIL("TODO");
+}
+
+void TestMath::test_matrix_scalar_multiplication()
+{
+    QFAIL("TODO");
+}
+
+void TestMath::test_sigmoid()
+{
+    QFAIL("TODO");
+}
+
+void TestMath::test_hyperbolic_tangent()
+{
+    QFAIL("TODO");
+}
+
+void TestMath::test_sign()
+{
+    QFAIL("TODO");
+}
+
+void TestMath::test_heaviside()
+{
+    QFAIL("TODO");
+}
+
+void TestMath::test_ReLU()
+{
+    QFAIL("TODO");
+}
+
+void TestMath::test_leaky_ReLU()
+{
+    QFAIL("TODO");
+}
+
+void TestMath::test_gaussian()
+{
+    QFAIL("TODO");
+}
+
+void TestMath::test_softmax()
+{
+    QFAIL("TODO");
+}
