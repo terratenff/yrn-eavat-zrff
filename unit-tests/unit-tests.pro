@@ -9,7 +9,6 @@ TEMPLATE = app
 SOURCES +=  \
     test_main.cpp \
     test_math.cpp \
-    test_subject.cpp \
     # Include necessary project source files to conduct unit tests.
     ../shipyard/fitness.cpp \
     ../shipyard/inputoutput.cpp \
@@ -19,5 +18,4 @@ SOURCES +=  \
     ../shipyard/subjectcore.cpp \
 
 HEADERS += \
-    test_math.hh \
-    test_subject.hh
+    test_math.hh
