@@ -119,7 +119,7 @@ private slots:
     void test_XY_distance();
 
     /*!
-     * \brief test_XY_unit_vector_from_points
+     * \brief Tests unit vector creation from XY structs.
      *
      * Testing consists of a few instances: horizontal vectors,
      * vertical vectors, point vectors and various diagonal vectors.
@@ -129,7 +129,7 @@ private slots:
     void test_XY_unit_vector_from_points();
 
     /*!
-     * \brief test_XY_unit_vector_from_angle
+     * \brief Tests unit vector creation from angles.
      *
      * Testing consists of various angles in degrees that are to be
      * converted into unit vectors. These are known beforehand, and
