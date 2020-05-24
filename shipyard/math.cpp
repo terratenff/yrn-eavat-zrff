@@ -86,10 +86,16 @@ double calculate_angle(XY point1, XY point2)
     return calculate_angle(difference);
 }
 
-XY calculate_components(double angle, double space)
+XY calculate_components(double angle, double space, bool radians)
 {
-    double dx = cos(to_radians(angle)) * space;
-    double dy = sin(to_radians(angle)) * space;
+    double dx, dy;
+    if (radians) {
+        dx = cos(angle) * space;
+        dy = sin(angle) * space;
+    } else {
+        dx = cos(to_radians(angle)) * space;
+        dy = sin(to_radians(angle)) * space;
+    }
     XY components(dx, dy);
     return components;
 }
