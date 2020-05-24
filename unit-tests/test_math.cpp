@@ -13,6 +13,7 @@ TestMath::~TestMath()
 void TestMath::test_near_zero()
 {
     QCOMPARE(near_zero(0.0000000000), true);
+    QCOMPARE(near_zero(0), true);
     double positive = 1.0;
     double negative = -1.0;
 
