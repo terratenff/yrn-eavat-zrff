@@ -1,5 +1,4 @@
 #include "test_math.hh"
-#include "test_subject.hh"
 
 int main(int argc, char** argv)
 {
@@ -8,9 +7,9 @@ int main(int argc, char** argv)
         TestMath testCase;
         status |= QTest::qExec(&testCase, argc, argv);
     }
-    {
-        TestSubject testCase;
-        status |= QTest::qExec(&testCase, argc, argv);
-    }
+//    {
+//        TestSubject testCase;
+//        status |= QTest::qExec(&testCase, argc, argv);
+//    }
     return status;
 }
