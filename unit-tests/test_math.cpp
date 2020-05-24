@@ -314,17 +314,126 @@ void TestMath::test_XY_unit_vector_from_angle()
 
 void TestMath::test_angle_calculation_vector()
 {
-    QFAIL("TODO");
+    XY vector1(1,1);
+    XY vector2(-2,4);
+    XY vector3(7,-10);
+    XY vector4(0,-3);
+    XY vector5(0,0);
+
+    double angle1 = 45;
+    double angle2 = 116.5651;
+    double angle3 = -55.0080;
+    double angle4 = 270;
+    double angle5 = 0;
+
+    QVERIFY2(near_double(calculate_angle(vector1), angle1, 0.0001),
+             qPrintable(QString("Expected %1, got %2")
+                        .arg(angle1)
+                        .arg(calculate_angle(vector1))));
+    QVERIFY2(near_double(calculate_angle(vector2), angle2, 0.0001),
+             qPrintable(QString("Expected %1, got %2")
+                        .arg(angle2)
+                        .arg(calculate_angle(vector2))));
+    QVERIFY2(near_double(calculate_angle(vector3), angle3, 0.0001),
+             qPrintable(QString("Expected %1, got %2")
+                        .arg(angle3)
+                        .arg(calculate_angle(vector3))));
+    QVERIFY2(near_double(calculate_angle(vector4), angle4, 0.0001),
+             qPrintable(QString("Expected %1, got %2")
+                        .arg(angle4)
+                        .arg(calculate_angle(vector4))));
+    QVERIFY2(near_double(calculate_angle(vector5), angle5, 0.0001),
+             qPrintable(QString("Expected %1, got %2")
+                        .arg(angle5)
+                        .arg(calculate_angle(vector5))));
 }
 
 void TestMath::test_angle_calculation_points()
 {
-    QFAIL("TODO");
+    XY point1(0,0);
+    XY point2(-4,-2);
+    XY point3(2,11);
+    XY point4(6,0);
+
+    double angle1 = 206.5651;
+    double angle2 = -70.0169;
+    double angle3 = 79.6952;
+    double angle4 = 11.3099;
+    double angle5 = 0;
+    double angle6 = 180;
+    double angle7 = 0;
+
+    QVERIFY2(near_double(calculate_angle(point1, point2), angle1, 0.0001),
+             qPrintable(QString("Expected %1, got %2")
+                        .arg(angle1)
+                        .arg(calculate_angle(point1, point2))));
+    QVERIFY2(near_double(calculate_angle(point3, point4), angle2, 0.0001),
+             qPrintable(QString("Expected %1, got %2")
+                        .arg(angle2)
+                        .arg(calculate_angle(point3, point4))));
+    QVERIFY2(near_double(calculate_angle(point1, point3), angle3, 0.0001),
+             qPrintable(QString("Expected %1, got %2")
+                        .arg(angle3)
+                        .arg(calculate_angle(point1, point3))));
+    QVERIFY2(near_double(calculate_angle(point2, point4), angle4, 0.0001),
+             qPrintable(QString("Expected %1, got %2")
+                        .arg(angle4)
+                        .arg(calculate_angle(point2, point4))));
+    QVERIFY2(near_double(calculate_angle(point1, point4), angle5, 0.0001),
+             qPrintable(QString("Expected %1, got %2")
+                        .arg(angle5)
+                        .arg(calculate_angle(point1, point4))));
+    QVERIFY2(near_double(calculate_angle(point4, point1), angle6, 0.0001),
+             qPrintable(QString("Expected %1, got %2")
+                        .arg(angle6)
+                        .arg(calculate_angle(point4, point1))));
+    QVERIFY2(near_double(calculate_angle(point3, point3), angle7, 0.0001),
+             qPrintable(QString("Expected %1, got %2")
+                        .arg(angle7)
+                        .arg(calculate_angle(point3, point3))));
 }
 
 void TestMath::test_component_calculation()
 {
-    QFAIL("TODO");
+    double angle1 = 45;
+    double angle2 = -130;
+    double angle3 = 380;
+    double dist1 = 10;
+    double dist2 = -20;
+    double dist3 = 0;
+
+    XY comp1(7.07107, 7.07107);
+    XY comp2(12.85575, 15.32089);
+    XY comp3(-14.14214, -14.14214);
+    XY comp4(-6.42787, -7.66044);
+    XY comp5(0,0);
+
+    XY res1 = calculate_components(angle1, dist1);
+    XY res2 = calculate_components(angle2, dist2);
+    XY res3 = calculate_components(angle1, dist2);
+    XY res4 = calculate_components(angle2, dist1);
+    XY res5 = calculate_components(angle3, dist3);
+
+    QVERIFY2(res1 == comp1,
+             qPrintable(QString("Expected (%1,%2), got (%3,%4)")
+                        .arg(comp1.x).arg(comp1.y)
+                        .arg(res1.x).arg(res1.y)));
+    QVERIFY2(res2 == comp2,
+             qPrintable(QString("Expected (%1,%2), got (%3,%4)")
+                        .arg(comp2.x).arg(comp2.y)
+                        .arg(res2.x).arg(res2.y)));
+    QVERIFY2(res3 == comp3,
+             qPrintable(QString("Expected (%1,%2), got (%3,%4)")
+                        .arg(comp3.x).arg(comp3.y)
+                        .arg(res3.x).arg(res3.y)));
+    QVERIFY2(res4 == comp4,
+             qPrintable(QString("Expected (%1,%2), got (%3,%4)")
+                        .arg(comp4.x).arg(comp4.y)
+                        .arg(res4.x).arg(res4.y)));
+    QVERIFY2(res5 == comp5,
+             qPrintable(QString("Expected (%1,%2), got (%3,%4)")
+                        .arg(comp5.x).arg(comp5.y)
+                        .arg(res5.x).arg(res5.y)));
 }
 
 void TestMath::test_matrix_instantiation()
