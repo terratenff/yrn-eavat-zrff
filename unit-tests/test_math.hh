@@ -20,6 +20,27 @@ public:
 private:
 
     /*!
+     * \fn compare_rows
+     * \brief Convenient function for comparing two rows to see
+     * if they are equal, i.e. have the same elements and size.
+     * \param row1 Row 1.
+     * \param row2 Row 2.
+     * \return true, if given rows are equal. false otherwise.
+     */
+    bool compare_rows(Row &row1, Row &row2);
+
+    /*!
+     * \fn print_row_report
+     * \brief Convenient function for printing a report of comparison
+     * between two rows, mainly for demonstrating a failure of a
+     * softmax activation test.
+     * \param title Description of the unit test.
+     * \param row1 Row 1 (Expected row).
+     * \param row2 Row 2 (Result row).
+     */
+    void print_row_report(std::string title, Row &row1, Row &row2);
+
+    /*!
      * \fn compare_matrices
      * \brief Convenient function for comparing two matrices
      * to see if they are equal, i.e. have the same elements
@@ -255,8 +276,8 @@ private slots:
     /*!
      * \brief Tests activation function "sigmoid".
      *
-     * Testing consists of five different values that are used with
-     * other activation functions during testing. The results are
+     * Testing consists of five different values that are to be
+     * transformed in their activated values. The results are
      * compared with the expected results.
      */
     void test_sigmoid();
@@ -264,8 +285,8 @@ private slots:
     /*!
      * \brief Tests activation function "hyperbolic_tangent".
      *
-     * Testing consists of five different values that are used with
-     * other activation functions during testing. The results are
+     * Testing consists of five different values that are to be
+     * transformed in their activated values. The results are
      * compared with the expected results.
      */
     void test_hyperbolic_tangent();
@@ -273,8 +294,8 @@ private slots:
     /*!
      * \brief Tests activation function "sign".
      *
-     * Testing consists of five different values that are used with
-     * other activation functions during testing. The results are
+     * Testing consists of five different values that are to be
+     * transformed in their activated values. The results are
      * compared with the expected results.
      */
     void test_sign();
@@ -282,8 +303,8 @@ private slots:
     /*!
      * \brief Tests activation function "heaviside".
      *
-     * Testing consists of five different values that are used with
-     * other activation functions during testing. The results are
+     * Testing consists of five different values that are to be
+     * transformed in their activated values. The results are
      * compared with the expected results.
      */
     void test_heaviside();
@@ -291,26 +312,26 @@ private slots:
     /*!
      * \brief Tests activation function "ReLU".
      *
-     * Testing consists of five different values that are used with
-     * other activation functions during testing. The results are
+     * Testing consists of five different values that are to be
+     * transformed in their activated values. The results are
      * compared with the expected results.
      */
     void test_ReLU();
 
     /*!
-     * \brief Tests activation function "leaky_ReLU".
+     * \brief Tests activation function "ReLU_leaky".
      *
-     * Testing consists of five different values that are used with
-     * other activation functions during testing. The results are
+     * Testing consists of five different values that are to be
+     * transformed in their activated values. The results are
      * compared with the expected results.
      */
-    void test_leaky_ReLU();
+    void test_ReLU_leaky();
 
     /*!
      * \brief Tests activation function "gaussian".
      *
-     * Testing consists of five different values that are used with
-     * other activation functions during testing. The results are
+     * Testing consists of five different values that are to be
+     * transformed in their activated values. The results are
      * compared with the expected results.
      */
     void test_gaussian();
