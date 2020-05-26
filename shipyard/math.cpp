@@ -146,7 +146,7 @@ Matrix matrix_transpose(Matrix &matr)
 
 Matrix matrix_add(Matrix &a, Matrix &b)
 {
-    if (a.size() != b.size()) {
+    if ((a.size() != b.size()) || a[0].size() != b[0].size()) {
         throw std::out_of_range("Matrix sizes do not match.");
     }
 
@@ -156,9 +156,6 @@ Matrix matrix_add(Matrix &a, Matrix &b)
     );
 
     for (unsigned int i = 0; i < result.size(); i++) {
-        if (a[i].size() != b[i].size()) {
-            throw std::out_of_range("Matrix sizes do not match.");
-        }
         for (unsigned int j = 0; j < result[i].size(); j++) {
             result[i][j] = a[i][j] + b[i][j];
         }
@@ -168,7 +165,7 @@ Matrix matrix_add(Matrix &a, Matrix &b)
 
 Matrix matrix_subtract(Matrix &a, Matrix &b)
 {
-    if (a.size() != b.size()) {
+    if ((a.size() != b.size()) || a[0].size() != b[0].size()) {
         throw std::out_of_range("Matrix sizes do not match.");
     }
 
@@ -178,9 +175,6 @@ Matrix matrix_subtract(Matrix &a, Matrix &b)
     );
 
     for (unsigned int i = 0; i < result.size(); i++) {
-        if (a[i].size() != b[i].size()) {
-            throw std::out_of_range("Matrix sizes do not match.");
-        }
         for (unsigned int j = 0; j < result[i].size(); j++) {
             result[i][j] = a[i][j] - b[i][j];
         }
@@ -190,15 +184,16 @@ Matrix matrix_subtract(Matrix &a, Matrix &b)
 
 Matrix matrix_dot(Matrix &a, Matrix &b)
 {
+    if ((a.size() != b[0].size()) || (a[0].size() != b.size())) {
+        throw std::out_of_range("Matrix sizes do not agree.");
+    }
+
     Matrix result = matrix(
         static_cast<unsigned int>(a.size()),
         static_cast<unsigned int>(b[0].size())
     );
 
     for (unsigned int i = 0; i < result.size(); i++) {
-        if ((a.size() != b[i].size()) || (a[i].size() != b.size())) {
-            throw std::out_of_range("Matrix sizes do not agree.");
-        }
         for (unsigned int j = 0; j < result[i].size(); j++) {
             result[i][j] = matrix_dot_element(a,b,i,j);
         }
@@ -208,7 +203,7 @@ Matrix matrix_dot(Matrix &a, Matrix &b)
 
 Matrix matrix_dot_scalar(Matrix &a, Matrix &b)
 {
-    if (a.size() != b.size()) {
+    if ((a.size() != b.size()) || a[0].size() != b[0].size()) {
         throw std::out_of_range("Matrix sizes do not match.");
     }
 
@@ -218,9 +213,6 @@ Matrix matrix_dot_scalar(Matrix &a, Matrix &b)
     );
 
     for (unsigned int i = 0; i < result.size(); i++) {
-        if (a[i].size() != b[i].size()) {
-            throw std::out_of_range("Matrix sizes do not match.");
-        }
         for (unsigned int j = 0; j < result[i].size(); j++) {
             result[i][j] = a[i][j] * b[i][j];
         }
