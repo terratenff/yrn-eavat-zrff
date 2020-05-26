@@ -1,4 +1,5 @@
 #include "test_math.hh"
+#include <iostream>
 
 TestMath::TestMath()
 {
@@ -8,6 +9,34 @@ TestMath::TestMath()
 TestMath::~TestMath()
 {
 
+}
+
+bool TestMath::compare_matrices(Matrix &matr1, Matrix &matr2)
+{
+    // Check for same number of rows.
+    if (matr1.size() != matr2.size()) return false;
+
+    for (unsigned int i = 0; i < matr1.size(); i++) {
+
+        // Check for same number of columns (elements on each row).
+        if (matr1[i].size() != matr2[i].size()) return false;
+
+        for (unsigned int j = 0; j < matr1[i].size(); j++) {
+            if (!near_double(matr1[i][j], matr2[i][j])) {
+                return false;
+            }
+        }
+    }
+    return true;
+}
+
+void TestMath::print_matrix_report(std::string title, Matrix &matr1, Matrix &matr2)
+{
+    std::cout << title << std::endl;
+    std::cout << "Expected matrix:" << std::endl;
+    matrix_print(matr1);
+    std::cout << "Result matrix:" << std::endl;
+    matrix_print(matr2);
 }
 
 void TestMath::test_near_zero()
@@ -438,32 +467,502 @@ void TestMath::test_component_calculation()
 
 void TestMath::test_matrix_instantiation()
 {
-    QFAIL("TODO");
+    Matrix matr1 = matrix(3,3);
+    Matrix matr2 = matrix(10,7);
+    Matrix matr3 = matrix(0,0);
+    Matrix matr4 = matrix(3,0);
+
+    unsigned int sizeRows1 = 3;
+    unsigned int sizeColumns1 = 3;
+    QVERIFY2(matr1.size() == sizeRows1,
+             qPrintable(QString("Expected %1, got %2")
+                        .arg(sizeRows1).arg(matr1.size())));
+    for (Row row : matr1) {
+        QVERIFY2(row.size() == sizeColumns1,
+                 qPrintable(QString("Expected %1, got %2")
+                            .arg(sizeColumns1).arg(row.size())));
+    }
+
+    unsigned int sizeRows2 = 10;
+    unsigned int sizeColumns2 = 7;
+    QVERIFY2(matr2.size() == sizeRows2,
+             qPrintable(QString("Expected %1, got %2")
+                        .arg(sizeRows2).arg(matr2.size())));
+    for (Row row : matr2) {
+        QVERIFY2(row.size() == sizeColumns2,
+                 qPrintable(QString("Expected %1, got %2")
+                            .arg(sizeColumns2).arg(row.size())));
+    }
+
+    unsigned int sizeRows3 = 0;
+    unsigned int sizeColumns3 = 0;
+    QVERIFY2(matr3.size() == sizeRows3,
+             qPrintable(QString("Expected %1, got %2")
+                        .arg(sizeRows3).arg(matr3.size())));
+    for (Row row : matr3) {
+        QVERIFY2(row.size() == sizeColumns3,
+                 qPrintable(QString("Expected %1, got %2")
+                            .arg(sizeColumns3).arg(row.size())));
+    }
+
+    unsigned int sizeRows4 = 0;
+    unsigned int sizeColumns4 = 0;
+    QVERIFY2(matr4.size() == sizeRows4,
+             qPrintable(QString("Expected %1, got %2")
+                        .arg(sizeRows4).arg(matr4.size())));
+    for (Row row : matr4) {
+        QVERIFY2(row.size() == sizeColumns4,
+                 qPrintable(QString("Expected %1, got %2")
+                            .arg(sizeColumns4).arg(row.size())));
+    }
 }
 
 void TestMath::test_matrix_transpose()
 {
-    QFAIL("TODO");
+    Matrix matr1 = {
+        {1, 2, 3},
+        {4, 5, 6},
+        {7, 8, 9}
+    };
+    Matrix matr2 = {
+        {10, 11, 12, 13, 14, 15, 16, 17},
+        {18, 19, 20, 21, 22, 23, 24, 25}
+    };
+    Matrix matr3 = {
+        {26},
+        {27},
+        {28},
+        {29},
+        {30},
+        {31}
+    };
+    Matrix matr4 = {
+        {0}
+    };
+
+    Matrix matr1t = {
+        {1, 4, 7},
+        {2, 5, 8},
+        {3, 6, 9}
+    };
+    Matrix matr2t = {
+        {10, 18},
+        {11, 19},
+        {12, 20},
+        {13, 21},
+        {14, 22},
+        {15, 23},
+        {16, 24},
+        {17, 25}
+    };
+    Matrix matr3t = {
+        {26, 27, 28, 29, 30, 31}
+    };
+    Matrix matr4t = {
+        {0}
+    };
+
+    Matrix matr1r = matrix_transpose(matr1);
+    Matrix matr2r = matrix_transpose(matr2);
+    Matrix matr3r = matrix_transpose(matr3);
+    Matrix matr4r = matrix_transpose(matr4);
+
+    bool pass1 = compare_matrices(matr1r, matr1t);
+    bool pass2 = compare_matrices(matr2r, matr2t);
+    bool pass3 = compare_matrices(matr3r, matr3t);
+    bool pass4 = compare_matrices(matr4r, matr4t);
+
+    std::string title;
+    if (!pass1) {
+        title = " -- test_matrix_transpose - Matrix test 1 --";
+        print_matrix_report(title, matr1t, matr1r);
+    }
+    if (!pass2) {
+        title = " -- test_matrix_transpose - Matrix test 2 --";
+        print_matrix_report(title, matr2t, matr2r);
+    }
+    if (!pass3) {
+        title = " -- test_matrix_transpose - Matrix test 3 --";
+        print_matrix_report(title, matr3t, matr3r);
+    }
+    if (!pass4) {
+        title = " -- test_matrix_transpose - Matrix test 4 --";
+        print_matrix_report(title, matr4t, matr4r);
+    }
+
+    if (!pass1 || !pass2 || !pass3 || !pass4) {
+        QFAIL(qPrintable(QString("One or more matrix tests failed. "
+                                 "See below for the comparisons.")));
+    }
 }
 
 void TestMath::test_matrix_addition()
 {
-    QFAIL("TODO");
+    Matrix matr1 = {
+        {5, 5, 5},
+        {5, 5, 5},
+        {5, 5, 5}
+    };
+    Matrix matr2 = {
+        {2, 2, 2},
+        {3, 3, 3},
+        {8, 10, 8}
+    };
+    Matrix matr3 = {
+        {-1, -1, 0},
+        {0, 6, 20},
+        {-15, 10, -25}
+    };
+    Matrix matr4 = {
+        {-8, -1, 12, 18},
+        {0, 0, 100, 200}
+    };
+    Matrix matr5 = {
+        {-10, 50, -19, 24},
+        {1, 7, -2, -4}
+    };
+
+    Matrix matr12 = {
+        {7, 7, 7},
+        {8, 8, 8},
+        {13, 15, 13}
+    };
+    Matrix matr13 = {
+        {4, 4, 5},
+        {5, 11, 25},
+        {-10, 15, -20}
+    };
+    Matrix matr22 = {
+        {4, 4, 4},
+        {6, 6, 6},
+        {16, 20, 16}
+    };
+    Matrix matr45 = {
+        {-18, 49, -7, 42},
+        {1, 7, 98, 196}
+    };
+
+    Matrix matr12r = matrix_add(matr1, matr2);
+    Matrix matr13r = matrix_add(matr1, matr3);
+    Matrix matr22r = matrix_add(matr2, matr2);
+    Matrix matr45r = matrix_add(matr4, matr5);
+
+    bool pass1 = compare_matrices(matr12r, matr12);
+    bool pass2 = compare_matrices(matr13r, matr13);
+    bool pass3 = compare_matrices(matr22r, matr22);
+    bool pass4 = compare_matrices(matr45r, matr45);
+
+    std::string title;
+    if (!pass1) {
+        title = "-- test_matrix_add - Matrix test 1 --";
+        print_matrix_report(title, matr12, matr12r);
+    }
+    if (!pass2) {
+        title = "-- test_matrix_add - Matrix test 2 --";
+        print_matrix_report(title, matr13, matr13r);
+    }
+    if (!pass3) {
+        title = "-- test_matrix_add - Matrix test 3 --";
+        print_matrix_report(title, matr22, matr22r);
+    }
+    if (!pass4) {
+        title = "-- test_matrix_add - Matrix test 4 --";
+        print_matrix_report(title, matr45, matr45r);
+    }
+
+    if (!pass1 || !pass2 || !pass3 || !pass4) {
+        QFAIL(qPrintable(QString("One or more valid matrix tests failed. "
+                                 "See below for the comparisons.")));
+    }
+
+    QVERIFY_EXCEPTION_THROWN(matrix_add(matr1, matr4), std::out_of_range);
+    QVERIFY_EXCEPTION_THROWN(matrix_add(matr1, matr5), std::out_of_range);
+    QVERIFY_EXCEPTION_THROWN(matrix_add(matr4, matr2), std::out_of_range);
+    QVERIFY_EXCEPTION_THROWN(matrix_add(matr5, matr2), std::out_of_range);
 }
 
 void TestMath::test_matrix_subtraction()
 {
-    QFAIL("TODO");
+    Matrix matr1 = {
+        {5, 5, 5},
+        {5, 5, 5},
+        {5, 5, 5}
+    };
+    Matrix matr2 = {
+        {2, 2, 2},
+        {3, 3, 3},
+        {8, 10, 8}
+    };
+    Matrix matr3 = {
+        {-1, -1, 0},
+        {0, 6, 20},
+        {-15, 10, -25}
+    };
+    Matrix matr4 = {
+        {-8, -1, 12, 18},
+        {0, 0, 100, 200}
+    };
+    Matrix matr5 = {
+        {-10, 50, -19, 24},
+        {1, 7, -2, -4}
+    };
+
+    Matrix matr12 = {
+        {3, 3, 3},
+        {2, 2, 2},
+        {-3, -5, -3}
+    };
+    Matrix matr13 = {
+        {6, 6, 5},
+        {5, -1, -15},
+        {20, -5, 30}
+    };
+    Matrix matr22 = {
+        {0, 0, 0},
+        {0, 0, 0},
+        {0, 0, 0}
+    };
+    Matrix matr45 = {
+        {2, -51, 31, -6},
+        {-1, -7, 102, 204}
+    };
+
+    Matrix matr12r = matrix_subtract(matr1, matr2);
+    Matrix matr13r = matrix_subtract(matr1, matr3);
+    Matrix matr22r = matrix_subtract(matr2, matr2);
+    Matrix matr45r = matrix_subtract(matr4, matr5);
+
+    bool pass1 = compare_matrices(matr12r, matr12);
+    bool pass2 = compare_matrices(matr13r, matr13);
+    bool pass3 = compare_matrices(matr22r, matr22);
+    bool pass4 = compare_matrices(matr45r, matr45);
+
+    std::string title;
+    if (!pass1) {
+        title = "-- test_matrix_subtract - Matrix test 1 --";
+        print_matrix_report(title, matr12, matr12r);
+    }
+    if (!pass2) {
+        title = "-- test_matrix_subtract - Matrix test 2 --";
+        print_matrix_report(title, matr13, matr13r);
+    }
+    if (!pass3) {
+        title = "-- test_matrix_subtract - Matrix test 3 --";
+        print_matrix_report(title, matr22, matr22r);
+    }
+    if (!pass4) {
+        title = "-- test_matrix_subtract - Matrix test 4 --";
+        print_matrix_report(title, matr45, matr45r);
+    }
+
+    if (!pass1 || !pass2 || !pass3 || !pass4) {
+        QFAIL(qPrintable(QString("One or more valid matrix tests failed. "
+                                 "See below for the comparisons.")));
+    }
+
+    QVERIFY_EXCEPTION_THROWN(matrix_subtract(matr1, matr4), std::out_of_range);
+    QVERIFY_EXCEPTION_THROWN(matrix_subtract(matr1, matr5), std::out_of_range);
+    QVERIFY_EXCEPTION_THROWN(matrix_subtract(matr4, matr2), std::out_of_range);
+    QVERIFY_EXCEPTION_THROWN(matrix_subtract(matr5, matr2), std::out_of_range);
 }
 
-void TestMath::test_matrix_multiplication()
+void TestMath::test_matrix_dot()
 {
-    QFAIL("TODO");
+    Matrix matr1 = {
+        {5, 5, 5},
+        {5, 5, 5},
+        {5, 5, 5}
+    };
+    Matrix matr2 = {
+        {2, 2, 2},
+        {3, 3, 3},
+        {8, 10, 8}
+    };
+    Matrix matr3 = {
+        {-1, -1, 0},
+        {0, 6, 20},
+        {-15, 10, -25}
+    };
+    Matrix matr4 = {
+        {-8, -1, 12, 18},
+        {0, 0, 100, 200}
+    };
+    Matrix matr5 = {
+        {-10, 50, -19, 24},
+        {1, 7, -2, -4}
+    };
+    Matrix matr6 = {
+        {-10, 50},
+        {-19, 24},
+        {1, 7},
+        {-2, -4}
+    };
+
+    Matrix matr12 = {
+        {65, 75, 65},
+        {65, 75, 65},
+        {65, 75, 65}
+    };
+    Matrix matr13 = {
+        {-80, 75, -25},
+        {-80, 75, -25},
+        {-80, 75, -25}
+    };
+    Matrix matr22 = {
+        {26, 30, 26},
+        {39, 45, 39},
+        {110, 126, 110}
+    };
+    Matrix matr31 = {
+        {-10, -10, -10},
+        {130, 130, 130},
+        {-150, -150, -150}
+    };
+    Matrix matr46 = {
+        {75, -412},
+        {-300, -100}
+    };
+    Matrix matr64 = {
+        {80, 10, 4880, 9820},
+        {152, 19, 2172, 4458},
+        {-8, -1, 712, 1418},
+        {16, 2, -424, -836}
+    };
+
+    Matrix matr12r = matrix_dot(matr1, matr2);
+    Matrix matr13r = matrix_dot(matr1, matr3);
+    Matrix matr22r = matrix_dot(matr2, matr2);
+    Matrix matr31r = matrix_dot(matr3, matr1);
+    Matrix matr46r = matrix_dot(matr4, matr6);
+    Matrix matr64r = matrix_dot(matr6, matr4);
+
+    bool pass1 = compare_matrices(matr12r, matr12);
+    bool pass2 = compare_matrices(matr13r, matr13);
+    bool pass3 = compare_matrices(matr22r, matr22);
+    bool pass4 = compare_matrices(matr31r, matr31);
+    bool pass5 = compare_matrices(matr46r, matr46);
+    bool pass6 = compare_matrices(matr64r, matr64);
+
+    std::string title;
+    if (!pass1) {
+        title = "-- test_matrix_dot - Matrix test 1 --";
+        print_matrix_report(title, matr12, matr12r);
+    }
+    if (!pass2) {
+        title = "-- test_matrix_dot - Matrix test 2 --";
+        print_matrix_report(title, matr13, matr13r);
+    }
+    if (!pass3) {
+        title = "-- test_matrix_dot - Matrix test 3 --";
+        print_matrix_report(title, matr22, matr22r);
+    }
+    if (!pass4) {
+        title = "-- test_matrix_dot - Matrix test 4 --";
+        print_matrix_report(title, matr31, matr31r);
+    }
+    if (!pass5) {
+        title = "-- test_matrix_dot - Matrix test 5 --";
+        print_matrix_report(title, matr46, matr46r);
+    }
+    if (!pass6) {
+        title = "-- test_matrix_dot - Matrix test 6 --";
+        print_matrix_report(title, matr64, matr64r);
+    }
+
+    if (!pass1 || !pass2 || !pass3 || !pass4 || !pass5 || !pass6) {
+        QFAIL(qPrintable(QString("One or more valid matrix tests failed. "
+                                 "See below for the comparisons.")));
+    }
+
+    QVERIFY_EXCEPTION_THROWN(matrix_dot(matr1, matr4), std::out_of_range);
+    QVERIFY_EXCEPTION_THROWN(matrix_dot(matr4, matr1), std::out_of_range);
+    QVERIFY_EXCEPTION_THROWN(matrix_dot(matr4, matr5), std::out_of_range);
+    QVERIFY_EXCEPTION_THROWN(matrix_dot(matr6, matr3), std::out_of_range);
 }
 
-void TestMath::test_matrix_scalar_multiplication()
+void TestMath::test_matrix_dot_scalar()
 {
-    QFAIL("TODO");
+    Matrix matr1 = {
+        {5, 5, 5},
+        {5, 5, 5},
+        {5, 5, 5}
+    };
+    Matrix matr2 = {
+        {2, 2, 2},
+        {3, 3, 3},
+        {8, 10, 8}
+    };
+    Matrix matr3 = {
+        {-1, -1, 0},
+        {0, 6, 20},
+        {-15, 10, -25}
+    };
+    Matrix matr4 = {
+        {-8, -1, 12, 18},
+        {0, 0, 100, 200}
+    };
+    Matrix matr5 = {
+        {-10, 50, -19, 24},
+        {1, 7, -2, -4}
+    };
+
+    Matrix matr12 = {
+        {10, 10, 10},
+        {15, 15, 15},
+        {40, 50, 40}
+    };
+    Matrix matr13 = {
+        {-5, -5, 0},
+        {0, 30, 100},
+        {-75, 50, -125}
+    };
+    Matrix matr22 = {
+        {4, 4, 4},
+        {9, 9, 9},
+        {64, 100, 64}
+    };
+    Matrix matr45 = {
+        {80, -50, -228, 432},
+        {0, 0, -200, -800}
+    };
+
+    Matrix matr12r = matrix_dot_scalar(matr1, matr2);
+    Matrix matr13r = matrix_dot_scalar(matr1, matr3);
+    Matrix matr22r = matrix_dot_scalar(matr2, matr2);
+    Matrix matr45r = matrix_dot_scalar(matr4, matr5);
+
+    bool pass1 = compare_matrices(matr12r, matr12);
+    bool pass2 = compare_matrices(matr13r, matr13);
+    bool pass3 = compare_matrices(matr22r, matr22);
+    bool pass4 = compare_matrices(matr45r, matr45);
+
+    std::string title;
+    if (!pass1) {
+        title = "-- test_matrix_dot_scalar - Matrix test 1 --";
+        print_matrix_report(title, matr12, matr12r);
+    }
+    if (!pass2) {
+        title = "-- test_matrix_dot_scalar - Matrix test 2 --";
+        print_matrix_report(title, matr13, matr13r);
+    }
+    if (!pass3) {
+        title = "-- test_matrix_dot_scalar - Matrix test 3 --";
+        print_matrix_report(title, matr22, matr22r);
+    }
+    if (!pass4) {
+        title = "-- test_matrix_dot_scalar - Matrix test 4 --";
+        print_matrix_report(title, matr45, matr45r);
+    }
+
+    if (!pass1 || !pass2 || !pass3 || !pass4) {
+        QFAIL(qPrintable(QString("One or more valid matrix tests failed. "
+                                 "See below for the comparisons.")));
+    }
+
+    QVERIFY_EXCEPTION_THROWN(matrix_dot_scalar(matr1, matr4), std::out_of_range);
+    QVERIFY_EXCEPTION_THROWN(matrix_dot_scalar(matr1, matr5), std::out_of_range);
+    QVERIFY_EXCEPTION_THROWN(matrix_dot_scalar(matr4, matr2), std::out_of_range);
+    QVERIFY_EXCEPTION_THROWN(matrix_dot_scalar(matr5, matr2), std::out_of_range);
 }
 
 void TestMath::test_sigmoid()

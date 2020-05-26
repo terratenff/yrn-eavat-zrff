@@ -17,6 +17,29 @@ public:
     TestMath();
     ~TestMath();
 
+private:
+
+    /*!
+     * \fn compare_matrices
+     * \brief Convenient function for comparing two matrices
+     * to see if they are equal, i.e. have the same elements
+     * and size.
+     * \param matr1 Matrix 1.
+     * \param matr2 Matrix 2.
+     * \return true, if given matrices are equal. false otherwise.
+     */
+    bool compare_matrices(Matrix &matr1, Matrix &matr2);
+
+    /*!
+     * \fn print_matrix_report
+     * \brief Convenient function for printing a report of comparison
+     * between two matrices, mainly for demonstrating a failure of a
+     * particular matrix test.
+     * \param title Description of the unit test.
+     * \param matr1 Matrix 1 (Expected matrix).
+     * \param matr2 Matrix 2 (Result matrix).
+     */
+    void print_matrix_report(std::string title, Matrix &matr1, Matrix &matr2);
 private slots:
 
     /*!
@@ -217,7 +240,7 @@ private slots:
      * by one another. Incompatible matrices are also tested. Valid
      * operations are verified with expected results.
      */
-    void test_matrix_multiplication();
+    void test_matrix_dot();
 
     /*!
      * \brief Tests scalar-wise matrix multiplication
@@ -227,7 +250,7 @@ private slots:
      * by one another. Incompatible matrices are also tested. Valid
      * operations are verified with expected results.
      */
-    void test_matrix_scalar_multiplication();
+    void test_matrix_dot_scalar();
 
     /*!
      * \brief Tests activation function "sigmoid".
