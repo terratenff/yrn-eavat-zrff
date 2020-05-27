@@ -27,9 +27,34 @@ private:
 private slots:
 
     /*!
-     * \brief test_1
+     * \brief TODO
      */
-    void test_1();
+    void test_fitness_correct_angle();
+
+    /*!
+     * \brief TODO
+     */
+    void test_fitness_close_proximity();
+
+    /*!
+     * \brief TODO
+     */
+    void test_fitness_fixed_distance();
+
+    /*!
+     * \brief TODO
+     */
+    void test_fitness_not_out_of_bounds();
+
+    /*!
+     * \brief TODO
+     */
+    void test_fitness_look_from_distance();
+
+    /*!
+     * \brief TODO
+     */
+    void test_fitness_avoid_eye_contact();
 };
 
 #endif // TESTFITNESS_HH

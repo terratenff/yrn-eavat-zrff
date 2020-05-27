@@ -27,9 +27,74 @@ private:
 private slots:
 
     /*!
-     * \brief test_1
+     * \brief TODO
      */
-    void test_1();
+    void test_input_angular_difference();
+
+    /*!
+     * \brief TODO
+     */
+    void test_input_space_scalar_difference();
+
+    /*!
+     * \brief TODO
+     */
+    void test_input_axis_difference();
+
+    /*!
+     * \brief TODO
+     */
+    void test_input_wall_distances();
+
+    /*!
+     * \brief TODO
+     */
+    void test_input_four_way_search();
+
+    /*!
+     * \brief TODO
+     */
+    void test_input_four_corner_search();
+
+    /*!
+     * \brief TODO
+     */
+    void test_output_angular_velocity();
+
+    /*!
+     * \brief TODO
+     */
+    void test_output_direct_angle();
+
+    /*!
+     * \brief TODO
+     */
+    void test_output_angle_velocity();
+
+    /*!
+     * \brief TODO
+     */
+    void test_output_angle_acceleration();
+
+    /*!
+     * \brief TODO
+     */
+    void test_output_axis_velocity();
+
+    /*!
+     * \brief TODO
+     */
+    void test_output_axis_acceleration();
+
+    /*!
+     * \brief TODO
+     */
+    void test_output_small_hops();
+
+    /*!
+     * \brief TODO
+     */
+    void test_output_fixed_movement();
 };
 
 #endif // TESTINPUTOUTPUT_HH

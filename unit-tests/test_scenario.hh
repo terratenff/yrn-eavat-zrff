@@ -28,9 +28,29 @@ private:
 private slots:
 
     /*!
-     * \brief test_1
+     * \brief TODO
      */
-    void test_1();
+    void test_instantiation();
+
+    /*!
+     * \brief TODO
+     */
+    void test_apply_settings();
+
+    /*!
+     * \brief TODO
+     */
+    void test_set_settings();
+
+    /*!
+     * \brief TODO
+     */
+    void test_save_scenario();
+
+    /*!
+     * \brief TODO
+     */
+    void test_load_scenario();
 };
 
 #endif // TESTSCENARIO_HH
