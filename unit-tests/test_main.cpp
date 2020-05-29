@@ -1,5 +1,6 @@
 #include "test_math.hh"
-#include "test_subject.hh"
+#include "test_inputoutput.hh"
+#include "test_fitness.hh"
 
 int main(int argc, char** argv)
 {
@@ -9,7 +10,11 @@ int main(int argc, char** argv)
         status |= QTest::qExec(&testCase, argc, argv);
     }
     {
-        TestSubject testCase;
+        TestInputOutput testCase;
+        status |= QTest::qExec(&testCase, argc, argv);
+    }
+    {
+        TestFitness testCase;
         status |= QTest::qExec(&testCase, argc, argv);
     }
     return status;

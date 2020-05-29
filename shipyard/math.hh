@@ -232,9 +232,11 @@ double calculate_angle(XY point1, XY point2);
  * and distance.
  * \param angle Target angle.
  * \param space Target distance.
+ * \param radians Flag that indicates whether the angle in question
+ * is in radians (true) or degrees (false).
  * \return X and Y components as an XY struct.
  */
-XY calculate_components(double angle, double space);
+XY calculate_components(double angle, double space, bool radians = false);
 
 /*!
  * \fn to_degrees

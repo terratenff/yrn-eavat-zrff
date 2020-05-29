@@ -7,17 +7,17 @@ CONFIG -= app_bundle
 TEMPLATE = app
 
 SOURCES +=  \
-    test_main.cpp \
-    test_math.cpp \
-    test_subject.cpp \
-    # Include necessary project source files to conduct unit tests.
     ../shipyard/fitness.cpp \
     ../shipyard/inputoutput.cpp \
     ../shipyard/math.cpp \
-    ../shipyard/neuralnetwork.cpp \
     ../shipyard/settings.cpp \
-    ../shipyard/subjectcore.cpp \
+    ../shipyard/scenario.cpp \
+    test_inputoutput.cpp \
+    test_main.cpp \
+    test_math.cpp \
+    test_fitness.cpp
 
 HEADERS += \
-    test_math.hh \
-    test_subject.hh
+    test_inputoutput.hh \
+    test_fitness.hh \
+    test_math.hh

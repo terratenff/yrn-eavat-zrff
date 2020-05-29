@@ -16,7 +16,7 @@ double Fitness::correct_angle(double angle, XY position, XY target)
 double Fitness::close_proximity(XY position, XY target)
 {
     double space = distance(position, target);
-    return 1 - hyperbolic_tangent(space);
+    return 1 - (space / 1000);
 }
 
 double Fitness::fixed_distance(XY position, XY target)
@@ -38,7 +38,7 @@ double Fitness::look_from_distance(double angle, XY position, XY target)
 {
     double angle_fitness = correct_angle(angle, position, target);
     double space = distance(position, target);
-    double space_fitness = hyperbolic_tangent(space);
+    double space_fitness = space / 1000;
     if (space < 500.0) {
         angle_fitness *= -1;
         space_fitness *= -1;

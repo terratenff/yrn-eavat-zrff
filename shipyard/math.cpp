@@ -71,6 +71,8 @@ double calculate_angle(XY vector)
         return 90;
     } else if (near_zero(vector.x) && vector.y < 0) {
         return 270;
+    } else if (near_zero(vector.x) && near_zero(vector.y)) {
+        return 0;
     } else {
         double radians = atan(vector.y / vector.x);
         if (vector.x > 0) return to_degrees(radians);
@@ -84,10 +86,16 @@ double calculate_angle(XY point1, XY point2)
     return calculate_angle(difference);
 }
 
-XY calculate_components(double angle, double space)
+XY calculate_components(double angle, double space, bool radians)
 {
-    double dx = cos(to_radians(angle)) * space;
-    double dy = sin(to_radians(angle)) * space;
+    double dx, dy;
+    if (radians) {
+        dx = cos(angle) * space;
+        dy = sin(angle) * space;
+    } else {
+        dx = cos(to_radians(angle)) * space;
+        dy = sin(to_radians(angle)) * space;
+    }
     XY components(dx, dy);
     return components;
 }
@@ -104,6 +112,9 @@ double to_radians(double angle_degrees)
 
 Matrix matrix(unsigned int row_count, unsigned int column_count)
 {
+    if (row_count == 0 || column_count == 0) {
+        return Matrix(0, Row(0, 0));
+    }
     Matrix m(row_count, Row(column_count, 0));
     return m;
 }
@@ -135,6 +146,10 @@ Matrix matrix_transpose(Matrix &matr)
 
 Matrix matrix_add(Matrix &a, Matrix &b)
 {
+    if ((a.size() != b.size()) || a[0].size() != b[0].size()) {
+        throw std::out_of_range("Matrix sizes do not match.");
+    }
+
     Matrix result = matrix(
         static_cast<unsigned int>(a.size()),
         static_cast<unsigned int>(a[0].size())
@@ -150,6 +165,10 @@ Matrix matrix_add(Matrix &a, Matrix &b)
 
 Matrix matrix_subtract(Matrix &a, Matrix &b)
 {
+    if ((a.size() != b.size()) || a[0].size() != b[0].size()) {
+        throw std::out_of_range("Matrix sizes do not match.");
+    }
+
     Matrix result = matrix(
         static_cast<unsigned int>(a.size()),
         static_cast<unsigned int>(a[0].size())
@@ -165,6 +184,10 @@ Matrix matrix_subtract(Matrix &a, Matrix &b)
 
 Matrix matrix_dot(Matrix &a, Matrix &b)
 {
+    if ((a.size() != b[0].size()) || (a[0].size() != b.size())) {
+        throw std::out_of_range("Matrix sizes do not agree.");
+    }
+
     Matrix result = matrix(
         static_cast<unsigned int>(a.size()),
         static_cast<unsigned int>(b[0].size())
@@ -180,6 +203,10 @@ Matrix matrix_dot(Matrix &a, Matrix &b)
 
 Matrix matrix_dot_scalar(Matrix &a, Matrix &b)
 {
+    if ((a.size() != b.size()) || a[0].size() != b[0].size()) {
+        throw std::out_of_range("Matrix sizes do not match.");
+    }
+
     Matrix result = matrix(
         static_cast<unsigned int>(a.size()),
         static_cast<unsigned int>(a[0].size())
