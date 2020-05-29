@@ -1,7 +1,6 @@
 #include "test_math.hh"
 #include "test_inputoutput.hh"
 #include "test_fitness.hh"
-#include "test_scenario.hh"
 
 int main(int argc, char** argv)
 {
@@ -16,10 +15,6 @@ int main(int argc, char** argv)
     }
     {
         TestFitness testCase;
-        status |= QTest::qExec(&testCase, argc, argv);
-    }
-    {
-        TestScenario testCase;
         status |= QTest::qExec(&testCase, argc, argv);
     }
     return status;

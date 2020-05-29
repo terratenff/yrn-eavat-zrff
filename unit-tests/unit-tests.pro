@@ -15,11 +15,9 @@ SOURCES +=  \
     test_inputoutput.cpp \
     test_main.cpp \
     test_math.cpp \
-    test_fitness.cpp \
-    test_scenario.cpp
+    test_fitness.cpp
 
 HEADERS += \
     test_inputoutput.hh \
     test_fitness.hh \
-    test_math.hh \
-    test_scenario.hh
+    test_math.hh
