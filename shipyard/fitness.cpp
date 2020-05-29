@@ -16,15 +16,16 @@ double Fitness::correct_angle(double angle, XY position, XY target)
 double Fitness::close_proximity(XY position, XY target)
 {
     double space = distance(position, target);
-    return 1 - (space / 1000);
+    return min(1.0, abs(1.0 - (space / 2000.0)));
 }
 
 double Fitness::fixed_distance(XY position, XY target)
 {
     double space = distance(position, target);
-    if (near_double(space, 500.0, 25)) return 1.0;
-    else if (near_double(space, 500, 50)) return 0.5;
-    else return 0.0;
+    if (space > 300.0 || space < 700.0) {
+        double difference = abs(space - 500.0);
+        return 1 - (difference / 200.0);
+    } else return 0.0;
 }
 
 double Fitness::not_out_of_bounds(XY position)
@@ -38,12 +39,10 @@ double Fitness::look_from_distance(double angle, XY position, XY target)
 {
     double angle_fitness = correct_angle(angle, position, target);
     double space = distance(position, target);
-    double space_fitness = space / 1000;
     if (space < 500.0) {
         angle_fitness *= -1;
-        space_fitness *= -1;
     }
-    return angle_fitness + space_fitness;
+    return angle_fitness;
 }
 
 double Fitness::avoid_eye_contact(double angle, double target_angle,

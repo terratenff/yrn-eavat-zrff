@@ -32,9 +32,9 @@ namespace Fitness
      * points. The closer they are, the higher the fitness value.
      * \param position Current position.
      * \param target Target position.
-     * \return Fitness value that varies in the range (0,1). Distance
-     * between two points is translated into said range using the
-     * hyperbolic tangent activation function.
+     * \return Fitness value that varies in the range (0,1). High value
+     * is given if current position is close to that of target's, and
+     * low value is given for faraway positions.
      */
     double close_proximity(XY position, XY target);
 
@@ -46,9 +46,10 @@ namespace Fitness
      * (hard-coded to 500), the higher the fitness value.
      * \param position Current position.
      * \param target Target position.
-     * \return One of 3 different fitness value, based on the distance
-     * between the two points (the closer the distance is to 500, the
-     * higher the fitness value): 0.0, 0.5, 1.0.
+     * \return Fitness value that varies in the range (0,1). The
+     * closer the distance is to 500, the closer the fitness value
+     * is to 1. 0 is given if distance is lower than 300 or
+     * greater than 700.
      */
     double fixed_distance(XY position, XY target);
 
@@ -68,15 +69,13 @@ namespace Fitness
      * \brief Calculates the fitness value based on provided information.
      * The goal of this fitness function is to keep distance from the
      * target while maintaining eye contact. As long as distance is
-     * maintained, fitness increases. Fitness increases even further if
-     * eye contact is also managed (but greatly decreases if the distance
-     * to one another is too close).
+     * maintained as well, fitness increases. Otherwise it decreases.
      * \param angle Current angle.
      * \param position Current position.
      * \param target Target position.
-     * \return Fitness value that varies in the range (-2, 2). A
-     * combination of "correct_angle" and "fixed_distance" is used
-     * to determine the fitness value.
+     * \return Fitness value that varies in the range (-1, 1).
+     * Fitness value is negative, if distance to target is lower
+     * than 500, and positive, if greater than that.
      */
     double look_from_distance(double angle, XY position, XY target);
 
