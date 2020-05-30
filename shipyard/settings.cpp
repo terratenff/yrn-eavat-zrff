@@ -55,6 +55,7 @@ void Settings::use_default_settings()
     fitness_type_ = CORRECT_ANGLE;
     hidden_layer_count_ = 2;
     hidden_neuron_count_ = 10;
+    initial_bias_ = 0;
 
     iteration_count_ = 1000;
     instance_count_ = 50;
