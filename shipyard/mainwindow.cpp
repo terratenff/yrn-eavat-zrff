@@ -499,7 +499,7 @@ void MainWindow::fileLoadScenario()
                 QDir::homePath() + "/desktop",
                 tr("Scenario-formatted Text Files (*.txt)")
     );
-    qDebug() << filename;
+    if (filename.isEmpty()) return;
     int outcome = scenario_->load_scenario(filename.toStdString());
     if (outcome > 0) {
         QString title = "Neural Networks Demonstrator";
@@ -548,7 +548,7 @@ void MainWindow::fileSaveScenario()
                 QDir::homePath() + "/desktop",
                 tr("Scenario-formatted Text Files (*.txt)")
     );
-    qDebug() << filename;
+    if (filename.isEmpty()) return;
     scenario_->apply_settings(settings_);
     scenario_->save_scenario(filename.toStdString());
 }
