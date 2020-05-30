@@ -34,7 +34,8 @@ namespace Input
      * \param position Current position.
      * \param target_position Target position.
      * \return Scalar spatial difference, reduced to range (0,1]. 0
-     * implies zero distance, and 1 implies a distance of 500 or greater.
+     * implies zero distance, and 1 implies a distance of 2000
+     * or greater.
      * \post Input vector size should be 1.
      */
     Row space_scalar_difference(XY position,
@@ -80,7 +81,9 @@ namespace Input
      * \param position Current position.
      * \param target_position Target position.
      * \return Detection values to the target, as two different possible
-     * values: 0 implies no detection, and 1 implies a detection.
+     * values: 0 implies no detection, and any number greater than 0
+     * implies a detection. Magnitude of the number determines
+     * how close the detection is.
      * Directions by order: left, right, up, down.
      * \post Input vector size should be 4.
      */
@@ -95,7 +98,9 @@ namespace Input
      * \param position Current position.
      * \param target_position Target position.
      * \return Detection values to the target, as two different possible
-     * values: 0 implies no detection, and 1 implies a detection.
+     * values: 0 implies no detection, and any numbere greater than 0
+     * implies a detection. Magnitude of the number determines how
+     * close the detection is.
      * Corners by order: top-left, bottom-left, top-right, bottom-right.
      * \post Input vector size should be 4.
      */

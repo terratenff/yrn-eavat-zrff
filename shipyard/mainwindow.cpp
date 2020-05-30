@@ -105,8 +105,8 @@ MainWindow::MainWindow(QWidget *parent) :
     ui->comboInput->addItem("Space Difference [0,1]");
     ui->comboInput->addItem("Axis-wise Difference [-1,1]");
     ui->comboInput->addItem("Distances to 4 walls [0,1]");
-    ui->comboInput->addItem("Search in 4 Directions (0/1)");
-    ui->comboInput->addItem("Search in 4 Corners (0/1)");
+    ui->comboInput->addItem("Search in 4 Directions [0,1]");
+    ui->comboInput->addItem("Search in 4 Corners [0,1]");
 
     ui->comboOutput->addItem("Angular Velocity [0,1]");
     ui->comboOutput->addItem("Direct Angle [0,1]");

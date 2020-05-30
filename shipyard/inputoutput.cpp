@@ -25,7 +25,7 @@ Row Input::space_scalar_difference(XY position,
 {
     Row inputs;
     double difference = distance(position, target_position);
-    double scaled_difference = min(1.0, difference / 500.0);
+    double scaled_difference = min(1.0, difference / 2000.0);
     double semiInput = scaled_difference;
 
     inputs.push_back(semiInput);
@@ -75,22 +75,24 @@ Row Input::four_way_search(XY position,
                            XY target_position)
 {
     Row inputs;
-    bool left = near_double(position.y, target_position.y, 30)
+    bool left = near_double(position.y, target_position.y, 100)
             && position.x >= target_position.x;
-    bool right = near_double(position.y, target_position.y, 30)
+    bool right = near_double(position.y, target_position.y, 100)
             && position.x < target_position.x;
-    bool up = near_double(position.x, target_position.x, 30)
+    bool up = near_double(position.x, target_position.x, 100)
             && position.y >= target_position.y;
-    bool down = near_double(position.x, target_position.x, 30)
+    bool down = near_double(position.x, target_position.x, 100)
             && position.y < target_position.y;
 
-    if (left)  inputs.push_back(1.0);
+    double dist = space_scalar_difference(position, target_position)[0];
+
+    if (left)  inputs.push_back(dist);
     else       inputs.push_back(0.0);
-    if (right) inputs.push_back(1.0);
+    if (right) inputs.push_back(dist);
     else       inputs.push_back(0.0);
-    if (up)    inputs.push_back(1.0);
+    if (up)    inputs.push_back(dist);
     else       inputs.push_back(0.0);
-    if (down)  inputs.push_back(1.0);
+    if (down)  inputs.push_back(dist);
     else       inputs.push_back(0.0);
     return inputs;
 }
@@ -108,10 +110,13 @@ Row Input::four_corner_search(XY position, XY target_position)
     bool right = difference.x > 0.0;
     bool up = difference.y < 0.0;
     bool down = difference.y > 0.0;
-    if      (left && up)    inputs[0] = 1.0;
-    else if (left && down)  inputs[1] = 1.0;
-    else if (right && up)   inputs[2] = 1.0;
-    else if (right && down) inputs[3] = 1.0;
+
+    double dist = space_scalar_difference(position, target_position)[0];
+
+    if      (left && up)    inputs[0] = dist;
+    else if (left && down)  inputs[1] = dist;
+    else if (right && up)   inputs[2] = dist;
+    else if (right && down) inputs[3] = dist;
 
     return inputs;
 }
