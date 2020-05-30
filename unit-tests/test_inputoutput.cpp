@@ -96,9 +96,9 @@ void TestInputOutput::test_input_space_scalar_difference()
     XY position3(960, 540);
     XY target_position3(100,100);
 
-    Row row1t = {0.7211};
-    Row row2t = {0.6000};
-    Row row3t = {1.0000};
+    Row row1t = {0.1802};
+    Row row2t = {0.1500};
+    Row row3t = {0.4830};
 
     Row row1r = Input::space_scalar_difference(position1, target_position1);
     Row row2r = Input::space_scalar_difference(position2, target_position2);
@@ -220,15 +220,15 @@ void TestInputOutput::test_input_four_way_search()
     XY position5(500, 500);
     XY target_position5(471,529);
     XY position6(500, 500);
-    XY target_position6(535,531);
+    XY target_position6(602,608);
     XY position7(500, 500);
-    XY target_position7(469,465);
+    XY target_position7(399,390);
 
-    Row row1t = {0.0000, 0.0000, 0.0000, 1.0000};
-    Row row2t = {0.0000, 0.0000, 1.0000, 0.0000};
-    Row row3t = {0.0000, 1.0000, 0.0000, 0.0000};
-    Row row4t = {1.0000, 0.0000, 0.0000, 0.0000};
-    Row row5t = {1.0000, 0.0000, 0.0000, 1.0000};
+    Row row1t = {0.0000, 0.0000, 0.0000, 0.2502};
+    Row row2t = {0.0000, 0.0000, 0.1253, 0.0000};
+    Row row3t = {0.0000, 0.2502, 0.0000, 0.0000};
+    Row row4t = {0.1253, 0.0000, 0.0000, 0.0000};
+    Row row5t = {0.0205, 0.0000, 0.0000, 0.0205};
     Row row6t = {0.0000, 0.0000, 0.0000, 0.0000};
     Row row7t = {0.0000, 0.0000, 0.0000, 0.0000};
 
@@ -295,10 +295,10 @@ void TestInputOutput::test_input_four_corner_search()
     XY position4(500, 500);
     XY target_position4(550,480);
 
-    Row row1t = {0.0000, 0.0000, 0.0000, 1.0000};
-    Row row2t = {1.0000, 0.0000, 0.0000, 0.0000};
-    Row row3t = {0.0000, 1.0000, 0.0000, 0.0000};
-    Row row4t = {0.0000, 0.0000, 1.0000, 0.0000};
+    Row row1t = {0.0000, 0.0000, 0.0000, 0.2549};
+    Row row2t = {0.1346, 0.0000, 0.0000, 0.0000};
+    Row row3t = {0.0000, 0.5001, 0.0000, 0.0000};
+    Row row4t = {0.0000, 0.0000, 0.0269, 0.0000};
 
     Row row1r = Input::four_corner_search(position1, target_position1);
     Row row2r = Input::four_corner_search(position2, target_position2);

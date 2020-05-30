@@ -22,7 +22,7 @@ double Fitness::close_proximity(XY position, XY target)
 double Fitness::fixed_distance(XY position, XY target)
 {
     double space = distance(position, target);
-    if (space > 300.0 || space < 700.0) {
+    if (space > 300.0 && space < 700.0) {
         double difference = abs(space - 500.0);
         return 1 - (difference / 200.0);
     } else return 0.0;

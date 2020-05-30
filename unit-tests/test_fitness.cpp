@@ -179,15 +179,15 @@ void TestFitness::test_fitness_fixed_distance()
     double instance32 = Fitness::fixed_distance(position3,
                                                 target2);
 
-    QVERIFY2(near_double(instance12, instance22),
-             qPrintable(QString("Fitness test 4 failed: %1 == %2")
-                        .arg(instance12).arg(instance22)));
-    QVERIFY2(near_double(instance12, instance32),
-             qPrintable(QString("Fitness test 5 failed: %1 == %2")
+    QVERIFY2(instance22 > instance12,
+             qPrintable(QString("Fitness test 4 failed: %1 > %2")
+                        .arg(instance22).arg(instance12)));
+    QVERIFY2(instance32 > instance22,
+             qPrintable(QString("Fitness test 5 failed: %1 > %2")
                         .arg(instance12).arg(instance32)));
-    QVERIFY2(near_double(instance22, instance32),
-             qPrintable(QString("Fitness test 6 failed: %1 == %2")
-                        .arg(instance22).arg(instance32)));
+    QVERIFY2(instance32 > instance22,
+             qPrintable(QString("Fitness test 6 failed: %1 > %2")
+                        .arg(instance32).arg(instance22)));
 
     double instance13 = Fitness::fixed_distance(position1,
                                                 target3);
@@ -196,11 +196,11 @@ void TestFitness::test_fitness_fixed_distance()
     double instance33 = Fitness::fixed_distance(position3,
                                                 target3);
 
-    QVERIFY2(near_double(instance13, instance23),
-             qPrintable(QString("Fitness test 7 failed: %1 == %2")
+    QVERIFY2(instance13 > instance23,
+             qPrintable(QString("Fitness test 7 failed: %1 > %2")
                         .arg(instance13).arg(instance23)));
-    QVERIFY2(near_double(instance13, instance33),
-             qPrintable(QString("Fitness test 8 failed: %1 == %2")
+    QVERIFY2(instance13 > instance33,
+             qPrintable(QString("Fitness test 8 failed: %1 > %2")
                         .arg(instance13).arg(instance33)));
     QVERIFY2(near_double(instance23, instance33),
              qPrintable(QString("Fitness test 9 failed: %1 == %2")
