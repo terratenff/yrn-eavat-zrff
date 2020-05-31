@@ -98,7 +98,7 @@ namespace Input
      * \param position Current position.
      * \param target_position Target position.
      * \return Detection values to the target, as two different possible
-     * values: 0 implies no detection, and any numbere greater than 0
+     * values: 0 implies no detection, and any number greater than 0
      * implies a detection. Magnitude of the number determines how
      * close the detection is.
      * Corners by order: top-left, bottom-left, top-right, bottom-right.

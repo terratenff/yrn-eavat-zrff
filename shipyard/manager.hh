@@ -113,7 +113,7 @@ private:
 
     /*!
      * \fn get_top_subjects
-     * \brief Pseudo-Getter for the best subjects, fitness-wise.
+     * \brief Pseudo-getter for the best subjects, fitness-wise.
      * \param count Number of subjects to be collected.
      * \return Specified number of top performers.
      * \pre Simulation must be currently underway, and list of networks must be sorted.
@@ -139,8 +139,8 @@ private:
 
     /*!
      * \fn generate_breeders
-     * \brief Creates a list of individuals/groups that are responsible of
-     * creating children for the next generation.
+     * \brief Creates a list of individuals/groups that are to
+     * create children for the next generation.
      * \param method Subject breeding method (crossover function). While the function
      * itself is not used directly, it is used to determine the size of the
      * breeding groups.

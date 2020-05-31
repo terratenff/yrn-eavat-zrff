@@ -400,7 +400,7 @@ double sign(double &x);
 
 /*!
  * \fn heaviside
- * \brief Calculates the Heavisde value for given variable.
+ * \brief Calculates the Heaviside value for given variable.
  * \param x Target variable.
  * \return Heaviside value of target variable:
  * 1 if x >= 0, 0 if x < 0.

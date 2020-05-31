@@ -252,7 +252,8 @@ private:
 
     /*!
      * \fn initializeNeurons
-     * \brief TODO
+     * \brief Initializes the neurons by settings their values
+     * to zero.
      */
     void initializeNeurons();
 
